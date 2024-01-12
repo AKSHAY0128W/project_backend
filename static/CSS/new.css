@@ -1,0 +1,524 @@
+.button {
+    border: 0;
+    outline: 0;
+    color: #f2f2f2;
+    background-color: #000;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 10px 50px;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.8s;
+}
+
+.btn-hover:hover {
+    background: linear-gradient(120deg, #456fd2, #06b9e1);
+}
+
+
+
+/*  */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+/* Navbar */
+
+
+
+/* Navbar */
+nav {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.nav-logo {
+    font-size: 25px !important;
+    font-weight: 600;
+    color: #555;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+
+}
+
+.nav-link {
+    font-size: 18px !important;
+    font-weight: 500;
+    color: #555;
+    font-family: 'Poppins', sans-serif !important;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+
+}
+
+.nav-link:hover {
+    color: #456fd2 !important;
+}
+
+.username {
+    background-color: #f2f2f2;
+    border-radius: 30px;
+    padding: 0 20px;
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    color: black !important;
+
+
+}
+
+.navbar-nav .active a {
+    color: #456fd2 !important;
+}
+
+/* Header */
+
+#header-content {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    padding: 150px;
+}
+
+#header-content h1 {
+    font-size: 6vw;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background-image: linear-gradient(120deg, #456fd2, #06b9e1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
+
+#header-content p {
+    font-size: 1.1vw;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #555;
+}
+
+
+.header-img {
+    width: 480px !important;
+}
+
+/* Header */
+
+/* appointment */
+
+.appimg img {
+    border-radius: 20px;
+}
+
+.appointment-content h1 {
+    font-size: 5vw;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    background-image: linear-gradient(120deg, #456fd2, #06b9e1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
+
+.appointment-content p {
+    font-size: 1.1vw;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+
+
+
+/* appointment */
+
+
+/* About us */
+
+.about-us {
+    text-align: center;
+    padding: 50px 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.about-us h2 {
+    font-size: 3vw;
+    color: #333;
+}
+
+.about-us h2::after {
+    content: "";
+    width: 120px;
+    height: 3px;
+    background-color: #06b9e1;
+    display: block;
+    margin: 8px auto;
+}
+
+
+.about-us p {
+    font-size: 1.1vw;
+    color: #666;
+    margin: 20px 0;
+}
+
+.card-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.card {
+    width: 450px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: 0.5s;
+}
+
+.card:hover {
+    scale: 1.010;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    color: #333;
+}
+
+/* appointment */
+
+.appointment-form {
+    font-weight: 500;
+    max-width: 700px;
+    margin: 20px auto;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    margin: 1% 0;
+}
+
+.a_form {
+    margin-top: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.appointment-form label {
+    display: block;
+    margin: 8px 0;
+}
+
+/*
+.appointment-form input,
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.appointment-form button {
+    border: 0;
+    outline: 0;
+    background-color: #000;
+    padding: 10px 50px;
+    border-radius: 40px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.appointment-form button:hover {
+    background: linear-gradient(120deg, #456fd2, #06b9e1);
+    color: #fff;
+}
+
+.appointment-form h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+    border-bottom: 4px solid #456fd2;
+}
+
+*/
+/* appointment */
+
+/* calculator */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+.my-calc {
+    height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    box-sizing: border-box;
+    margin-top: 60px;
+}
+
+#my-calc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper {
+    min-width: 400px;
+    max-height: 610px;
+    color: black;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    padding: 20px 40px;
+    margin: 20px;
+    overflow: auto;
+}
+
+.sip_calculator h3 {
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.sip_calculator h5 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.sip_calculator p {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+input {
+    background-color: transparent;
+    color: #fff;
+}
+
+.sip_calculator .feild {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.sip_calculator label {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.sip_calculator input {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px 10px;
+    color: black;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.sip_calculator button {
+    background-color: black;
+    color: white;
+    border: none;
+    width: 100%;
+    margin: 20px 0;
+    outline: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.gst-calculator {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.gst-calculator h3 {
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.gst-calculator input {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px 10px;
+    border-radius: 5px;
+    color: black;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.gst-calculator h4 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.gst-calculator select {
+    width: 100%;
+    margin: 10px 0;
+    padding: 20px 10px;
+    border-radius: 5px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.gst-calculator button {
+    background-color: black;
+    color: white;
+    border: none;
+    width: 100%;
+    margin: 20px 0;
+    outline: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+
+
+.income-calculator {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.income-calculator h3 {
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.income-calculator input {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px 10px;
+    border-radius: 5px;
+    color: black;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.income-calculator select {
+    width: 100%;
+    margin: 10px 0;
+    padding: 20px 10px;
+    border-radius: 5px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+
+
+.income-calculator button {
+    background-color: black;
+    color: white;
+    border: none;
+    width: 100%;
+    margin: 20px 0;
+    outline: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.income-calculator #result {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.income_dropdown {
+    width: 100%;
+    margin: 10px 0;
+    padding: 20px 10px;
+    border-radius: 5px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.my-calc h3::after {
+    content: "";
+    display: block;
+    width: 150px;
+    height: 3px;
+    background-color: black;
+    margin: 10px auto;
+}
+
+.income-calculator label {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+
+/* calculator */
+@media (max-width: 768px) {
+    .my-calc {
+        flex-direction: column;
+    }
+
+    .wrapper {
+        min-width: 300px;
+    }
+}

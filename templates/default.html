@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/CSS/new.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+
+
+
+<body>
+
+    <!-- Navbar Start -->
+    <section class="container-fluid">
+        <nav data-aos="fade-right" class="navbar navbar-expand-lg bg-body-tertiary" style="width: 100%;">
+            <div class="container-fluid">
+                <a class=" nav-logo" href="#">Accountant</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
+                    aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header border-bottom">
+                        <h5 class="offcanvas-title logos" id="offcanvasNavbarLabel">Accountant
+
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            <li class="nav-item mx-2">
+                                <a class="nav-link " aria-current="page" href="#header">Home</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <a class="nav-link" href="#aboutus">About</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <a class="nav-link" href="#services">Services</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <a class="nav-link" href="#Packages">Packages</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <a class="nav-link" href="#my-calc">Calculators</a>
+                            </li>
+                            <a href="{% url 'login' %}" class="button btn-hover">Login</a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+    </section>
+    <!-- Navbar Start -->
+
+    <!-- Header Start -->
+    <header id="header">
+        <div class="row">
+            <div class="col-lg-8  col-mg-12" id="header-content" data-aos-duration="1000" data-aos="fade-left">
+                <h1>Accountant</h1>
+                <p>Empowering Financial Success: <br> Your Trusted Partner in Precision Accounting Solutions.</p>
+                <a href="" class="button">Get Started</a>
+            </div>
+            <div class="col-lg-4 col-mg-12" data-aos-duration="1000" data-aos="fade-right">
+                <img src="/static/images/user.png" class="img-fluid" alt="">
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <hr>
+    <!-- About US -->
+    <div class="about-us" id="aboutus">
+        <h2>About Us</h2>
+        <div class="card-container">
+            <div class="card">
+                <img src="https://img.freepik.com/free-photo/business-concept-with-team-close-up_23-2149151159.jpg?w=1060&t=st=1704982894~exp=1704983494~hmac=0292fad6626ae9301a1984122939a526023d8936add733ebc9962b44a39df518"
+                    class="img-fluid" alt="">
+                <h3>Our Mission</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla condimentum tortor id ligula varius,
+                    id feugiat neque dictum.</p>
+            </div>
+            <div class="card">
+                <img src="https://img.freepik.com/free-photo/guy-shows-document-girl-group-young-freelancers-office-have-conversation-working_146671-13569.jpg?w=1060&t=st=1704982957~exp=1704983557~hmac=193e774398180580279511a396767afc66e7b62d0e68b4293b8cb25c56433522"
+                    class="img-fluid" alt="">
+                <h3>Our Team</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla condimentum tortor id ligula varius,
+                    id feugiat neque dictum.</p>
+            </div>
+            <div class="card">
+                <img src="https://img.freepik.com/free-photo/smiling-businessman-welcoming-new-partner-group-meeting-with-handshake_1163-4627.jpg?w=1060&t=st=1704983031~exp=1704983631~hmac=3664cb816ac0ce5511961949b19807d363ef3c9f129c1c3a516d45dcfa2e3c5e"
+                    class="img-fluid" alt="">
+                <h3>We Provide</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla condimentum tortor id ligula varius,
+                    id feugiat neque dictum.</p>
+            </div>
+        </div>
+    </div>
+    <!-- About US -->
+
+    <!-- calculator -->
+    <section id="my-calc">
+        <div class="my-calc">
+            <div class=" wrapper sip_calculator " data-aos-duration="1000" data-aos="fade-right">
+                <h3>SIP Calculator</h3>
+                <div class="field">
+                    <label for="">AMOUNT INVESTED ₹</label>
+                    <div>
+                        <input type="number" placeholder="5000₹" class="amount">
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="">Rate Of Return %</label>
+                    <div>
+                        <input type="number" placeholder="15%" class="rate">
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="">Duration Years</label>
+                    <div>
+                        <input type="number" placeholder="20 years" class="years">
+                    </div>
+                </div>
+                <button class=" mb-2 w-100 py-2" onclick="calculateSIP()">CALCULATE</button>
+                <h5>TOTAL AMOUNT: <p id="amount">0 ₹</p>
+                </h5>
+                <h5>FUTURE VALUE: <p id="futurevalue">0 ₹</p>
+                </h5>
+
+            </div>
+
+
+            <div class="gst-calculator wrapper " data-aos-duration="1000" data-aos="fade-right">
+
+                <h3>GST Calculator</h3>
+                <h5>Amount (excluding GST)</h5>
+                <input type="number" id="gstamount" placeholder="Enter amount">
+
+                <select class="gstdropdown" name="" id="">
+                    <option value="5">5% - Mass Consumption Items </option>
+                    <option value="12">12% - Processed Foods</option>
+                    <option value="18">18% -Hair Product,Stationary</option>
+                    <option value="28">28% -Cars,Tobacco,drinks</option>
+                </select>
+                <button onclick="calculateGST()">Calculate Total</button>
+
+                <h5>Total Amount (including GST)</h5>
+                <input type="text" id="gsttotal" readonly>
+            </div>
+
+
+
+            <div class="income-calculator wrapper" data-aos="fade-right" data-aos-duration="1000">
+                <h3>INCOME TAX <br> CALCULATOR</h3>
+                <label for="income">Enter your income:</label>
+                <input type="number" id="income" required>
+
+                <label for="taxPercentage">Select tax percentage:</label>
+                <select id="taxPercentage" class="income_dropdown">
+                    <option value="5">5%</option>
+                    <option value="20">20%</option>
+                    <option value="30">30%</option>
+                </select>
+
+                <button type="button" class="py-2" onclick="calculateTax()">Calculate Tax</button>
+
+                <div id="result"></div>
+            </div>
+        </div>
+    </section>
+    <!-- calculator -->
+    <div style="height: 200vh;" class="spacing">
+    </div>
+    <script src="/static/main.js">
+    </script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

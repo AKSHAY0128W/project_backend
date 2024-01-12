@@ -1,0 +1,90 @@
+<!-- FILEPATH: /e:/MY PROJECT/project_backend/templates/indexregister.html -->
+<!-- BEGIN: bootstrap-cdn -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Your custom CSS -->
+    <link rel="stylesheet" href="path/to/your/custom.css">
+    <style>
+        body {
+            display: grid;
+            place-items: center;
+            height: 100vh;
+        }
+
+        form {
+            margin: 0 auto;
+            width: 50%;
+            padding: 30px;
+            background-color: #f2f2f2;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        form label {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0px;
+            border: 1px solid rgb(161, 161, 255);
+            border-radius: 5px;
+        }
+
+        form input[type="text"] {
+            width: 100%;
+            padding: 20px 10px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        form input[type="email"] {
+            width: 100%;
+            padding: 20px 10px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        form input[type="password"] {
+            width: 100%;
+            padding: 15px 10px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        form a {
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="" method="post" class="form-group">
+        {% csrf_token %}
+        {{ registerform.as_p }}
+        {{ customerform.as_p }}
+        <input type="submit" value="Register" class="btn btn-primary px-4">
+        <a href="{% url 'login' %}">Login if Already registed</a>
+    </form>
+
+    <!-- Bootstrap JS CDN -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Your custom JS -->
+    <script src="path/to/your/custom.js"></script>
+</body>
+
+</html>
+<!-- END: bootstrap-cdn -->

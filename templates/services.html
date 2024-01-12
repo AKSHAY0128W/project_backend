@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'sans-serif';
+            background-image: linear-gradient(45deg,
+                    rgba(245, 70, 66, 0.75),
+                    rgba(8, 83, 156, 0.75)), url("https://plus.unsplash.com/premium_photo-1678567671952-4028b2ec6c71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .cards {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* background: #93BFCF; */
+
+        }
+
+        .card {
+            background: #fff;
+            padding: 20px;
+            text-align: center;
+            min-width: 300px;
+            min-height: 500px;
+            margin: 20px;
+            border-radius: 25px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+
+
+        .card h2 {
+            margin: 0 0 10px 0;
+            padding: 0;
+        }
+
+        .card p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .card img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            margin-top: 20px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card img:hover {
+            transition: 0.3s ease-in-out;
+            transform: scale(1.05);
+        }
+
+
+        .card h2 {
+            color: #333;
+            font-size: 28px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .card h2::after {
+            content: '';
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(120deg, #456fd2, #06b9e1);
+            display: block;
+            margin: 10px auto 5px auto;
+        }
+
+
+
+        .card p {
+            color: #777;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .card a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .card .button {
+            position: relative;
+            height: 50px;
+            width: 100%;
+            border-radius: 25px;
+            margin-top: 30px;
+            overflow: hidden;
+        }
+
+        .card .button .button-layer {
+            position: absolute;
+            height: 100%;
+            width: 300%;
+            left: -100%;
+            background-image: linear-gradient(135deg, #9708CC, #43CBFF, #9708CC, #43CBFF);
+            transition: all 0.4s ease;
+            border-radius: 25PX;
+        }
+
+        .card .button:hover .button-layer {
+            left: 0;
+        }
+
+        .card .button button {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            background: none;
+            outline: none;
+            border: none;
+            font-size: 18px;
+            font-family: 'Poppins', 'sans-serif';
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+</head>
+
+<body>
+    <div class="cards">
+
+        <div class="card">
+            <h2>ITR File</h2>
+            <img src="/images/itr.jpg" alt="">
+            <p>Description of Service 1</p>
+            <div class="button">
+                <div class="button-layer"></div>
+                <button><a href="">Book Now</a></button>
+            </div>
+        </div>
+        <div class="card">
+            <h2>GST Registration</h2>
+            <img src="/images/gst-registration_copy.jpg" alt="">
+            <p>Description of Service 2</p>
+            <div class="button">
+                <div class="button-layer"></div>
+                <button><a href="">Book Now</a></button>
+            </div>
+        </div>
+        <div class="card">
+            <h2>GST Return</h2>
+            <img src="/images/gst return.jpg" alt="">
+            <p>Description of Service 3</p>
+            <div class="button">
+                <div class="button-layer"></div>
+                <button><a href="">Book Now</a></button>
+            </div>
+        </div>
+        <div class="card">
+            <h2>Digital Signature</h2>
+            <img src="/images/digital signature.jpg" alt="">
+            <p>Description of Service 4</p>
+            <div class="button">
+                <div class="button-layer"></div>
+                <button><a href="">Book Now</a></button>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+
+</html>

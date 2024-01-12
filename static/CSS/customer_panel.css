@@ -1,0 +1,147 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    height: 100vh;
+    max-width: 100%;
+}
+
+.container .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #555;
+    padding: 10px 14px;
+
+}
+
+.container .nav h1 {
+    color: #f2f2f2;
+    font-size: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.container .nav ul li {
+    display: inline-block;
+    list-style: none;
+}
+
+.container .nav ul li a {
+    text-decoration: none;
+    font-size: 20px;
+    color: #f2f2f2;
+    padding: 5px 20px;
+    border-radius: 10px;
+    transition: 0.5s ease;
+}
+
+.container .nav ul li a:hover {
+    background-color: #f2f2f2;
+    color: black;
+}
+
+
+.container2 {
+    height: 100%;
+    display: flex;
+}
+
+.container2 .sidebar {
+    width: 20%;
+    height: 100%;
+    background-color: #f2f2f2;
+}
+
+.container2 .dashboard {
+    width: 80%;
+    background-color: #EEE7DA;
+}
+
+.contents {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+
+}
+
+.dashboard .contents .div {
+    height: auto;
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px 20px;
+    background-color: #f2f3f3;
+}
+
+
+.sidebar ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.sidebar ul li {
+    list-style: none;
+    font-size: 18px;
+    display: flex;
+    font-weight: 500;
+    align-items: center;
+    padding: 10px;
+    transition: 0.3s ease;
+    margin: 10px 30px;
+}
+
+.sidebar ul li:hover {
+    background-color: #2F80ED;
+    border-radius: 10px;
+    color: #f2f2f2;
+    cursor: pointer;
+
+}
+
+.sidebar ul li a {
+    font-size: 14px;
+    text-decoration: none;
+    color: #f2f2f2;
+
+}
+
+.sidebar ul li img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+    .container2 {
+        flex-direction: column;
+    }
+
+    .container2 .sidebar {
+        width: 100%;
+        height: 20%;
+    }
+
+    .container2 .dashboard {
+        width: 100%;
+        height: 80%;
+    }
+
+    .sidebar ul {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+
+    .sidebar ul li {
+        margin: 0;
+    }
+
+
+}

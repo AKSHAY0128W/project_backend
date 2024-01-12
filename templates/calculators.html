@@ -1,0 +1,70 @@
+{% include 'nav.html' %}
+<div class="my-calc">
+
+    <div class=" wrapper sip_calculator " data-aos-duration="1000" data-aos="fade-right">
+        <h1>SIP Calculator</h1>
+        <div class="field">
+            <label for="">AMOUNT INVESTED ₹</label>
+            <div>
+                <input type="number" placeholder="5000₹" class="amount">
+            </div>
+        </div>
+        <div class="field">
+            <label for="">Rate Of Return %</label>
+            <div>
+                <input type="number" placeholder="15%" class="rate">
+            </div>
+        </div>
+        <div class="field">
+            <label for="">Duration Years</label>
+            <div>
+                <input type="number" placeholder="20 years" class="years">
+            </div>
+        </div>
+        <button class=" mb-2 w-100 py-2" onclick="calculateSIP()">CALCULATE</button>
+        <h5>TOTAL AMOUNT: <p id="amount">0 ₹</p>
+        </h5>
+        <h5>FUTURE VALUE: <p id="futurevalue">0 ₹</p>
+        </h5>
+
+    </div>
+
+
+    <div class="gst-calculator wrapper " data-aos-duration="1000" data-aos="fade-right">
+
+        <h1>GST Calculator</h1>
+        <h4>Amount (excluding GST)</h4>
+        <input type="number" id="gstamount" placeholder="Enter amount">
+
+        <select class="gstdropdown" name="" id="">
+            <option value="5">5% - Mass Consumption Items </option>
+            <option value="12">12% - Processed Foods</option>
+            <option value="18">18% -Hair Product,Stationary</option>
+            <option value="28">28% -Cars,Tobacco,drinks</option>
+        </select>
+        <button onclick="calculateGST()">Calculate Total</button>
+
+        <h3>Total Amount (including GST)</h3>
+        <input type="text" id="gsttotal" readonly>
+    </div>
+
+
+
+    <div class="income-calculator wrapper" data-aos="fade-right" data-aos-duration="1000">
+        <h1>INCOME TAX <br> CALCULATOR</h1>
+        <label for="income">Enter your income:</label>
+        <input type="number" id="income" required>
+
+        <label for="taxPercentage">Select tax percentage:</label>
+        <select id="taxPercentage" class="income_dropdown">
+            <option value="5">5%</option>
+            <option value="20">20%</option>
+            <option value="30">30%</option>
+        </select>
+
+        <button type="button" class="py-2" onclick="calculateTax()">Calculate Tax</button>
+
+        <div id="result"></div>
+    </div>
+</div>
+{% include 'footer.html' %}

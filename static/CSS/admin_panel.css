@@ -1,0 +1,199 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    text-decoration: none;
+    border: none;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #dfe9f5;
+}
+
+.container {
+    display: flex;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+
+    align-items: center;
+
+    /* align-items: center; */
+
+}
+
+.logo img {
+    width: 30px;
+    height: 30px;
+}
+
+nav {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 280px;
+    overflow: hidden;
+    background: #fff;
+    height: 100vh;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-out;
+}
+
+.logo h2 {
+    color: rgb(11, 109, 109);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.logo h2::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: rgb(11, 109, 109);
+    bottom: 0;
+    left: 0;
+}
+
+.logo span {
+    color: rgb(11, 109, 109);
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+}
+
+a {
+    position: relative;
+    color: rgb(85, 83, 83);
+    display: table;
+    width: 280px;
+    padding: 10px;
+}
+
+nav .fas {
+    position: relative;
+    width: 70px;
+    height: 40px;
+    top: 14px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.nav-item {
+    position: relative;
+    top: 12px;
+    margin-left: 10px;
+}
+
+a:hover {
+    background: #eee;
+}
+
+/* .hamburger {
+    position: absolute;
+    bottom: -10px;
+    left: 195px;
+} */
+
+.main {
+    position: relative;
+    width: 100%;
+}
+
+.main-top {
+    display: flex;
+    background-color: #d4d2caa0;
+    color: purple;
+    padding: 14px;
+    width: 100%;
+}
+
+
+.main-top i {
+    position: absolute;
+    right: 0;
+    margin: 10px 30px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.Superuser {
+    margin-top: 20px;
+    display: flex;
+    padding: 20px 20px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: start;
+    width: 100%;
+}
+
+.Superuser h2 {
+    text-transform: capitalize;
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.Superuser form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    width: 100%;
+}
+
+.Superuser button {
+    padding: 10px;
+    border-radius: 30px;
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    margin: 10px 0;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.Superuser label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    margin: 10px 0;
+}
+
+.Superuser button:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.my-custom-class {
+    font-size: 16px;
+    color: #000;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+
+
+.my-custom-class:focus {
+    border-color: #000;
+    box-shadow: 0 0 10px #000;
+}
+
+/* 
+.my-custom-class {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 20px 20px;
+    margin: 10px 0;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+} */
