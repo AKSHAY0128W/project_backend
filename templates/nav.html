@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="offcanvas-body">
-                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-2">
 
                             <li class="nav-item mx-2 {% if request.path == '/homepage/' %} active {% endif %}">
                                 <a class="nav-link " aria-current="page" href="{% url 'homepage' %}">Home</a>
@@ -44,8 +44,8 @@
                             <li class="nav-item mx-2 {% if request.path == '/aboutus/' %} active {% endif %}">
                                 <a class="nav-link" href="{% url 'aboutus' %}">About</a>
                             </li>
-                            <li class="nav-item mx-2">
-                                <a class="nav-link" href="#services">Services</a>
+                            <li class="nav-item mx-2 {% if request.path == '/services/' %} active {% endif %}">
+                                <a class=" nav-link" href="{% url 'services' %}">Services</a>
                             </li>
                             <li class="nav-item mx-2">
                                 <a class="nav-link" href="#Packages">Packages</a>

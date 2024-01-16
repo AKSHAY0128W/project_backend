@@ -1,8 +1,17 @@
-{% include 'nav.html' %}
+{% extends 'base.html' %}
+{% block content %}
 <div class="a_form">
 
-    <form class="appointment-form p-4 " action="" data-aos-duration="1000" data-aos="fade-left">
-        <h1>BOOK APPOINTMENT</h1>
+    <div class="appointment-heading">
+        <h1>BOOK <br> APPOINTMENT</h1>
+        <hr>
+        <p>Book an appointment with us today and get the best services.</p>
+    </div>
+
+    <form method="post" class="appointment-form p-4 " action="{% url 'appointment' %}" data-aos-duration="1000"
+        data-aos="fade-left">
+        {% csrf_token %}
+        <h1>APPOINTMENT</h1>
         <hr>
         <div class="form-group">
             <label for="name">Name:</label>
@@ -25,11 +34,11 @@
         </div>
         <div class="form-group">
             <label for="comments">Additional Comments:</label>
-            <textarea id="comments" name="comments" class="form-control" rows="4"></textarea>
-            <button type="submit" class="button btn-hover">Submit Appointment</button>
+            <textarea id="comments" name="description" class="form-control" rows="4"></textarea>
+            <button type="submit" class="mt-2 button btn-hover">Submit Appointment</button>
         </div>
 
     </form>
-</div>
 
-{% include 'footer.html' %}
+</div>
+{% endblock %}

@@ -66,24 +66,12 @@
         <a href="#" class="sidebar-item">Leave Requests</a>
         <a href="#" class="sidebar-item">Payroll</a>
         <a href="#" class="sidebar-item">Settings</a>
+        <a href="{% url 'default' %}" class="sidebar-item">Logout</a>
     </div>
 
     <div id="content">
         <div class="dashboard-card">
             <h1>Admin Dashboard</h1>
-
-            <h2>Create Employee Account</h2>
-            <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Register</button>
-            </form>
-            <h2>Employee Login</h2>
-            <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Login</button>
-            </form>
         </div>
     </div>
 

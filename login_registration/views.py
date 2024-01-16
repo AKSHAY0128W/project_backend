@@ -32,7 +32,10 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 auth.login(request, user)
-                return redirect('homepage')
+                if user.is_superuser:
+                    return redirect('admin_dashboard')
+                else:
+                    return redirect('homepage')
     context = {'loginform':form}
     return render(request, 'indexlogin.html', context=context)
 

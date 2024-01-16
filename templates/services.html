@@ -1,183 +1,48 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
+{% block content %}
 
-<head>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', 'sans-serif';
-            background-image: linear-gradient(45deg,
-                    rgba(245, 70, 66, 0.75),
-                    rgba(8, 83, 156, 0.75)), url("https://plus.unsplash.com/premium_photo-1678567671952-4028b2ec6c71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
-            background-size: cover;
-            background-position: center;
-        }
+<div class="Service_cards">
 
-        .cards {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            /* background: #93BFCF; */
-
-        }
-
-        .card {
-            background: #fff;
-            padding: 20px;
-            text-align: center;
-            min-width: 300px;
-            min-height: 500px;
-            margin: 20px;
-            border-radius: 25px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-        }
-
-
-
-        .card h2 {
-            margin: 0 0 10px 0;
-            padding: 0;
-        }
-
-        .card p {
-            margin: 0;
-            padding: 0;
-        }
-
-        .card img {
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            margin-top: 20px;
-            border-radius: 20px;
-            margin-bottom: 20px;
-        }
-
-        .card img:hover {
-            transition: 0.3s ease-in-out;
-            transform: scale(1.05);
-        }
-
-
-        .card h2 {
-            color: #333;
-            font-size: 28px;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .card h2::after {
-            content: '';
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(120deg, #456fd2, #06b9e1);
-            display: block;
-            margin: 10px auto 5px auto;
-        }
-
-
-
-        .card p {
-            color: #777;
-            font-size: 16px;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .card a {
-            text-decoration: none;
-            color: #fff;
-        }
-
-        .card .button {
-            position: relative;
-            height: 50px;
-            width: 100%;
-            border-radius: 25px;
-            margin-top: 30px;
-            overflow: hidden;
-        }
-
-        .card .button .button-layer {
-            position: absolute;
-            height: 100%;
-            width: 300%;
-            left: -100%;
-            background-image: linear-gradient(135deg, #9708CC, #43CBFF, #9708CC, #43CBFF);
-            transition: all 0.4s ease;
-            border-radius: 25PX;
-        }
-
-        .card .button:hover .button-layer {
-            left: 0;
-        }
-
-        .card .button button {
-            position: relative;
-            height: 100%;
-            width: 100%;
-            background: none;
-            outline: none;
-            border: none;
-            font-size: 18px;
-            font-family: 'Poppins', 'sans-serif';
-            font-weight: 500;
-            letter-spacing: 1px;
-            color: #fff;
-        }
-    </style>
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-
-</head>
-
-<body>
-    <div class="cards">
-
-        <div class="card">
-            <h2>ITR File</h2>
-            <img src="/images/itr.jpg" alt="">
-            <p>Description of Service 1</p>
-            <div class="button">
-                <div class="button-layer"></div>
-                <button><a href="">Book Now</a></button>
-            </div>
-        </div>
-        <div class="card">
-            <h2>GST Registration</h2>
-            <img src="/images/gst-registration_copy.jpg" alt="">
-            <p>Description of Service 2</p>
-            <div class="button">
-                <div class="button-layer"></div>
-                <button><a href="">Book Now</a></button>
-            </div>
-        </div>
-        <div class="card">
-            <h2>GST Return</h2>
-            <img src="/images/gst return.jpg" alt="">
-            <p>Description of Service 3</p>
-            <div class="button">
-                <div class="button-layer"></div>
-                <button><a href="">Book Now</a></button>
-            </div>
-        </div>
-        <div class="card">
-            <h2>Digital Signature</h2>
-            <img src="/images/digital signature.jpg" alt="">
-            <p>Description of Service 4</p>
-            <div class="button">
-                <div class="button-layer"></div>
-                <button><a href="">Book Now</a></button>
-            </div>
+    <div class="s-card">
+        <h2>ITR File</h2>
+        <!-- <img src="/images/itr.jpg" alt=""> -->
+        <img src="https://img.freepik.com/free-vector/monthly-expense-planning-reminder-appointment-payment-deadline-worker-with-timetable-organizer-schedule-countdown-payday-vector-isolated-concept-metaphor-illustration_335657-4322.jpg?w=740&t=st=1705396371~exp=1705396971~hmac=63a225eaaad872609841855cf036309fd2aca2053d5f8bcd2074cb0467aa6723"
+            alt="">
+        <p>Description of Service 1</p>
+        <div class="button">
+            <div class="button-layer"></div>
+            <a href="" class="button`">Book Now</a>
         </div>
     </div>
-</body>
-<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-<script>
-    AOS.init();
-</script>
-
-</html>
+    <div class="s-card">
+        <h2>GST Registration</h2>
+        <img src="https://img.freepik.com/free-vector/business-goods-services-tax-people-around-gst-text-chard-board-box-packed-money-template-banner-flyer_82472-447.jpg?w=740&t=st=1705396509~exp=1705397109~hmac=07801760487f3ac0720a854f6fafad96d35b6ad527acacb3d2f5a76befe6467c"
+            alt="">
+        <p>Description of Service 2</p>
+        <div class="button">
+            <div class="button-layer"></div>
+            <a href="" class="button`">Book Now</a>
+        </div>
+    </div>
+    <div class="s-card">
+        <h2>GST Return</h2>
+        <img src="https://img.freepik.com/free-vector/corporation-income-tax-returns-abstract-concept-illustration-company-income-return-form-corporation-accountancy-tax-preparation-financial-activity-corporate-taxation_335657-1240.jpg?w=740&t=st=1705396457~exp=1705397057~hmac=a9af6d87057e659d620057404d59f8f176aa6586347cd8aa37a5e452a3782db8"
+            alt="">
+        <p>Description of Service 3</p>
+        <div class="button">
+            <div class="button-layer"></div>
+            <a href="" class="button ">Book Now</a>
+        </div>
+    </div>
+    <div class="s-card">
+        <h2>Digital Signature</h2>
+        <img src="https://img.freepik.com/free-vector/electronic-signature-technology-operation-validation-digital-signing-electronic-documents-verification-virtual-agreement-confirmation_335657-2362.jpg?w=740&t=st=1705396550~exp=1705397150~hmac=e0b8928f36a07909fb1cbdf085c3efa2a618bfcf9e3b1bb638fa7b88556b2df3"
+            alt="">
+        <p>Description of Service 4</p>
+        <div class="button">
+            <div class="button-layer"></div>
+            <a href="" class="button ">Book Now</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
