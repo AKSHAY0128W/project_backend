@@ -1,0 +1,12 @@
+{% extends 'admin.html' %}
+{% block content %}
+<div class="container">
+    <h2>Create Employee Account</h2>
+    <form method="post" action="{% url 'create_employee' %}">
+        {% csrf_token %}
+        {{ eform.as_p }}
+        {{ edetails.as_p }}
+        <button type="submit" class="btn btn-primary px-4">Create</button>
+    </form>
+</div>
+{% endblock %}

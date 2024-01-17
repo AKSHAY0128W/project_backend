@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'calculators',
     'homepage',
     'login_registration',
+    'display',
     # 'appointments',
 
 

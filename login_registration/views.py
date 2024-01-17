@@ -54,15 +54,16 @@ def create_employee(request):
         if request.method == 'POST':
             form = EmployeeForm(request.POST)
             edetails = EmployeeDetailsForm(request.POST)
-            if form.is_valid():
+            if form.is_valid() and edetails.is_valid():
                 form.save()
                 edetails.save()
                 return redirect('admin_dashboard')
             else:
-                print(form.errors)
+                print(form.errors, edetails.errors)
         else:
             form = EmployeeForm()
+            edetails = EmployeeDetailsForm()
         context = {'eform': form, 'edetails': edetails}
-        return render(request, 'latest_admin.html', context=context)
+        return render(request, 'admin_create_employee.html', context=context)
     else:
         return redirect('homepage')

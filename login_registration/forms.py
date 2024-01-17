@@ -60,7 +60,7 @@ class EmployeeForm(UserCreationForm):
 class EmployeeDetailsForm(forms.ModelForm):
     class Meta:
         model = Employee
-        fields = ['first_name','last_name','email','phone','address','user']
+        fields = ['name','email','phone','address','user']
         widgets = {
             'user': forms.TextInput(attrs={'class': 'form-control'}),
         }
