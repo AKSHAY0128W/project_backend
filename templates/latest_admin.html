@@ -72,6 +72,15 @@
     <div id="content">
         <div class="dashboard-card">
             <h1>Admin Dashboard</h1>
+            <div class="container">
+                <h2>Create Employee</h2>
+                <form method="post" action="{% url 'create_employee' %}">
+                    {% csrf_token %}
+                    {{ eform.as_p }}
+                    {{ edetails.as_p }}
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </form>
+            </div>
         </div>
     </div>
 

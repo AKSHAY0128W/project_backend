@@ -2,13 +2,13 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 
 
-# Create your views here.
+def default(request):
+    return render(request, 'default.html')
+    
 @login_required(login_url='login')
 def homepage(request):
     return render(request, 'index.html')
 
-def default(request):
-    return render(request, 'default.html')
 
 @login_required(login_url='login')
 def aboutus(request):
@@ -25,6 +25,10 @@ def dashboard(request):
 @login_required(login_url='login')
 def admin_dashboard(request):
     return render(request, 'latest_admin.html')
+
+@login_required(login_url='login')
+def employee_panel(request):
+    return render(request, 'employee.html')
 
 @login_required(login_url='login')
 def services(request):
