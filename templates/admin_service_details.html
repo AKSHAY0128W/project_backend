@@ -13,6 +13,10 @@
                 <textarea id="description" class="form-control" name="description" required></textarea>
             </div>
             <div class="form-group">
+                <label for="description">Price:</label>
+                <input id="description" type="text" class="form-control" name="Price" required></input>
+            </div>
+            <div class="form-group">
                 <label for="image">Image:</label>
                 <input id="image" type="file" name="image" class="form-control-file">
             </div>
@@ -35,6 +39,7 @@
                     <th>Title</th>
                     <th>Description</th>
                     <th>Image</th>
+                    <th>Price</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -43,6 +48,7 @@
                 <tr>
                     <td>{{i.name}}</td>
                     <td>{{i.description}}</td>
+                    <td>{{i.price}}</td>
                     <td>
                         <img src="/media/{{i.image}}" height="100px" width="100px" class="img-fluid" alt="{{i.name}}">
                     </td>
@@ -82,6 +88,10 @@
                     <div class="form-group">
                         <label>Description</label>
                         <textarea class="form-control" name="description" required>{{i.description}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Price</label>
+                        <textarea class="form-control" name="description" required>{{i.Price}}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Image</label>
