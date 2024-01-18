@@ -14,7 +14,7 @@
             </div>
             <div class="form-group">
                 <label for="description">Price:</label>
-                <input id="description" type="text" class="form-control" name="Price" required></input>
+                <input id="description" type="text" class="form-control" name="price" required></input>
             </div>
             <div class="form-group">
                 <label for="image">Image:</label>
@@ -38,8 +38,8 @@
                 <tr>
                     <th>Title</th>
                     <th>Description</th>
-                    <th>Image</th>
                     <th>Price</th>
+                    <th>Image</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -91,7 +91,7 @@
                     </div>
                     <div class="form-group">
                         <label>Price</label>
-                        <textarea class="form-control" name="description" required>{{i.Price}}</textarea>
+                        <input type="number" class="form-control" name="price" value="{{i.price}}" required>
                     </div>
                     <div class="form-group">
                         <label>Image</label>

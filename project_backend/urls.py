@@ -51,6 +51,15 @@ urlpatterns = [
     path('services_edit/', display_views.services_edit, name='services_edit'),
     path('services_update/<int:id>', display_views.services_update, name='services_update'),
     path('services_delete/<int:id>', display_views.services_delete, name='services_delete'),
+
+    path('add_packages/', display_views.add_packages, name='add_packages'),
+    path('packages_list/', display_views.packages_list, name='packages_list'),
+    path('packages_edit/', display_views.packages_edit, name='packages_edit'),
+    path('packages_update/<int:id>', display_views.packages_update, name='packages_update'),
+    path('packages_delete/<int:id>', display_views.packages_delete, name='packages_delete'),
+
+    path('customer_list/', display_views.customer_list, name='customer_list'),
+    path('customer_delete/<int:id>', display_views.customer_delete, name='customer_delete'),
     # #Login Registration
 
     path('login/', login_registration_views.login_view, name="login"), 

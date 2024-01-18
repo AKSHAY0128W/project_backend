@@ -8,6 +8,7 @@ from login_registration.models import *
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
+# employee
 def emp_display(request):
     emp = Employee.objects.all()
     print(emp)
@@ -47,14 +48,19 @@ def emp_delete(request, employee_id):
     return redirect('/emp_display', context)
 
 
+# services
 
 def add_service(request):
     if request.method == "POST":
         name = request.POST.get('name')
         description = request.POST.get('description')
         image = request.FILES.get('image')
+        price = request.POST.get('price')
 
-        Services.objects.create(name=name, description=description, image=image)
+        if not price:
+            price = 0  # set a default value
+
+        Services.objects.create(name=name, description=description, image=image, price=price)
 
         return redirect('/services_list')
 
@@ -83,6 +89,7 @@ def services_update(request, id):
     if request.method == "POST":
         services.name = request.POST.get('name')
         services.description = request.POST.get('description')
+        services.price = request.POST.get('price')
 
         # handle file upload
         if 'image' in request.FILES:
@@ -100,3 +107,76 @@ def services_delete(request, id):
         'services':services,
     }
     return redirect('/services_list', context)
+
+
+# packages
+def add_packages(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        description = request.POST.get('description')
+        price = request.POST.get('price')
+
+        if not price:
+            price = 0  # set a default value
+
+        Packages.objects.create(name=name, description=description,price=price)
+
+        return redirect('/packages_list')
+
+    return render(request, 'admin_package_details.html')
+
+def packages_list(request):
+    packages = Packages.objects.all()
+    print(packages)
+    context = {
+        'packages':packages,
+    }
+    return render(request, 'admin_package_details.html', context)
+
+def packages_edit(request, id):
+    packages = Packages.objects.get(id=id)
+    context = {
+        'packages':packages,
+    }
+    return render(request, 'admin_package_details.html', context)
+
+def packages_update(request, id):
+    packages = Packages.objects.get(id=id)  # fetch the Packages object or return 404 if not found
+    if request.method == "POST":
+        packages.name = request.POST.get('name')
+        packages.description = request.POST.get('description')
+        packages.price = request.POST.get('price')
+
+        packages.save()  # save the updated Packages object
+        return redirect('/packages_list')
+
+    return render(request, 'admin_package_details', {'packages': packages})
+
+
+def packages_delete(request, id):
+    packages = Packages.objects.filter(id=id)
+    packages.delete()
+    context = {
+        'packages':packages,
+    }
+    return redirect('/packages_list', context)
+
+
+#customers
+
+def customer_list(request):
+    customer = Customer.objects.all()
+    print(customer)
+    context = {
+        'customer':customer,
+    }
+    return render(request, 'admin_customer_details.html', context)
+
+def customer_delete(request, id):
+    customer = Customer.objects.filter(id=id)
+    customer.delete()
+    context = {
+        'customer':customer,
+    }
+    return redirect('/customer_list', context)
+
