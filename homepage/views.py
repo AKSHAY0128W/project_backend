@@ -52,3 +52,6 @@ def admin_homepage(request):
 
 def admin_view_employee(request):
     return render(request, 'admin_employee_details.html')
+
+def admin_service_details(request):
+    return render(request, 'admin_service_details.html')

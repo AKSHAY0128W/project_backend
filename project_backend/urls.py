@@ -4,6 +4,11 @@ from homepage import views as homepage_views
 from login_registration import views as login_registration_views
 from calculators import views as calculators_views
 from display import views as display_views
+from django.conf import settings
+from django.conf.urls.static import static
+
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     
@@ -32,13 +37,20 @@ urlpatterns = [
     #admin_panel_pages
     path('add_employee/',homepage_views.admin_create_employee, name="add_employee"),
     path('admin_homepage/', homepage_views.admin_homepage, name="admin_homepage"),
+    path('admin_service_details', homepage_views.admin_service_details, name="admin_employee_details"),
 
 
     #display
     path('emp_display/', display_views.emp_display, name="emp_display"),
     path('emp_edit/', display_views.emp_edit, name="emp_edit"),
-    path('emp_update/<str:id>', display_views.emp_update, name="emp_update"),
+    path('update/<int:employee_id>', display_views.emp_update, name="update"),
+    path('delete/<int:employee_id>', display_views.emp_delete, name="delete"),
 
+    path('add_service/', display_views.add_service, name='add_service'),
+    path('services_list/', display_views.services_list, name='services_list'),
+    path('services_edit/', display_views.services_edit, name='services_edit'),
+    path('services_update/<int:id>', display_views.services_update, name='services_update'),
+    path('services_delete/<int:id>', display_views.services_delete, name='services_delete'),
     # #Login Registration
 
     path('login/', login_registration_views.login_view, name="login"), 
@@ -48,3 +60,7 @@ urlpatterns = [
     #Calculators
     path('calculators/', calculators_views.Calculators, name="calculators"),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

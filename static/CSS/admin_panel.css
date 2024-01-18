@@ -34,8 +34,10 @@ body {
     transition: background 0.3s;
 }
 
-.sidebar-item:hover {
+.sidebar-item a:hover {
+
     background: #555;
+    color: white;
 }
 
 .dashboard-card {
