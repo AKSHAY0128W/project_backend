@@ -43,15 +43,18 @@ def admin_login(request):
         return render(request, 'admin_login')
     return render(request, 'login.html')
 
-
+@login_required(login_url='login')
 def admin_create_employee(request):
     return render(request, 'admin_create_employee.html')
 
+@login_required(login_url='login')
 def admin_homepage(request):
     return render(request, 'admin_dashboard.html')
 
+@login_required(login_url='login')
 def admin_view_employee(request):
     return render(request, 'admin_employee_details.html')
 
+@login_required(login_url='login')
 def admin_service_details(request):
     return render(request, 'admin_service_details.html')

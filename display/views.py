@@ -2,13 +2,16 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
-# Create your views here.
 from .models import *
 from login_registration.models import *
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 
 # employee
+@login_required(login_url='login')
 def emp_display(request):
     emp = Employee.objects.all()
     print(emp)
@@ -17,6 +20,7 @@ def emp_display(request):
     }
     return render(request, 'admin_employee_details.html', context)
 
+@login_required(login_url='login')
 def emp_edit(request, id):
     emp = Employee.objects.get(id=id)
     context = {
@@ -25,20 +29,21 @@ def emp_edit(request, id):
     return render(request, 'admin_employee_details.html', context)
 
 
-
+@login_required(login_url='login')
 def emp_update(request, employee_id):
-    emp = get_object_or_404(Employee, employee_id=employee_id)  # fetch the Employee object or return 404 if not found
+    emp = get_object_or_404(Employee, employee_id=employee_id)  
 
     if request.method == "POST":
         emp.name = request.POST.get('name')
         emp.email = request.POST.get('email')
         emp.phone = request.POST.get('phone')
         emp.address = request.POST.get('address')
-        emp.save()  # save the updated Employee object
+        emp.save() 
         return redirect('/emp_display')
 
     return render(request, 'admin_employee_details', {'emp': emp})
 
+@login_required(login_url='login')
 def emp_delete(request, employee_id):
     emp = Employee.objects.filter(employee_id=employee_id)
     emp.delete()
@@ -49,7 +54,7 @@ def emp_delete(request, employee_id):
 
 
 # services
-
+@login_required(login_url='login')
 def add_service(request):
     if request.method == "POST":
         name = request.POST.get('name')
@@ -58,7 +63,7 @@ def add_service(request):
         price = request.POST.get('price')
 
         if not price:
-            price = 0  # set a default value
+            price = 0 
 
         Services.objects.create(name=name, description=description, image=image, price=price)
 
@@ -66,6 +71,7 @@ def add_service(request):
 
     return render(request, 'admin_service_details.html')
 
+@login_required(login_url='login')
 def services_list(request):
     services = Services.objects.all()
     print(services)
@@ -74,6 +80,7 @@ def services_list(request):
     }
     return render(request, 'admin_service_details.html', context)
 
+@login_required(login_url='login')
 def services_edit(request, id):
     services = Services.objects.get(id=id)
     context = {
@@ -84,22 +91,23 @@ def services_edit(request, id):
 
 from django.core.files import File
 
+@login_required(login_url='login')
 def services_update(request, id):
-    services = Services.objects.get(id=id)  # fetch the Services object or return 404 if not found
+    services = Services.objects.get(id=id)  
     if request.method == "POST":
         services.name = request.POST.get('name')
         services.description = request.POST.get('description')
         services.price = request.POST.get('price')
 
-        # handle file upload
         if 'image' in request.FILES:
             services.image = request.FILES['image']
 
-        services.save()  # save the updated Services object
+        services.save()  
         return redirect('/services_list')
 
     return render(request, 'admin_service_details', {'services': services})
 
+@login_required(login_url='login')
 def services_delete(request, id):
     services = Services.objects.filter(id=id)
     services.delete()
@@ -108,7 +116,7 @@ def services_delete(request, id):
     }
     return redirect('/services_list', context)
 
-
+@login_required(login_url='login')
 # packages
 def add_packages(request):
     if request.method == "POST":
@@ -117,7 +125,7 @@ def add_packages(request):
         price = request.POST.get('price')
 
         if not price:
-            price = 0  # set a default value
+            price = 0  
 
         Packages.objects.create(name=name, description=description,price=price)
 
@@ -125,6 +133,7 @@ def add_packages(request):
 
     return render(request, 'admin_package_details.html')
 
+@login_required(login_url='login')
 def packages_list(request):
     packages = Packages.objects.all()
     print(packages)
@@ -133,6 +142,7 @@ def packages_list(request):
     }
     return render(request, 'admin_package_details.html', context)
 
+@login_required(login_url='login')
 def packages_edit(request, id):
     packages = Packages.objects.get(id=id)
     context = {
@@ -140,19 +150,20 @@ def packages_edit(request, id):
     }
     return render(request, 'admin_package_details.html', context)
 
+@login_required(login_url='login')
 def packages_update(request, id):
-    packages = Packages.objects.get(id=id)  # fetch the Packages object or return 404 if not found
+    packages = Packages.objects.get(id=id)  
     if request.method == "POST":
         packages.name = request.POST.get('name')
         packages.description = request.POST.get('description')
         packages.price = request.POST.get('price')
 
-        packages.save()  # save the updated Packages object
+        packages.save()
         return redirect('/packages_list')
 
     return render(request, 'admin_package_details', {'packages': packages})
 
-
+@login_required(login_url='login')
 def packages_delete(request, id):
     packages = Packages.objects.filter(id=id)
     packages.delete()
@@ -163,7 +174,7 @@ def packages_delete(request, id):
 
 
 #customers
-
+@login_required(login_url='login')
 def customer_list(request):
     customer = Customer.objects.all()
     print(customer)
@@ -172,6 +183,7 @@ def customer_list(request):
     }
     return render(request, 'admin_customer_details.html', context)
 
+@login_required(login_url='login')
 def customer_delete(request, id):
     customer = Customer.objects.filter(id=id)
     customer.delete()
