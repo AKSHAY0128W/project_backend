@@ -33,6 +33,7 @@ urlpatterns = [
     
     path('services/', homepage_views.services, name="services"),
 
+    path('myservices/', homepage_views.myservices, name="myservices"),
 
     #admin_panel_pages
     path('add_employee/',homepage_views.admin_create_employee, name="add_employee"),

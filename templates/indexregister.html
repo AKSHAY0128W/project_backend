@@ -18,67 +18,97 @@
             display: grid;
             place-items: center;
             height: 100vh;
+            background-image: url("https://plus.unsplash.com/premium_photo-1678567671952-4028b2ec6c71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
         }
 
         form {
-            margin: 0 auto;
-            width: 50%;
-            padding: 30px;
-            background-color: #f2f2f2;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px 20px 20px 20px;
+            min-width: 400px;
         }
 
         form label {
-            font-weight: bold;
-            font-size: 20px;
+            color: white;
+            font-weight: 600;
         }
 
         form input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0px;
-            border: 1px solid rgb(161, 161, 255);
             border-radius: 5px;
+            outline: none !important;
+            color: white !important;
+            padding: 15px !important;
+            background-color: transparent !important;
         }
 
-        form input[type="text"] {
-            width: 100%;
-            padding: 20px 10px;
-            margin: 0 auto;
+        form input:focus {
+            border: 1px solid white !important;
+        }
+
+        form h1 {
+            font-weight: 400;
+            font-family: 'Poppins', 'serif';
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        form h1::after {
+            content: "";
             display: block;
+            width: 120px;
+            height: 3px;
+            background-color: #007bff;
+            margin: 8px auto 0;
         }
 
-        form input[type="email"] {
-            width: 100%;
-            padding: 20px 10px;
-            margin: 0 auto;
-            display: block;
+        form button {
+            margin-top: 10px;
         }
 
-        form input[type="password"] {
-            width: 100%;
-            padding: 15px 10px;
-            margin: 0 auto;
-            display: block;
-        }
-
-        form a {
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 600;
+        a {
+            color: white;
+            margin-top: 20px;
         }
     </style>
 </head>
 
 <body>
-    <form action="" method="post" class="form-group">
+    <form method="post">
+        <h1 class="mb-2 text-center">Customer Registrations</h1>
         {% csrf_token %}
-        {{ registerform.as_p }}
-        {{ customerform.as_p }}
-        <input type="submit" value="Register" class="btn btn-primary px-4">
-        <a href="{% url 'login' %}">Login if Already registed</a>
+        <div class="mb-1">
+            <label for="username" class="form-label sr-only">Username:</label>
+            <input class="form-control" id="username" placeholder="Username" type="text" name="username" required>
+        </div>
+        <div class="mb-1">
+            <label for="email" class="form-label">Email:</label>
+            <input class="form-control" id="email" type="email" name="email" required>
+        </div>
+        <div class="mb-1">
+            <label for="password1" class="form-label">Password:</label>
+            <input class="form-control" id="password1" type="password" name="password1" required>
+        </div>
+        <div class="mb-1">
+            <label for="password2" class="form-label">Confirm Password:</label>
+            <input class="form-control" id="password2" type="password" name="password2" required>
+        </div>
+        <div class="mb-1">
+            <label for="name" class="form-label">Name:</label>
+            <input class="form-control" id="name" type="text" name="name" required>
+        </div>
+        <div class="mb-1">
+            <label for="address" class="form-label">Address:</label>
+            <input class="form-control" id="address" type="text" name="address" required>
+        </div>
+        <div class="mb-1">
+            <label for="phone" class="form-label">Phone:</label>
+            <input class="form-control" id="phone" type="text" name="phone" required>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block " value="Register" type="submit">Register</button>
+        <a href="{% url 'login' %}">Login if Already register!</a>
     </form>
-
     <!-- Bootstrap JS CDN -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 

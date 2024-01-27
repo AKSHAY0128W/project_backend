@@ -2,16 +2,16 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
-from .models import *
+from .models import Services, Packages
 from login_registration.models import *
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.core.files import File
 
 # employee
-@login_required(login_url='login')
 def emp_display(request):
     emp = Employee.objects.all()
     print(emp)
@@ -20,7 +20,6 @@ def emp_display(request):
     }
     return render(request, 'admin_employee_details.html', context)
 
-@login_required(login_url='login')
 def emp_edit(request, id):
     emp = Employee.objects.get(id=id)
     context = {
@@ -29,7 +28,6 @@ def emp_edit(request, id):
     return render(request, 'admin_employee_details.html', context)
 
 
-@login_required(login_url='login')
 def emp_update(request, employee_id):
     emp = get_object_or_404(Employee, employee_id=employee_id)  
 
@@ -43,7 +41,6 @@ def emp_update(request, employee_id):
 
     return render(request, 'admin_employee_details', {'emp': emp})
 
-@login_required(login_url='login')
 def emp_delete(request, employee_id):
     emp = Employee.objects.filter(employee_id=employee_id)
     emp.delete()
@@ -54,7 +51,20 @@ def emp_delete(request, employee_id):
 
 
 # services
-@login_required(login_url='login')
+
+
+def services_list(request):
+    services = Services.objects.all()
+    print(services)
+    context = {
+        'services':services,
+    }
+
+    return render(request, 'admin_service_details.html', context)
+
+
+
+
 def add_service(request):
     if request.method == "POST":
         name = request.POST.get('name')
@@ -71,16 +81,8 @@ def add_service(request):
 
     return render(request, 'admin_service_details.html')
 
-@login_required(login_url='login')
-def services_list(request):
-    services = Services.objects.all()
-    print(services)
-    context = {
-        'services':services,
-    }
-    return render(request, 'admin_service_details.html', context)
 
-@login_required(login_url='login')
+
 def services_edit(request, id):
     services = Services.objects.get(id=id)
     context = {
@@ -89,9 +91,7 @@ def services_edit(request, id):
     return render(request, 'admin_service_details.html', context)
 
 
-from django.core.files import File
 
-@login_required(login_url='login')
 def services_update(request, id):
     services = Services.objects.get(id=id)  
     if request.method == "POST":
@@ -107,7 +107,6 @@ def services_update(request, id):
 
     return render(request, 'admin_service_details', {'services': services})
 
-@login_required(login_url='login')
 def services_delete(request, id):
     services = Services.objects.filter(id=id)
     services.delete()
@@ -116,7 +115,6 @@ def services_delete(request, id):
     }
     return redirect('/services_list', context)
 
-@login_required(login_url='login')
 # packages
 def add_packages(request):
     if request.method == "POST":
@@ -133,7 +131,6 @@ def add_packages(request):
 
     return render(request, 'admin_package_details.html')
 
-@login_required(login_url='login')
 def packages_list(request):
     packages = Packages.objects.all()
     print(packages)
@@ -142,7 +139,6 @@ def packages_list(request):
     }
     return render(request, 'admin_package_details.html', context)
 
-@login_required(login_url='login')
 def packages_edit(request, id):
     packages = Packages.objects.get(id=id)
     context = {
@@ -150,7 +146,6 @@ def packages_edit(request, id):
     }
     return render(request, 'admin_package_details.html', context)
 
-@login_required(login_url='login')
 def packages_update(request, id):
     packages = Packages.objects.get(id=id)  
     if request.method == "POST":
@@ -163,7 +158,6 @@ def packages_update(request, id):
 
     return render(request, 'admin_package_details', {'packages': packages})
 
-@login_required(login_url='login')
 def packages_delete(request, id):
     packages = Packages.objects.filter(id=id)
     packages.delete()
@@ -174,7 +168,6 @@ def packages_delete(request, id):
 
 
 #customers
-@login_required(login_url='login')
 def customer_list(request):
     customer = Customer.objects.all()
     print(customer)
@@ -183,7 +176,6 @@ def customer_list(request):
     }
     return render(request, 'admin_customer_details.html', context)
 
-@login_required(login_url='login')
 def customer_delete(request, id):
     customer = Customer.objects.filter(id=id)
     customer.delete()

@@ -23,10 +23,9 @@ class CreateUserForm(UserCreationForm):
 class CustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
-        fields = ['phone','address','first_name','last_name']
+        fields = ['phone','address','name']
         widgets = {
-            'first_name' : forms.TextInput(attrs={'class': 'form-control'}),
-            'last_name' : forms.TextInput(attrs={'class': 'form-control'}),
+            'name' : forms.TextInput(attrs={'class': 'form-control'}),
             'phone': forms.TextInput(attrs={'class': 'form-control'}),
             'address' : forms.TextInput(attrs={'class': 'form-control'}),
         }
@@ -60,7 +59,7 @@ class EmployeeForm(UserCreationForm):
 class EmployeeDetailsForm(forms.ModelForm):
     class Meta:
         model = Employee
-        fields = ['name','email','phone','address','user']
+        fields = ['name','email','phone','address']
         widgets = {
             'user': forms.TextInput(attrs={'class': 'form-control'}),
         }

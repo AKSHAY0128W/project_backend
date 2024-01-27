@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
-
+from display.models import Services
 
 def default(request):
     return render(request, 'default.html')
@@ -21,6 +21,12 @@ def appointment(request):
 @login_required(login_url='login')
 def dashboard(request):
     return render(request, 'customer.html')
+
+def myservices(request):
+    services = Services.objects.all()
+    context = {'services':services}
+    print(services)
+    return render(request, 'services.html', context)
 
 @login_required(login_url='login')
 def admin_dashboard(request):

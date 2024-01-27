@@ -3,46 +3,64 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .forms import CreateUserForm,LoginForm,CustomerForm,EmployeeForm,EmployeeDetailsForm
 from django.contrib.auth.models import auth
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.core.exceptions import ValidationError
+from django.contrib.auth.password_validation import validate_password
+from .models import Customer,Employee,Profile
 
-#Customer registration view
+
 def register(request):
-    user_form = CreateUserForm()
-    customer_form = CustomerForm()
     if request.method == 'POST':
-        user_form = CreateUserForm(request.POST)
-        customer_form = CustomerForm(request.POST)
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+        name = request.POST.get('name')
+        address = request.POST.get('address')
+        phone = request.POST.get('phone')
 
-        if user_form.is_valid() and customer_form.is_valid(): 
-            user = user_form.save()
-            customer = customer_form.save(commit=False)
-            customer.user = user  
-            customer.save()
-            return redirect('login')
+        if password1 != password2:
+            pass
 
-    context = {'registerform': user_form, 'customerform': customer_form}
-    return render(request, 'indexregister.html', context=context)
+        try:
+            validate_password(password1)
+        except ValidationError as e:
+            pass
+        
+        user = User.objects.create_user(username=username, email=email, password=password1)
+        user.save()
+
+        profile = Profile(user=user, user_type='customer')
+        profile.save()
+        
+
+        customer = Customer(profile=profile, name=name, address=address, phone=phone,email=email)
+        customer.save()
+
+        return redirect('login')
+
+    return render(request, 'indexregister.html')
 
 #Login View both customer and employee and admin
 def login_view(request):
-    form = LoginForm()
     if request.method == 'POST':
-        form = LoginForm(data=request.POST)
-        if form.is_valid():
-            username = request.POST['username']
-            password = request.POST['password']
+        username = request.POST['username']
+        password = request.POST['password']
 
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                auth.login(request, user)
-                if user.is_superuser:
-                    return redirect('admin_dashboard')
-                elif user.is_staff:
-                    return redirect('employee_panel')
-                else:
-                    return redirect('homepage')
-    context = {'loginform':form}
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            if user.is_superuser:
+                return redirect('admin_dashboard')
+            elif user.is_staff:
+                return redirect('employee_panel')
+            else:
+                return redirect('homepage')
+    context = {'form': LoginForm()}
     return render(request, 'indexlogin.html', context=context)
-
+    
 #Logout View for customer and employee and admin
 def logout_view(request):
     auth.logout(request)
@@ -56,6 +74,12 @@ def create_employee(request):
             edetails = EmployeeDetailsForm(request.POST)
             if form.is_valid() and edetails.is_valid():
                 form.save()
+
+                profile = Profile(user=form.instance, user_type='employee')
+                profile.save()
+
+                edetails = edetails.save(commit=False)
+                edetails.profile = profile
                 edetails.save()
                 return redirect('admin_dashboard')
             else:

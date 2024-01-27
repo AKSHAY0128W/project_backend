@@ -14,28 +14,33 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
 
 <body>
 
     <div id="sidebar">
-        <div id="dashboard">Accountant</div>
-        <hr>
-        <a href="{% url 'admin_homepage' %}" class="sidebar-item">Home</a>
-        <a href="{% url 'add_employee' %}" class="sidebar-item">Add Employee</a>
-        <a href="{% url 'emp_display' %}" class="sidebar-item">Employees</a>
-        <a href="{% url 'services_list' %}" class="sidebar-item">Services</a>
-        <a href="{% url 'packages_list' %}" class="sidebar-item">Packages</a>
-        <a href="{% url 'customer_list'%}" class="sidebar-item">Customers</a>
-        <a href="{% url 'default' %}" class="sidebar-item">Logout</a>
+        <!-- <div id="dashboard">Accountant</div> -->
+        <div id="dashboard">
+            <img class="img-fluid" width="180px" src="/static/IMAGES/ac-logo.png" alt="logo"></div>
+        <a href="{% url 'admin_homepage' %}" class="sidebar-item"><i class="fa fa-home"
+                aria-hidden="true"></i><span>Home</span></a>
+        <a href="{% url 'add_employee' %}" class="sidebar-item"><i class="fa fa-user-plus"
+                aria-hidden="true"></i><span>Add Employee</span></a>
+        <a href="{% url 'emp_display' %}" class="sidebar-item"><i class="fas fa-user"></i><span> Employees</span></a>
+        <a href="{% url 'services_list' %}" class="sidebar-item"><i class="fas fa-print"></i> <span>Services</span></a>
+        <a href="{% url 'packages_list' %}" class="sidebar-item"><i class="fas fa-boxes"></i> <span>Packages</span></a>
+        <a href="{% url 'customer_list'%}" class="sidebar-item"><i class="fa fa-users"
+                aria-hidden="true"></i><span>Customers</span></a>
+        <a href="{% url 'default' %}" class="sidebar-item"><i class="fa fa-arrow-circle-left"
+                aria-hidden="true"></i><span>Logout</span></a>
     </div>
 
     <div id="content">
         <h1 class="text-center border p-2 border-dark"
             style="border-radius: 50px; background-color: #555; color: white;">Admin Panel
         </h1>
+
         <div class="dashboard-card">
             {% block content %}
 
