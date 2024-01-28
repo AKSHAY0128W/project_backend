@@ -33,7 +33,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -90,7 +89,7 @@ WSGI_APPLICATION = 'project_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mybackend',
+        'NAME': 'mybackendc',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
