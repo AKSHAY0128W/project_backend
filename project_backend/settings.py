@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'homepage',
     'login_registration',
     'display',
-    # 'appointments',
+    'appointment',
+    'course',
 
 
 ]
@@ -89,7 +90,7 @@ WSGI_APPLICATION = 'project_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mybackendc',
+        'NAME': 'mybackend',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',

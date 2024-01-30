@@ -160,7 +160,7 @@ nav {
     margin-top: 30px;
 }
 
-.card {
+.about-card {
     width: 450px;
     background-color: #fff;
     border-radius: 8px;
@@ -171,16 +171,16 @@ nav {
     border-radius: 40px !important;
 }
 
-.about-us .card-container .card img {
+.about-us .card-container .about-card img {
     border-radius: 30px !important;
 }
 
-.card:hover {
+.about-card:hover {
     scale: 1.010;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
-.card h3 {
+.about-card h3 {
     color: #333;
 }
 
@@ -543,9 +543,8 @@ main {
 }
 
 
+
 /* services */
-
-
 /* calculator */
 @media (max-width: 768px) {
     .my-calc {

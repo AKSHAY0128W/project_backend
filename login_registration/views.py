@@ -1,14 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from .forms import CreateUserForm,LoginForm,CustomerForm,EmployeeForm,EmployeeDetailsForm
+from .forms import CreateUserForm, LoginForm, CustomerForm, EmployeeForm, EmployeeDetailsForm
 from django.contrib.auth.models import auth
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.contrib.auth.password_validation import validate_password
-from .models import Customer,Employee,Profile
+from .models import Customer, Employee, Profile
 
 
 def register(request):
@@ -28,22 +28,23 @@ def register(request):
             validate_password(password1)
         except ValidationError as e:
             pass
-        
+
         user = User.objects.create_user(username=username, email=email, password=password1)
         user.save()
 
         profile = Profile(user=user, user_type='customer')
         profile.save()
-        
 
-        customer = Customer(profile=profile, name=name, address=address, phone=phone,email=email)
+        customer = Customer(profile=profile, name=name, address=address, phone=phone, email=email)
         customer.save()
 
         return redirect('login')
 
     return render(request, 'indexregister.html')
 
-#Login View both customer and employee and admin
+
+# Login View both customer and employee and admin
+
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -60,13 +61,15 @@ def login_view(request):
                 return redirect('homepage')
     context = {'form': LoginForm()}
     return render(request, 'indexlogin.html', context=context)
-    
-#Logout View for customer and employee and admin
+
+
+# Logout View for customer and employee and admin
 def logout_view(request):
     auth.logout(request)
     return redirect('default')
 
-#Employee creation view for admin
+
+# Employee creation view for admin
 def create_employee(request):
     if request.user.is_superuser:
         if request.method == 'POST':

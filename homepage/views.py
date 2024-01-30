@@ -3,7 +3,9 @@ from django.contrib.auth.decorators import login_required
 from display.models import Services
 
 def default(request):
-    return render(request, 'default.html')
+    services = Services.objects.all()
+    context = {'services':services}
+    return render(request, 'default.html', context)
     
 @login_required(login_url='login')
 def homepage(request):

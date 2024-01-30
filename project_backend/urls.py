@@ -6,6 +6,7 @@ from calculators import views as calculators_views
 from display import views as display_views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.urls import include
 
 
 
@@ -69,7 +70,15 @@ urlpatterns = [
 
     #Calculators
     path('calculators/', calculators_views.Calculators, name="calculators"),
+
+
+
+    #course
+    path('course/', include('course.urls')),
+    
 ]
+
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -48,7 +48,7 @@
                                 <a class="nav-link" href="#aboutus">About</a>
                             </li>
                             <li class="nav-item mx-2">
-                                <a class="nav-link" href="#services">Services</a>
+                                <a class="nav-link" href="#myservices">Services</a>
                             </li>
                             <li class="nav-item mx-2">
                                 <a class="nav-link" href="#Packages">Packages</a>
@@ -111,21 +111,26 @@
     </div>
     <!-- About US -->
     <!-- services -->
+    <div class="Service_cards" id="myservices">
 
-    <div class="Service_cards" id="services">
         {% for service in services %}
         <div class="s-card">
             <h2>{{ service.name }}</h2>
-            <img src="{{ service.image_url }}" class="img-fluid" alt="">
+            {% if service.image %}
+            <img src="/media/{{service.image}}" height="100px" width="100px" class="img-fluid" alt="{{service.name}}">
+            {% else %}
+            <p>No image available for this service.</p>
+            {% endif %}
             <p>{{ service.description }}</p>
-            <div class="button">
-                <div class="button-layer"></div>
+            <p>Price{{service.price}}</p>
+            <div class="button mt-2">
                 <a href="{{ service.booking_url }}" class="button">Book Now</a>
             </div>
         </div>
         {% endfor %}
     </div>
     <!-- services -->
+
 
     <!-- calculator -->
     <section id="my-calc">
