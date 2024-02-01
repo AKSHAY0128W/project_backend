@@ -1,7 +1,9 @@
 from django.urls import path, include
-from course.views import *
+from course.views import course_home, coursePage
 from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
-    path('course_home', course_home, name='course_home'),
+    path('', course_home, name='course_home'),
+    path('course_details/<slug:slug>/', coursePage, name='coursePage'),
+
 ]

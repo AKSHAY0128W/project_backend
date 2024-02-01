@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load courses_custom_tags %}
+{% block content %}
+<style>
+   .price {
+      font-family: sans-serif;
+      font-size: 18px;
+   }
+
+   #video_list {
+      overflow-y: scroll;
+   }
+</style>
+<div class="container-fluid mt-5 mb-5">
+   <div hidden>
+      <p style="margin-top: 80px;">Selected Course:{{course.name}}</p>
+      <p style="margin-top: 80px;">Selected Course:{{course.price}}</p>
+      <p style="margin-top: 80px;">Selected Course:{{course.discount}}</p>
+      <p style="margin-top: 80px;">Selected Course:{{course.description}}</p>
+      <p style="margin-top: 80px;">Selected Course:{{course.video_set.all}}</p>
+   </div>
+   <div style="margin-top: 80px;">
+      <div class="card p-3">
+         <div class="row">
+            <div class="col">
+               <iframe width="100%" id="player" height="315"
+                  src="https://www.youtube.com/embed/jMHcborMf0Q?si=Rh9HmlTWyNSrM8_f" title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen></iframe>
+            </div>
+            <div class="col-3">
+               <ul id="video_list" class="list-group">
+                  {% for video in course.video_set.all%}
+                  <li class="list-group-item"><a href="#">{{video}}</a></li>
+                  {% endfor %}
+               </ul>
+            </div>
+         </div>
+      </div>
+
+      <!-- course Details  -->
+      <div class="mt-3">
+         <div class="card">
+            <div class="card-body">
+               <h5 class="card-title">{{course.name}}</h5>
+               <p class="card-text">{{course.description}}</p>
+            </div>
+         </div>
+      </div>
+      <!-- Prerequisite -->
+      <div class="mt-3">
+         <div class="card">
+            <div class="card-body">
+               <h5 class="card-title">Prerequisite</h5>
+               <p class="card-text">
+                  <ol>
+
+                     {% for pre in course.prerequisite_set.all%}
+                     <li class="">{{pre.description}}</li>
+                     {% endfor %}
+                  </ol>
+               </p>
+            </div>
+         </div>
+      </div>
+      <!-- Learning -->
+      <div class="mt-3">
+         <div class="card">
+            <div class="card-body">
+               <h5 class="card-title">Learning</h5>
+               <p class="card-text">
+                  <ol>
+                     {% for l in course.learning_set.all%}
+                     <li class="">{{l.description}}</li>
+                     {% endfor %}
+                  </ol>
+               </p>
+            </div>
+         </div>
+      </div>
+      <!-- End Learning -->
+   </div>
+</div>
+<script>
+   var player;
+   var video_list
+   document.onreadystatechange = function () {
+      if (document.readyState == 'interactive') {
+         player = document.getElementById("player")
+         video_list = document.getElementById("video_list")
+
+         maintainRatio()
+      }
+   }
+
+   function maintainRatio() {
+      var w = player.clientWidth
+      var h = (w * 9) / 16
+      console.log({
+         w,
+         h
+      });
+      player.height = h
+      video_list.style.maxHeight = h + "px"
+   }
+   window.onresize = maintainRatio
+</script>
+{% endblock %}

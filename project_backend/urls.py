@@ -75,7 +75,7 @@ urlpatterns = [
 
     #course
     path('course/', include('course.urls')),
-    
+   
 ]
 
 
