@@ -54,7 +54,7 @@ def login_view(request):
         if user is not None:
             login(request, user)
             if user.is_superuser:
-                return redirect('admin_dashboard')
+                return redirect('admin_homepage')
             elif user.is_staff:
                 return redirect('employee_panel')
             else:

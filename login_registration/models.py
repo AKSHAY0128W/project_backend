@@ -39,7 +39,6 @@ class Employee(models.Model):
         db_table = 'employee'
 
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE, default='')
-    # user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, default='')
     email = models.EmailField(default='', unique=True)
     address = models.CharField(max_length=255, null=True, default='Default address')

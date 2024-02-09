@@ -62,6 +62,7 @@ urlpatterns = [
 
     path('customer_list/', display_views.customer_list, name='customer_list'),
     path('customer_delete/<int:id>', display_views.customer_delete, name='customer_delete'),
+    
     # #Login Registration
 
     path('login/', login_registration_views.login_view, name="login"), 

@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
-from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from .models import Services, Packages
 from login_registration.models import *
@@ -20,10 +19,11 @@ def emp_display(request):
     }
     return render(request, 'admin_employee_details.html', context)
 
-def emp_edit(request, id):
-    emp = Employee.objects.get(id=id)
+def emp_edit(request,employee_id):
+    emp = Employee.objects.get(employee_id=employee_id)
     context = {
-        'emp':emp,
+        'emp':emp,  
+        
     }
     return render(request, 'admin_employee_details.html', context)
 
