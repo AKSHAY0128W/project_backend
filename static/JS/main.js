@@ -20,6 +20,7 @@ let navbar = document.getElementsByTagName('nav')[0];
         }
 
 
+
         function calculateSIP() {
             var amountinvested = document.querySelector(".amount");
             var rateofreturn = document.querySelector(".rate");

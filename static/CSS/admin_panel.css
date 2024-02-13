@@ -52,12 +52,13 @@ body {
     font-size: 18px;
 }
 
-/* 
+
 .sidebar-item:hover {
     text-decoration: none;
     background-color: #f3f3f3;
     color: #000;
-} */
+}
+
 @media (max-width: 768px) {
     .sidebar-item span {
         display: none;

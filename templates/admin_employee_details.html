@@ -28,10 +28,15 @@
                     <td>{{i.address}}</td>
                     <td>{{i.phone}}</td>
                     <td>
-                        <a href="#editEmployeeModal-{{forloop.counter}}" class="edit" data-toggle="modal"><i
-                                class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deleteEmployeeModal-{{forloop.counter}}" class="delete" data-toggle="modal"><i
-                                class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                        <a href="#editEmployeeModal-{{forloop.counter}}" class="edit" data-toggle="modal"><span
+                                class="material-symbols-outlined" data-toggle="tooltip" title="Edit">
+                                edit
+                            </span>
+                        </a>
+                        <a href="#deleteEmployeeModal-{{forloop.counter}}" class="delete" data-toggle="modal"><span
+                                class="material-symbols-outlined" data-toggle="tooltip" title="Delete">
+                                delete
+                            </span></a>
                     </td>
                 </tr>
                 {% endfor %}
