@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from display.models import Services
 from login_registration.models import Customer, Employee
 from django.contrib.sessions.models import Session
+from appointment.models import Appointment
 from django.utils import timezone
 
 def default(request):
@@ -15,8 +16,24 @@ def homepage(request):
 
 def aboutus(request):
     return render(request, 'aboutus.html')
-
+@login_required
 def appointment(request):
+    if request.method == 'POST':
+        # Get name and email from the Customer table
+        customer = Customer.objects.get(user=request.user)
+        name = customer.name
+        email = customer.email
+
+        date = request.POST.get('date')
+        time = request.POST.get('time')
+        message = request.POST.get('message')        
+        print(name, email, date, time, message)
+
+        appointment = Appointment(name=name, email=email, date=date, time=time, message=message)
+        appointment.save()
+
+        return render(request, 'appointment.html')
+
     return render(request, 'appointment.html')
 
 def dashboard(request):
