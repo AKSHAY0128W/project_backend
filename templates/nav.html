@@ -48,7 +48,7 @@
                                 <a class=" nav-link" href="{% url 'myservices' %}">Services</a>
                             </li>
                             <li class="nav-item mx-2">
-                                <a class="nav-link" href="#Packages">Packages</a>
+                                <a class="nav-link" href="{% url 'packages' %}">Packages</a>
                             </li>
                             <li class="nav-item mx-2 {% if request.path == '/appointment/' %} active {% endif %}">
                                 <a class="nav-link" href="{% url 'appointment' %}">Appointment</a>

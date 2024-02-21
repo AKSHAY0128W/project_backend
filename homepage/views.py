@@ -1,10 +1,13 @@
 from django.shortcuts import render,redirect
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from display.models import Services
-from login_registration.models import Customer, Employee
+from display.models import Services, serviceBooking, Packages
+from login_registration.models import Customer, Employee, Profile
 from django.contrib.sessions.models import Session
 from appointment.models import Appointment
+from django.http import HttpResponse
 from django.utils import timezone
+from django.shortcuts import get_object_or_404
 
 def default(request):
     services = Services.objects.all()
@@ -45,6 +48,15 @@ def myservices(request):
     print(services)
     return render(request, 'services.html', context)
 
+def mypackages(request):
+
+    packages = Packages.objects.all()
+    context = {'packages':packages}
+    print(packages)
+    return render(request, 'packages.html', context)
+
+
+
 def admin_dashboard(request):
     return render(request, 'admin_dashboard.html')
 
@@ -54,7 +66,32 @@ def employee_panel(request):
 def services(request):
     return render(request, 'services.html')
 
+
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
+
+@login_required
+def service_booking(request, id):  # make sure to include 'request' as the first argument
+    selected_service = get_object_or_404(Services, id=id)
+    if request.method == 'POST':
+        profile = get_object_or_404(Profile, user=request.user)
+        print(profile)
+
+        customer_id = profile.user_id  # get the user_id from the profile
+        date = request.POST.get('date')
+        time = request.POST.get('time')
+
+        booking = serviceBooking(customer_id=customer_id, date=date, time=time, service=selected_service)
+        booking.save()
+
+
+
+    return render(request, 'service_booking.html', {'selected_service': selected_service})        
+
 def admin_login(request):
+
     # if user is super user he will redirect to admin dashboard
     if request.user.is_superuser:
         return redirect(request, 'admin_dashboard')

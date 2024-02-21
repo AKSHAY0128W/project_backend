@@ -1,9 +1,13 @@
 from django.contrib.auth.models import User
 from django.db import models
-
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Multiuser Profile Model
 class Profile(models.Model):
+    class Meta:
+        db_table = 'profile'
+
     USER_TYPE_CHOICES = (
         ('customer', 'customer'),
         ('employee', 'employee'),
@@ -29,7 +33,6 @@ class Customer(models.Model):
 
     def __str__(self):
         return self.name
-
 
 # Employee model
 class Employee(models.Model):

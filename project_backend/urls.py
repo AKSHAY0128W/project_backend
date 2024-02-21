@@ -33,13 +33,19 @@ urlpatterns = [
     path('admin_login/', homepage_views.admin_login, name="admin_login"),
     
     path('services/', homepage_views.services, name="services"),
-
+    path('service_booking/<int:id>/', homepage_views.service_booking, name='service_booking'),
     path('myservices/', homepage_views.myservices, name="myservices"),
+    path('service_booking_admin/', display_views.service_booking_admin, name='service_booking_admin'),
+    path('booking_delete/<int:id>', display_views.booking_delete, name='booking_delete'),
 
     #admin_panel_pages
     path('add_employee/',homepage_views.admin_create_employee, name="add_employee"),
     path('admin_homepage/', homepage_views.admin_homepage, name="admin_homepage"),
     path('admin_service_details', homepage_views.admin_service_details, name="admin_employee_details"),
+
+    #packages
+
+    path('packages/', homepage_views.mypackages, name="packages"),
 
 
     #display

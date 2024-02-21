@@ -9,3 +9,7 @@ def course_home(request):
       'courses': courses
    }
    return render(request, 'course/course_home.html',context)
+
+
+def payment_page(request):
+   return render(request, 'payment.html')

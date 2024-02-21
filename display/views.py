@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from .models import Services, Packages
+from .models import serviceBooking
 from login_registration.models import *
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -114,6 +115,18 @@ def services_delete(request, id):
         'services':services,
     }
     return redirect('/services_list', context)
+
+#serviceBooking
+
+def service_booking_admin(request):
+    bookings = serviceBooking.objects.select_related('customer').all()
+    return render(request, 'admin_service_booking_details.html', {'bookings': bookings})
+
+def booking_delete(request, id):
+    booking = serviceBooking.objects.filter(id=id)
+    booking.delete()
+    return redirect('/service_booking_admin')
+
 
 # packages
 def add_packages(request):

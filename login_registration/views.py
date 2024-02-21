@@ -58,7 +58,7 @@ def login_view(request):
             elif user.is_staff:
                 return redirect('employee_panel')
             else:
-                return redirect('homepage')
+                return redirect('homepage') 
     context = {'form': LoginForm()}
     return render(request, 'indexlogin.html', context=context)
 
