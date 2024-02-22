@@ -1,0 +1,65 @@
+{% extends 'admin.html' %}
+{% block content %}
+<!-- display -->
+<div class="container">
+   <div class="table-wrapper">
+      <div class="table-title">
+         <div class="row">
+            <div class="col-sm-6">
+               <h2>Manage <b>Payments</b></h2>
+            </div>
+         </div>
+      </div>
+      <table class="table table-striped table-hover">
+         <thead>
+            <tr>
+               <th>Customer</th>
+               <th>Service</th>
+               <th>Date</th>
+               <th>Time</th>
+            </tr>
+         </thead>
+         <tbody>
+            {% for i in payments %}
+            <tr>
+               <td>{{i.customer.name}}</td>
+               <td>{{i.service.name}}</td>
+               <td>{{i.date}}</td>
+               <td>{{i.time}}</td>
+               <td>
+                  <a href="#deletePaymentModal-{{forloop.counter}}" class="delete" data-toggle="modal">
+                     <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                  </a>
+               </td>
+            </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+   </div>
+</div>
+
+<!-- Delete Modal HTML -->
+{% for i in payments %}
+<div id="deletePaymentModal-{{forloop.counter}}" class="modal fade">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <form>
+            <div class="modal-header">
+               <h4 class="modal-title">Delete Payment</h4>
+               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+               <p>Are you sure you want to delete these Records?</p>
+               <p class="text-warning"><small>This payment made by {{i.customer.name}} for {{i.service.name}} will be
+                     deleted.</small></p>
+            </div>
+            <div class="modal-footer">
+               <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+               <a href="/payment_delete/{{i.id}}" type="submit" class="btn btn-danger">Delete</a>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>
+{% endfor %}
+{% endblock %}

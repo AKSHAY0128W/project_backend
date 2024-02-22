@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.core.files import File
+from display.models import payment
 
 # employee
 def emp_display(request):
@@ -126,6 +127,17 @@ def booking_delete(request, id):
     booking = serviceBooking.objects.filter(id=id)
     booking.delete()
     return redirect('/service_booking_admin')
+
+
+#payments
+
+def payment_list(request):
+    payments = payment.objects.all()
+    print(payments)
+    context = {
+        'payments':payments,
+    }
+    return render(request, 'admin_payments_details.html', context)
 
 
 # packages

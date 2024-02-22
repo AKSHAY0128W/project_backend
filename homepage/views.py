@@ -1,13 +1,39 @@
 from django.shortcuts import render,redirect
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
 from display.models import Services, serviceBooking, Packages
 from login_registration.models import Customer, Employee, Profile
 from django.contrib.sessions.models import Session
 from appointment.models import Appointment
-from django.http import HttpResponse
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from datetime import datetime
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from django.urls import reverse
+from display.models import payment
+
+def make_payment(request, id): 
+    selected_service = get_object_or_404(Services, id=id)
+
+    profile = get_object_or_404(Profile, user=request.user)
+    customer = profile.customer  
+
+    if not Customer.objects.filter(id=customer.id).exists():  
+        return HttpResponse('Customer does not exist', status=400)
+    
+    if request.method == 'POST':
+
+        date = datetime.now().date()
+        time = datetime.now().time()
+
+        print(date, time, customer, selected_service)
+        payment_instance = payment(date=date, time=time, customer=customer, service=selected_service)
+        payment_instance.save()
+
+        return redirect('myservices')
+        
+    return render(request, 'payment.html', {'service_name': selected_service.name, 'service_price': selected_service.price, 'customer': customer, 'service_id': id})
+
 
 def default(request):
     services = Services.objects.all()
@@ -19,6 +45,8 @@ def homepage(request):
 
 def aboutus(request):
     return render(request, 'aboutus.html')
+
+
 @login_required
 def appointment(request):
     if request.method == 'POST':
@@ -67,28 +95,42 @@ def services(request):
     return render(request, 'services.html')
 
 
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-
-
 @login_required
-def service_booking(request, id):  # make sure to include 'request' as the first argument
+def service_booking(request, id):
+    # Get the selected service
     selected_service = get_object_or_404(Services, id=id)
-    if request.method == 'POST':
-        profile = get_object_or_404(Profile, user=request.user)
-        print(profile)
 
-        customer_id = profile.user_id  # get the user_id from the profile
+    # Try to get the profile for the currently logged-in user
+    try:
+        profile = Profile.objects.get(user=request.user)
+    except Profile.DoesNotExist:
+        # Handle the case where the profile does not exist
+        # For example, you can return an HTTP 404 response
+        return HttpResponse('Profile does not exist', status=404)
+
+    # Get the customer related to this profile
+    customer = profile.customer  # replace 'customer' with the actual related name
+
+    # Check if the customer exists
+    if not Customer.objects.filter(id=customer.id).exists():
+        return HttpResponse('Customer does not exist', status=400)
+
+    if request.method == 'POST':
         date = request.POST.get('date')
         time = request.POST.get('time')
 
-        booking = serviceBooking(customer_id=customer_id, date=date, time=time, service=selected_service)
+        # Create a new serviceBooking instance with the customer and selected service
+        booking = serviceBooking(customer=customer, date=date, time=time, service=selected_service)
         booking.save()
 
+        # Redirect to the payment page for the selected service
+        return redirect(reverse('make_payment', args=[selected_service.id]))
+
+    return render(request, 'service_booking.html', {'selected_service': selected_service})
 
 
-    return render(request, 'service_booking.html', {'selected_service': selected_service})        
+
+
 
 def admin_login(request):
 

@@ -48,7 +48,8 @@
                <input type="text" class="form-control" id="address" name="address" placeholder="Enter your address">
             </div> -->
 
-            <button type="submit" class="btn mt-4 btn-primary">Submit</button>
+            <a type="submit" class="btn mt-3 btn-primary" href="{% url 'make_payment' id=selected_service.id %}">Go
+               to payment</a>
 
          </form>
 

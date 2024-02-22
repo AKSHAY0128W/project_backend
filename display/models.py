@@ -40,3 +40,16 @@ class Packages(models.Model):
 
     def __str__(self):
         return self.name
+    
+class payment(models.Model):
+    class Meta:
+        db_table = 'payment'
+    
+    id = models.AutoField(primary_key=True)
+    date = models.DateField()
+    time = models.TimeField()
+    customer = models.ForeignKey('login_registration.Customer', on_delete=models.CASCADE, default=None)
+    service = models.ForeignKey(Services, on_delete=models.CASCADE, default=None)
+    
+    def __str__(self):
+        return str(self.id)

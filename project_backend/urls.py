@@ -82,7 +82,10 @@ urlpatterns = [
 
     #course
     path('course/', include('course.urls')),
-   
+
+
+    path('make_payment/<int:id>', homepage_views.make_payment, name="make_payment"),
+    path('payment_list/', display_views.payment_list, name='payment_list'),
 ]
 
 
