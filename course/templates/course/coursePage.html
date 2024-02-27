@@ -67,22 +67,6 @@
             </div>
          </div>
       </div>
-      <!-- Prerequisite -->
-      <div class="mt-3">
-         <div class="card">
-            <div class="card-body">
-               <h5 class="card-title">Prerequisite</h5>
-               <p class="card-text">
-                  <ol>
-
-                     {% for pre in course.prerequisite_set.all%}
-                     <li class="">{{pre.description}}</li>
-                     {% endfor %}
-                  </ol>
-               </p>
-            </div>
-         </div>
-      </div>
       <!-- Learning -->
       <div class="mt-3">
          <div class="card">
@@ -91,7 +75,7 @@
                <p class="card-text">
                   <ol>
                      {% for l in course.learning_set.all%}
-                     <li class="">{{l.description}}</li>
+                     <li class="">{{l.learnings_description}}</li>
                      {% endfor %}
                   </ol>
                </p>

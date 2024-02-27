@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -80,31 +81,40 @@
     </header>
     <!-- Header End -->
 
+
     <hr>
     <!-- About US -->
-    <div class="about-us" id="aboutus">
+    <div class="about-us mt-3" id="aboutus">
         <h2>About Us</h2>
         <div class="card-container">
             <div class="about-card">
                 <img src="https://img.freepik.com/free-photo/business-concept-with-team-close-up_23-2149151159.jpg?w=1060&t=st=1704982894~exp=1704983494~hmac=0292fad6626ae9301a1984122939a526023d8936add733ebc9962b44a39df518"
                     class="img-fluid" alt="">
-                <h3>Our Mission</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla condimentum tortor id ligula varius,
-                    id feugiat neque dictum.</p>
+                <h3 class="mt-2">Our Mission</h3>
+                <p>
+                    Our mission is to provide the best accounting services to our clients. We are committed to
+                    providing.
+                </p>
             </div>
-            <div class="about-card ">
+            <div class="about-card">
                 <img src="https://img.freepik.com/free-photo/guy-shows-document-girl-group-young-freelancers-office-have-conversation-working_146671-13569.jpg?w=1060&t=st=1704982957~exp=1704983557~hmac=193e774398180580279511a396767afc66e7b62d0e68b4293b8cb25c56433522"
-                    class="img-fluid" alt="">
-                <h3>Our Team</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla condimentum tortor id ligula varius,
-                    id feugiat neque dictum.</p>
+                    class="img-fluid rounded " alt="">
+                <h3 class="mt-2">Our Team</h3>
+                <p>
+                    Our team is a group of highly qualified and experienced professionals who are committed to providing
+                    the
+                    best services to our clients.
+                </p>
             </div>
-            <div class="about-card ">
+            <div class="about-card">
                 <img src="https://img.freepik.com/free-photo/smiling-businessman-welcoming-new-partner-group-meeting-with-handshake_1163-4627.jpg?w=1060&t=st=1704983031~exp=1704983631~hmac=3664cb816ac0ce5511961949b19807d363ef3c9f129c1c3a516d45dcfa2e3c5e"
                     class="img-fluid" alt="">
-                <h3>We Provide</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla condimentum tortor id ligula varius,
-                    id feugiat neque dictum.</p>
+                <h3 class="mt-2">We Provide</h3>
+                <p>
+                    We provide a wide range of accounting services to our clients. We also provide accounting packages
+                    to
+                    our clients.
+                </p>
             </div>
         </div>
     </div>
@@ -135,9 +145,39 @@
     </div>
     <!-- services -->
 
+    <section id="Packages">
+        <div class="container package-container">
+            <div class="package-heading text-center">
+                <h2>Our Packages</h2>
+            </div>
+            <div class="row">
+                {% for package in packages %}
+                <div class="col-4 pack_box border border-5 p-4 rounded-5">
+                    <div class="package">
+                        <div class="package-name">
+                            <h1>
+                                {{ package.name }}
+                            </h1>
+                        </div>
+                        <hr>
+                        <div class="package-details">
+                            <p> {{ package.description}}</p>
+                            <h4>
+                                &#8377; {{ package.price }}
+                            </h4>
+                        </div>
+                        <a href="/package/{{ package.id }}" class="btn btn-primary">Book Now</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
 
     <!-- calculator -->
-    <!-- <section id="my-calc">
+    <section id="my-calc">
         <div class="my-calc">
             <div class=" wrapper sip_calculator " data-aos-duration="1000" data-aos="fade-right">
                 <h3>SIP Calculator</h3>
@@ -167,7 +207,6 @@
 
             </div>
 
-
             <div class="gst-calculator wrapper " data-aos-duration="1000" data-aos="fade-right">
 
                 <h3>GST Calculator</h3>
@@ -186,8 +225,6 @@
                 <input type="text" id="gsttotal" readonly>
             </div>
 
-
-
             <div class="income-calculator wrapper" data-aos="fade-right" data-aos-duration="1000">
                 <h3>INCOME TAX <br> CALCULATOR</h3>
                 <label for="income">Enter your income:</label>
@@ -205,7 +242,7 @@
                 <div id="result"></div>
             </div>
         </div>
-    </section> -->
+    </section>
     <script>
         function closeOffcanvas() {
             var offcanvasElement = document.getElementById('offcanvasNavbar');

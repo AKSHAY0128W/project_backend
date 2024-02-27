@@ -24,7 +24,6 @@ class Customer(models.Model):
     class Meta:
         db_table = 'customer'
 
-    # user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE, default='')
     name = models.CharField(max_length=100, default='')
     email = models.EmailField(default='', unique=True)

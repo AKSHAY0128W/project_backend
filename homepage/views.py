@@ -26,7 +26,10 @@ def make_payment(request, id):
         date = datetime.now().date()
         time = datetime.now().time()
 
-        print(date, time, customer, selected_service)
+        booking = serviceBooking(customer=customer, date=date, time=time, service=selected_service)
+        booking.save()
+
+        # Create a new payment instance with the customer and selected service
         payment_instance = payment(date=date, time=time, customer=customer, service=selected_service)
         payment_instance.save()
 
@@ -34,10 +37,37 @@ def make_payment(request, id):
         
     return render(request, 'payment.html', {'service_name': selected_service.name, 'service_price': selected_service.price, 'customer': customer, 'service_id': id})
 
+@login_required
+def service_booking(request, id):
+    selected_service = get_object_or_404(Services, id=id)
+
+    try:
+        profile = Profile.objects.get(user=request.user)
+    except Profile.DoesNotExist:
+        return HttpResponse('Profile does not exist', status=404)
+
+    customer = profile.customer  # replace 'customer' with the actual related name
+
+    if not Customer.objects.filter(id=customer.id).exists():
+        return HttpResponse('Customer does not exist', status=400)
+
+    if request.method == 'POST':
+        date = request.POST.get('date')
+        time = request.POST.get('time')
+
+        make_payment(request, id)
+        booking = serviceBooking(customer=customer, date=date, time=time, service=selected_service)
+        booking.save()
+        return redirect('myservices')
+
+    return render(request, 'service_booking.html', {'selected_service': selected_service})
+
+
 
 def default(request):
     services = Services.objects.all()
-    context = {'services':services}
+    packages = Packages.objects.all()
+    context = {'services':services, 'packages':packages}
     return render(request, 'default.html', context)
     
 def homepage(request):
@@ -51,7 +81,8 @@ def aboutus(request):
 def appointment(request):
     if request.method == 'POST':
         # Get name and email from the Customer table
-        customer = Customer.objects.get(user=request.user)
+        profile = Profile.objects.get(user=request.user)
+        customer = Customer.objects.get(profile=profile)
         name = customer.name
         email = customer.email
 
@@ -64,7 +95,6 @@ def appointment(request):
         appointment.save()
 
         return render(request, 'appointment.html')
-
     return render(request, 'appointment.html')
 
 def dashboard(request):
@@ -95,46 +125,9 @@ def services(request):
     return render(request, 'services.html')
 
 
-@login_required
-def service_booking(request, id):
-    # Get the selected service
-    selected_service = get_object_or_404(Services, id=id)
-
-    # Try to get the profile for the currently logged-in user
-    try:
-        profile = Profile.objects.get(user=request.user)
-    except Profile.DoesNotExist:
-        # Handle the case where the profile does not exist
-        # For example, you can return an HTTP 404 response
-        return HttpResponse('Profile does not exist', status=404)
-
-    # Get the customer related to this profile
-    customer = profile.customer  # replace 'customer' with the actual related name
-
-    # Check if the customer exists
-    if not Customer.objects.filter(id=customer.id).exists():
-        return HttpResponse('Customer does not exist', status=400)
-
-    if request.method == 'POST':
-        date = request.POST.get('date')
-        time = request.POST.get('time')
-
-        # Create a new serviceBooking instance with the customer and selected service
-        booking = serviceBooking(customer=customer, date=date, time=time, service=selected_service)
-        booking.save()
-
-        # Redirect to the payment page for the selected service
-        return redirect(reverse('make_payment', args=[selected_service.id]))
-
-    return render(request, 'service_booking.html', {'selected_service': selected_service})
-
-
-
-
 
 def admin_login(request):
 
-    # if user is super user he will redirect to admin dashboard
     if request.user.is_superuser:
         return redirect(request, 'admin_dashboard')
     else:
@@ -148,7 +141,9 @@ def admin_homepage(request):
     user_count = Customer.objects.count()
     logged_in_user_count = Session.objects.filter(expire_date__gte=timezone.now()).count()
     totalemployee = Employee.objects.count()
-    context = {'user_count': user_count, 'logged_in_user_count': logged_in_user_count, 'totalemployee': totalemployee}
+    totalservice_booking = serviceBooking.objects.count()
+    totalpayments = payment.objects.count()
+    context = {'user_count': user_count, 'logged_in_user_count': logged_in_user_count, 'totalemployee': totalemployee, 'totalservice_booking': totalservice_booking, 'totalpayments': totalpayments}
     return render(request, 'admin_homepage.html', context)
 
 def admin_view_employee(request):
@@ -156,3 +151,5 @@ def admin_view_employee(request):
 
 def admin_service_details(request):
     return render(request, 'admin_service_details.html')
+
+

@@ -1,180 +1,165 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
-   <title>Payment Form</title>
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+   <title>Title</title>
+   <!-- Required meta tags -->
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
    <style>
       body {
          display: grid;
+         background-image:
+            linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+            url('https://img.freepik.com/premium-photo/desktop-with-office-elements_23-2148174137.jpg?w=996') !important;
+         background-size: cover !important;
+         background-position: center !important;
+         background-repeat: no-repeat !important;
          place-items: center;
          font-family: 'Roboto', sans-serif;
-         background:
-            linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-            url("https://img.freepik.com/free-photo/businessmen-hands-white-table-with-documents-drafts_176420-351.jpg?w=1060&t=st=1708168145~exp=1708168745~hmac=b649a0b1cf3182c106d508337c378cd8a0d61724b95da3459b70fa8cddc286a1");
-         background-size: cover;
-         background-repeat: no-repeat;
          height: 100vh;
       }
 
-      .container {
-         border: 1px solid #fff;
-         outline: none;
-         background-color: transparent;
-         max-width: 500px;
-         border-radius: 10px;
-         padding: 20px;
-         backdrop-filter: blur(10px);
-      }
-
-
-      .pay-btn {
-         display: flex;
-         justify-content: center;
-         align-items: center;
-      }
-
-      .pay-btn a {
-         color: #fff;
-         padding: 11px 25px;
-         width: 100%;
-         text-decoration: none;
-         font-size: 20px;
+      .box {
+         width: 450px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+         background-color: #ffffff;
+         padding: 30px 30px;
       }
 
       h1 {
-         color: #fff;
-         text-align: center;
-         padding: 20px;
-         border-bottom: 1px solid white;
+         color: #000;
+         font-size: 24px;
+         margin-bottom: 20px !important;
+         font-weight: bold;
+         font-family: 'Poppins', sans-serif;
       }
 
-
+      .form-label {
+         font-size: 16px;
+         font-weight: 500;
+      }
 
       .form-control {
-         background-color: transparent;
-         outline: none;
-         border: 1px solid #fff;
-         padding: 10px;
-         font-size: 20px;
-         font-weight: 600;
-         color: #fff;
+         border: 1px solid #999393 !important;
          border-radius: 5px;
-      }
-
-      .form-control:focus {
-         box-shadow: none;
-         border: 1px solid #fff;
-         color: #333;
-      }
-
-      label {
-         font-size: 20px;
+         padding: 10px 15px;
+         font-size: 16px;
          font-weight: 500;
-         color: #fff;
+         outline: none;
       }
 
-      #expiry {
-         padding: 10px !important;
-         color: #555;
+      .form-control::placeholder {
+         font-size: 16px;
+         color: #c2c2c2;
+         font-weight: 400;
       }
 
-      #expiry::-webkit-calendar-picker-indicator {
-         filter: invert(1);
+      .btn {
+         background-color: #41ca7f !important;
+         color: #ffffff !important;
+         font-weight: 500 !important;
+         outline: none !important;
+         border: none !important;
+         width: 100% !important;
       }
 
-      .s-name,
-      .s-price {
-         background-color: #555 !important;
-         color: #f2f2f2 !important;
+      .btn:hover {
+         background-color: #3cb670 !important;
       }
    </style>
-
+   <!-- Bootstrap CSS v5.2.1 -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
 </head>
 
 <body>
-   <div class="container">
+
+   <div class="box">
+      <h1 class="text-center">Payment</h1>
+      <hr>
+      <div class="row">
+         <div class="col-12">
+            <div>
+               <label for="" class="form-label">Payment For:{{ service_name }}</label>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-12">
+            <div>
+               <label for="" class="form-label">Amount:{{ service_price }}</label>
+            </div>
+         </div>
+      </div>
+      <hr>
       <form action="{% url 'make_payment' id=service_id %}" method="post">
          {% csrf_token %}
-         <div class="heading row">
+         <div class="row">
             <div class="col-12">
-
-               <div class="row">
-                  <!-- Remove the extra 'd' character -->
-                  <div class="col-12">
-                     <div class="mb-3">
-                        <label for="serviceName" class="form-label">Service Name</label>
-                        <input type="text" name="serviceName" id="serviceName" class="s-name form-control"
-                           placeholder="" aria-describedby="helpId" readonly value="{{ service_name }}" />
-                     </div>
-                     <div class="mb-3">
-                        <label for="servicePrice" class="form-label">Service Price</label>
-                        <input type="text" name="servicePrice" id="servicePrice" class="s-price form-control"
-                           placeholder="" aria-describedby="helpId" readonly value="{{ service_price }}" />
-                     </div>
-                  </div>
+               <div class="mb-3">
+                  <label for="" class="form-label">Card Holder Name</label>
+                  <input type="text" name="" id="cardHolderName" class="form-control"
+                     placeholder="Enter Card Holder Name" aria-describedby="helpId" />
                </div>
             </div>
          </div>
          <div class="row">
             <div class="col-12">
                <div class="mb-3">
-                  <label for="cardHolderName" class="form-label">Card Holder Name </label>
-                  <input type="text" name="cardHolderName" id="cardHolderName" class="form-control" placeholder=""
-                     aria-describedby="helpId" />
-               </div>
-            </div>
-         </div>
-         <div class="row">
-            <div class="col-12">
-               <div class="mb-3">
-                  <label for="cardNumber" class="form-label">Card Number</label>
-                  <input type="text" name="cardNumber" id="cardNumber" class="form-control" placeholder=""
-                     aria-describedby="helpId" maxlength="19" />
+                  <label for="" class="form-label">Card Number</label>
+                  <input type="text" name="" id="cardNumber" maxlength="19" class="form-control"
+                     placeholder="Enter Card Number" aria-describedby="helpId" />
                </div>
             </div>
          </div>
          <div class="row">
             <div class="col-6">
                <div class="mb-3">
-                  <label for="expiry" class="form-label">Expiry</label>
-                  <input type="month" name="expiry" id="expiry" class="form-control" placeholder=""
+                  <label for="" class="form-label">Expiry Date</label>
+                  <input type="month" name="" id="expiry" class="form-control" placeholder="Exp. date"
                      aria-describedby="helpId" />
                </div>
             </div>
-
             <div class="col-6">
                <div class="mb-3">
                   <label for="" class="form-label">CVV</label>
-                  <input type="text" name="" id="" maxlength="3" class="form-control" placeholder=""
-                     aria-describedby="helpId" />
+                  <input type="text" name="" id="" class="form-control" placeholder="CVV" aria-describedby="helpId"
+                     maxlength="3" />
                </div>
             </div>
          </div>
-         <div class="pay-btn">
-            <button type="submit" class="btn btn-primary pxs-4">Pay Now</button>
+         <div class="row">
+            <div class="col-12">
+               <button type="submit" class="btn btn-success py-2">Pay Now</button>
+            </div>
          </div>
       </form>
    </div>
+   <script>
+      window.onload = function () {
+         var date = new Date();
+         var month = date.getMonth() + 1;
+         var year = date.getFullYear();
+         month = (month < 10) ? '0' + month : month; // prepend 0 if month is less than 10
+         document.getElementById('expiry').min = year + '-' + month;
+         document.getElementById('cardNumber').addEventListener('input', function (e) {
+            e.target.value = e.target.value.replace(/[^\dA-Z]/g, '').replace(/(.{4})/g, '$1 ').trim();
+         });
+         document.getElementById('cardHolderName').addEventListener('input', function (e) {
+            e.target.value = e.target.value.replace(/[0-9]/g, '');
+         });
+      }
+   </script>
+   <!-- Bootstrap JavaScript Libraries -->
+   <script src=" https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+   </script>
+
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
+   </script>
 </body>
-<script>
-   window.onload = function () {
-      var date = new Date();
-      var month = date.getMonth() + 1;
-      var year = date.getFullYear();
-      month = (month < 10) ? '0' + month : month; // prepend 0 if month is less than 10
-      document.getElementById('expiry').min = year + '-' + month;
-
-      document.getElementById('cardNumber').addEventListener('input', function (e) {
-         e.target.value = e.target.value.replace(/[^\dA-Z]/g, '').replace(/(.{4})/g, '$1 ').trim();
-      });
-
-      document.getElementById('cardHolderName').addEventListener('input', function (e) {
-         e.target.value = e.target.value.replace(/[0-9]/g, '');
-      });
-   }
-</script>
 
 </html>

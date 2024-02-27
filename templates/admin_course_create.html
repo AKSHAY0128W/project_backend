@@ -1,0 +1,151 @@
+{% extends 'admin.html' %}
+
+{% block content %}
+
+<h1>Create Course</h1>
+<hr>
+<button id="create-course" class="btn btn-primary">Add Course</button>
+
+<form method="post" action="{% url 'admin_course_create' %}" enctype="multipart/form-data" id="course-form"
+   class="p-3 d-none">
+   {% csrf_token %}
+   <div class="row">
+      <div class="col-md-6 mb-3">
+         <label for="name" class="form-label">Course Name</label>
+         <input type="text" name="name" id="name" class="form-control" placeholder="Course name"
+            aria-describedby="nameHelp">
+      </div>
+      <div class="col-md-6 mb-3">
+         <label for="slug" class="form-label">Slug</label>
+         <input type="text" name="slug" id="slug" class="form-control" placeholder="Course slug"
+            aria-describedby="slugHelp">
+      </div>
+   </div>
+
+   <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea name="description" id="description" class="form-control" placeholder="Course description"></textarea>
+   </div>
+
+   <div class="row">
+      <div class="col-md-6 mb-3">
+         <label for="price" class="form-label">Price</label>
+         <input type="number" name="price" id="price" class="form-control" placeholder="Course price">
+      </div>
+      <div class="col-md-6 mb-3">
+         <label for="discount" class="form-label">Discount</label>
+         <input type="number" name="discount" id="discount" class="form-control" placeholder="Course discount">
+      </div>
+   </div>
+
+   <div class="mb-3 form-check">
+      <input type="checkbox" name="active" id="active" class="form-check-input" value="true">
+      <label class="form-check-label" for="active">Active</label>
+   </div>
+
+   <div class="row">
+      <div class="col-md-6 mb-3">
+         <label for="thumbnail" class="form-label">Thumbnail</label>
+         <input type="file" name="thumbnail" id="thumbnail" class="form-control">
+      </div>
+      <div class="col-md-6 mb-3">
+         <label for="resource" class="form-label">Resource</label>
+         <input type="file" name="resource" id="resource" class="form-control">
+      </div>
+   </div>
+
+   <div class="mb-3">
+      <label for="length" class="form-label">Length</label>
+      <input type="number" name="length" id="length" class="form-control" placeholder="Course length">
+   </div>
+
+   <h6>Learning Description</h6>
+   <div class="mb-3">
+      <input type="text" id="learnings" name="learnings" class="form-control" placeholder="Enter learning description">
+   </div>
+
+   <div class="mb-3">
+      <input type="hidden" id="learning_count" name="learning_count" value="0">
+      <div id="learning-container">
+      </div>
+      <button id="add-learning" class="btn btn-primary" type="button">Add Learning</button>
+   </div>
+
+   <h6>Course Videos</h6>
+
+   <div hidden>
+      <div class="mb-3">
+         <input type="text" id="video_title" name="video_title" class="form-control" placeholder="Video Title">
+      </div>
+
+      <div class="mb-3">
+         <input type="number" id="video_serial" name="video_serial" class="form-control" placeholder="Serial Number">
+      </div>
+
+      <div class="mb-3">
+         <input type="text" id="video_id" name="video_id" class="form-control" placeholder="YouTube Video ID">
+      </div>
+
+      <div class="mb-3 form-check">
+         <input type="checkbox" name="video_preview" id="video_preview" class="form-check-input" value="true">
+         <label class="form-check-label" for="video_preview">Is Preview</label>
+      </div>
+   </div>
+
+   <div class="mb-3">
+      <input type="hidden" id="video_count" name="video_count" value="0">
+      <div id="video-container">
+      </div>
+      <button id="add-video" class="btn btn-primary" type="button">Add Video</button>
+   </div>
+   <button type="submit" class="btn btn-primary mt-3">Submit</button>
+
+</form>
+
+<script>
+   var createCourseButton = document.getElementById('create-course');
+   var courseForm = document.getElementById('course-form');
+
+   createCourseButton.addEventListener('click', function () {
+      courseForm.classList.remove('d-none');
+      createCourseButton.style.display = 'none'; // Hide the "Add Course" button
+   });
+
+   let learningCount = 0;
+   document.getElementById('add-learning').addEventListener('click', function () {
+      learningCount++;
+      let newLearningDiv = document.createElement('div');
+      newLearningDiv.innerHTML = `
+   <input type="text" name="learning_${learningCount}" class="form-control" placeholder="Enter Learning Description">
+   `;
+      document.getElementById('learning-container').appendChild(newLearningDiv);
+      document.getElementById('learning_count').value = learningCount;
+   });
+
+   let videoCount = 0;
+   document.getElementById('add-video').addEventListener('click', function () {
+      videoCount++;
+      let newVideoDiv = document.createElement('div');
+      newVideoDiv.innerHTML = `
+   <div class="mb-3">
+      <input type="text" name="video_title_${videoCount}" class="form-control" placeholder="Video Title">
+   </div>
+   <div class="mb-3">
+      <input type="text" name="video_serial_${videoCount}" class="form-control" placeholder="Serial Number">
+   </div>
+   <div class="mb-3">
+      <input type="text" name="video_id_${videoCount}" class="form-control" placeholder="YouTube Video ID">
+   </div>
+   <div class="mb-3 form-check">
+      <input type="checkbox" name="video_preview_${videoCount}" id="video_preview_${videoCount}"
+         class="form-check-input" value="true">
+      <label class="form-check-label" for="video_preview_${videoCount}">Is Preview</label>
+   </div>
+   `;
+      document.getElementById('video-container').appendChild(newVideoDiv);
+      document.getElementById('video_count').value = videoCount;
+   });
+</script>
+
+
+{% endblock %}

@@ -38,7 +38,7 @@ def register(request):
         customer = Customer(profile=profile, name=name, address=address, phone=phone, email=email)
         customer.save()
 
-        return redirect('login')
+        return redirect ('login')
 
     return render(request, 'indexregister.html')
 

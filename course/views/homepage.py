@@ -13,3 +13,4 @@ def course_home(request):
 
 def payment_page(request):
    return render(request, 'payment.html')
+   

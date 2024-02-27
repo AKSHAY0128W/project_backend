@@ -1,3 +1,4 @@
+from appointment.models import *
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
@@ -93,7 +94,6 @@ def services_edit(request, id):
     return render(request, 'admin_service_details.html', context)
 
 
-
 def services_update(request, id):
     services = Services.objects.get(id=id)  
     if request.method == "POST":
@@ -106,8 +106,8 @@ def services_update(request, id):
 
         services.save()  
         return redirect('/services_list')
-
     return render(request, 'admin_service_details', {'services': services})
+
 
 def services_delete(request, id):
     services = Services.objects.filter(id=id)
@@ -209,3 +209,32 @@ def customer_delete(request, id):
     }
     return redirect('/customer_list', context)
 
+
+#employee
+
+def employee_customer_list(request):
+    customer_list = Customer.objects.all()
+    context = {
+        'customer_list':customer_list,
+    }
+    return render(request, 'employee_customer_details.html', context)
+
+def employee_appointment_list(request):
+    appointment_list = Appointment.objects.all()
+    context = {
+        'appointment_list':appointment_list,
+    }
+    return render(request, 'employee_appointment_details.html', context)
+
+def employee_service_booking_list(request):
+    bookings = serviceBooking.objects.select_related('customer').all()
+    return render(request, 'employee_service_booking_details.html', {'bookings': bookings})
+
+
+def employee_payment_list(request):
+    payments = payment.objects.all()
+    print(payments)
+    context = {
+        'payments':payments,
+    }
+    return render(request, 'employee_payments_details.html', context)

@@ -13,7 +13,7 @@
         {% csrf_token %}
         <h1>APPOINTMENT</h1>
         <hr>
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" class="form-control" id="name" name="name" required>
         </div>
@@ -21,7 +21,7 @@
         <div class="form-group">
             <label for="email">Email:</label>
             <input type="email" id="email" class="form-control" name="email" required>
-        </div>
+        </div> -->
 
         <div class="form-group">
             <label for="date">Preferred Date:</label>
@@ -34,7 +34,7 @@
         </div>
         <div class="form-group">
             <label for="comments">Additional Comments:</label>
-            <textarea id="comments" name="description" class="form-control" rows="4"></textarea>
+            <textarea id="comments" name="message" class="form-control" rows="4"></textarea>
             <button type="submit" class="mt-2 button btn-hover">Submit Appointment</button>
         </div>
 

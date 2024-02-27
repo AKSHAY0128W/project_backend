@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -63,19 +66,26 @@
         <div id="dashboard">Employee Dashboard</div>
         <hr>
         <a href="#" class="sidebar-item">Home</a>
-        <a href="#" class="sidebar-item">Profile</a>
-        <a href="#" class="sidebar-item">Attendance</a>
-        <a href="#" class="sidebar-item">Leave Requests</a>
-        <a href="#" class="sidebar-item">Payroll</a>
+        <a href="{% url 'employee_customer_list' %}" class="sidebar-item">Customers</a>
+        <a href="{% url 'employee_appointment_list' %}" class="sidebar-item">Appointments</a>
+        <a href="{% url 'employe_service_booking_list' %}" class="sidebar-item">Booked Services</a>
+        <a href="{% url 'employee_payment_list' %}" class="sidebar-item">Payments</a>
         <a href="#" class="sidebar-item">Settings</a>
         <a href="{% url 'logout' %}" class="sidebar-item">Logout</a>
     </div>
 
     <div id="content">
         <div class="dashboard-card">
-            <h1>Employee Dashboard</h1>
-        </div>
+            {% block content %}
 
+            {% endblock %}
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+        </script>
+</body>
 </body>
 
 </html>

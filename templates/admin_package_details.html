@@ -50,10 +50,14 @@
 
                     <td>
                         <a href="#editpackagesModal-{{forloop.counter}}" class="edit" data-toggle="modal">
-                            <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
+                            <span class="material-symbols-outlined" data-toggle="tooltip" title="Edit">
+                                edit
+                            </span>
                         </a>
                         <a href="#deletepackagesModal-{{forloop.counter}}" class="delete" data-toggle="modal">
-                            <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                            <span class="material-symbols-outlined" data-toggle="tooltip" title="Delete">
+                                delete
+                            </span>
                         </a>
                     </td>
                 </tr>
@@ -76,7 +80,8 @@
                     <h4 class="modal-title">Edit Packages</h4>
                     <div class="close-modal">
                         <a href="" data-dismiss="modal" aria-hidden="true"><span
-                                class="material-symbols-outlined">close</span></a>
+                                class="material-symbols-outlined">close</span>
+                        </a>
                     </div>
                 </div>
                 <div class="modal-body">

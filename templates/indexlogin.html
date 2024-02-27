@@ -66,6 +66,19 @@
             color: white;
             margin-top: 20px;
         }
+
+        #show-password {
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+        #show-password:checked {
+            border: 1px solid white;
+        }
+
+        #show-text {
+            color: white;
+        }
     </style>
 </head>
 
@@ -80,16 +93,27 @@
         <div class="form-group">
             <label for="inputPassword">Password</label>
             <input type="password" id="inputPassword" name="password" class="form-control" required>
+            <input type="checkbox" name="" id="show-password"><span id="show-text">Show Password</span>
+
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
         <a href="{% url 'register' %}">Create Account</a>
     </form>
-
+    <script>
+        document.getElementById('show-password').addEventListener('change', function () {
+            var passwordInput = document.getElementById('inputPassword');
+            if (this.checked) {
+                passwordInput.type = 'text';
+            } else {
+                passwordInput.type = 'password';
+            }
+        });
+    </script>
     <!-- Bootstrap JS CDN -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <!-- Your custom JS -->
-    <script src="path/to/your/custom.js"></script>
+    <!-- <script src="path/to/your/custom.js"></script> -->
 </body>
 
 </html>

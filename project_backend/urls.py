@@ -7,7 +7,7 @@ from display import views as display_views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import include
-
+from course import views as course_views
 
 
 urlpatterns = [
@@ -60,6 +60,7 @@ urlpatterns = [
     path('services_update/<int:id>', display_views.services_update, name='services_update'),
     path('services_delete/<int:id>', display_views.services_delete, name='services_delete'),
 
+
     path('add_packages/', display_views.add_packages, name='add_packages'),
     path('packages_list/', display_views.packages_list, name='packages_list'),
     path('packages_edit/', display_views.packages_edit, name='packages_edit'),
@@ -79,11 +80,17 @@ urlpatterns = [
     path('calculators/', calculators_views.Calculators, name="calculators"),
 
 
+    #Emoploee
+    path('employee_customer_list/', display_views.employee_customer_list, name='employee_customer_list'),
+    path('employee_appointment_list/', display_views.employee_appointment_list, name='employee_appointment_list'),
+    path('employee_service_booking_list/', display_views.employee_service_booking_list, name='employe_service_booking_list'),
+    path('employee_payment_list/', display_views.employee_payment_list, name='employee_payment_list'),
 
     #course
     path('course/', include('course.urls')),
-
-
+    path('admin_course_create/',course_views.course_create_view, name="admin_course_create"),
+    path('admin_course_details/',course_views.course_list_view, name="admin_course_details"),
+    path('course_delete/<int:id>',course_views.course_delete_view, name="course_delete"),
     path('make_payment/<int:id>', homepage_views.make_payment, name="make_payment"),
     path('payment_list/', display_views.payment_list, name='payment_list'),
 ]

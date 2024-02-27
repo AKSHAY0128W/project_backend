@@ -469,10 +469,39 @@ input {
     flex-direction: column;
 }
 
+#Packages {
+    text-align: center;
+    padding: 50px 0;
+    height: 100vh;
+    display: flex;
+    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+
 .serivce-heading h2 {
     font-size: 3vw;
     color: #333;
 }
+
+.package-heading h2 {
+    font-size: 3vw;
+    color: #333;
+
+}
+
+.package-heading h2::after {
+    content: "";
+    width: 160px;
+    height: 3px;
+    background-color: #06b9e1;
+    display: block;
+    margin: 8px auto;
+}
+
 
 .serivce-heading h2::after {
     content: "";
