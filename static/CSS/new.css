@@ -489,8 +489,6 @@ input {
     margin-top: 30px;
 }
 
-
-
 .serivce-heading h2 {
     font-size: 3vw;
     color: #333;
@@ -509,10 +507,6 @@ input {
     background-color: #06b9e1;
     display: block;
     margin: 8px auto;
-}
-
-.row {
-    gap: 20px !important;
 }
 
 .serivce-heading h2::after {

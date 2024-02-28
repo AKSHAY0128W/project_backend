@@ -209,7 +209,6 @@ def customer_delete(request, id):
     }
     return redirect('/customer_list', context)
 
-
 #employee
 
 def employee_customer_list(request):
