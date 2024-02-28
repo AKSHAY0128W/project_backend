@@ -91,7 +91,7 @@ urlpatterns = [
     path('admin_course_create/',course_views.course_create_view, name="admin_course_create"),
     path('admin_course_details/',course_views.course_list_view, name="admin_course_details"),
     path('course_delete/<int:id>',course_views.course_delete_view, name="course_delete"),
-    path('make_payment/<int:id>', homepage_views.make_payment, name="make_payment"),
+    # path('make_payment/<int:id>', homepage_views.make_payment, name="make_payment"),
     path('payment_list/', display_views.payment_list, name='payment_list'),
 ]
 

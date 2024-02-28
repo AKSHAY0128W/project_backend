@@ -34,28 +34,27 @@
 </head>
 
 <body>
-   <div class="container package-container">
-      <div class="row">
+   <section id="Packages">
+      <div class="container-fluid package-container">
          {% for package in packages %}
-         <div class="col-4 pack_box">
-            <div class="package">
-               <div class="package-name">
-                  <h1>
-                     {{ package.name }}
-                  </h1>
-               </div>
-               <div class="package-details">
-                  <p> {{ package.description}}</p>
-                  <h4>
-                     &#8377; {{ package.price }}
-                  </h4>
-               </div>
-               <a href="/package/{{ package.id }}" class="btn btn-primary">View Package</a>
+         <div class="package">
+            <div class="package-name">
+               <h1>
+                  {{ package.name }}
+               </h1>
             </div>
+            <div class="package-details">
+               <p> {{ package.description}}</p>
+               <h4>
+                  &#8377; {{ package.price }}
+               </h4>
+            </div>
+            <a href="/package/{{ package.id }}" class="btn btn-primary">Book Package</a>
          </div>
+         <hr>
          {% endfor %}
       </div>
-   </div>
+   </section>
 
    <!-- <div class="package">
       <div class="package-name">

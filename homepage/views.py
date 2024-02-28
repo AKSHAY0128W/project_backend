@@ -12,30 +12,30 @@ from django.http import HttpResponse
 from django.urls import reverse
 from display.models import payment
 
-def make_payment(request, id): 
-    selected_service = get_object_or_404(Services, id=id)
+# def make_payment(request, id): 
+#     selected_service = get_object_or_404(Services, id=id)
 
-    profile = get_object_or_404(Profile, user=request.user)
-    customer = profile.customer  
+#     profile = get_object_or_404(Profile, user=request.user)
+#     customer = profile.customer  
 
-    if not Customer.objects.filter(id=customer.id).exists():  
-        return HttpResponse('Customer does not exist', status=400)
+#     if not Customer.objects.filter(id=customer.id).exists():  
+#         return HttpResponse('Customer does not exist', status=400)
     
-    if request.method == 'POST':
+#     if request.method == 'POST':
 
-        date = datetime.now().date()
-        time = datetime.now().time()
+#         date = datetime.now().date()
+#         time = datetime.now().time()
 
-        booking = serviceBooking(customer=customer, date=date, time=time, service=selected_service)
-        booking.save()
+#         booking = serviceBooking(customer=customer, date=date, time=time, service=selected_service)
+#         booking.save()
 
-        # Create a new payment instance with the customer and selected service
-        payment_instance = payment(date=date, time=time, customer=customer, service=selected_service)
-        payment_instance.save()
+#         # Create a new payment instance with the customer and selected service
+#         payment_instance = payment(date=date, time=time, customer=customer, service=selected_service)
+#         payment_instance.save()
 
-        return redirect('myservices')
+#         return redirect('myservices')
         
-    return render(request, 'payment.html', {'service_name': selected_service.name, 'service_price': selected_service.price, 'customer': customer, 'service_id': id})
+#     return render(request, 'payment.html', {'service_name': selected_service.name, 'service_price': selected_service.price, 'customer': customer, 'service_id': id})
 
 @login_required
 def service_booking(request, id):
@@ -55,9 +55,10 @@ def service_booking(request, id):
         date = request.POST.get('date')
         time = request.POST.get('time')
 
-        make_payment(request, id)
+        # make_payment(request, id)
         booking = serviceBooking(customer=customer, date=date, time=time, service=selected_service)
         booking.save()
+        
         return redirect('myservices')
 
     return render(request, 'service_booking.html', {'selected_service': selected_service})

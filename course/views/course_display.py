@@ -108,4 +108,4 @@ def course_update_view(request, id):
     context = {
         'course': course
     }
-    return render(request, 'admin_course_update.html', context)
+    return render(request, 'admin_course_details.html', context)

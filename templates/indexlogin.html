@@ -67,17 +67,18 @@
             margin-top: 20px;
         }
 
-        #show-password {
-            margin-left: 5px;
+        .form-group .show-password {
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        .form-group .show-password input {
             margin-right: 5px;
         }
 
-        #show-password:checked {
+        .form-group .show-password input:checked {
             border: 1px solid white;
-        }
-
-        #show-text {
-            color: white;
         }
     </style>
 </head>
@@ -93,11 +94,14 @@
         <div class="form-group">
             <label for="inputPassword">Password</label>
             <input type="password" id="inputPassword" name="password" class="form-control" required>
-            <input type="checkbox" name="" id="show-password"><span id="show-text">Show Password</span>
-
+            <div class="show-password">
+                <input type="checkbox" id="show-password">
+                <label for="show-password">Show Password</label>
+            </div>
         </div>
+
         <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-        <a href="{% url 'register' %}">Create Account</a>
+        <a href="{% url 'register' %}" class="mt-2">Create Account</a>
     </form>
     <script>
         document.getElementById('show-password').addEventListener('change', function () {

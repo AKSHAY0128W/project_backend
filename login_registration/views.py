@@ -45,6 +45,8 @@ def register(request):
 
 # Login View both customer and employee and admin
 
+from django.http import HttpResponse
+
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -58,9 +60,12 @@ def login_view(request):
             elif user.is_staff:
                 return redirect('employee_panel')
             else:
-                return redirect('homepage') 
+                return redirect('homepage')
+        else:
+            return HttpResponse("Invalid username or password.")
     context = {'form': LoginForm()}
     return render(request, 'indexlogin.html', context=context)
+
 
 
 # Logout View for customer and employee and admin

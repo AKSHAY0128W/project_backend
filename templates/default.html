@@ -136,9 +136,9 @@
                 {% endif %}
                 <p>{{ service.description }}</p>
                 <p>Price{{service.price}}</p>
-                <div class="button mt-2">
+                <!-- <div class="button mt-2">
                     <a href="{{ service.booking_url }}" class="button">Book Now</a>
-                </div>
+                </div> -->
             </div>
             {% endfor %}
         </div>
@@ -147,7 +147,7 @@
 
     <section id="Packages">
         <div class="container package-container">
-            <div class="package-heading text-center">
+            <div class="package-heading">
                 <h2>Our Packages</h2>
             </div>
             <div class="row">
@@ -166,7 +166,7 @@
                                 &#8377; {{ package.price }}
                             </h4>
                         </div>
-                        <a href="/package/{{ package.id }}" class="btn btn-primary">Book Now</a>
+                        <!-- <a href="/package/{{ package.id }}" class="btn btn-primary">Book Now</a> -->
                     </div>
                 </div>
                 {% endfor %}
