@@ -21,9 +21,6 @@
          <dt class="col-sm-3">Discount</dt>
          <dd class="col-sm-9">{{course.discount}}</dd>
 
-         <dt class="col-sm-3">Active</dt>
-         <dd class="col-sm-9">{{course.active}}</dd>
-
          <dt class="col-sm-3">Thumbnail</dt>
          <dd class="col-sm-9">
             <img src="{{course.thumbnail.url}}" height="100px" width="100px" class="img-fluid" alt="{{course.name}}">
@@ -33,16 +30,16 @@
          <dd class="col-sm-9">
             <a href="{{course.resource.url}}" download>Download Resource</a>
          </dd>
-
-         <dt class="col-sm-3">Length</dt>
-         <dd class="col-sm-9">{{course.length}}</dd>
-      </dl>
-      <a href="#deleteCourseModal-{{forloop.counter}}" class="delete" data-toggle="modal">
-         <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
-      </a>
-      <a href="#updateCourseModal-{{forloop.counter}}" class="edit" data-toggle="modal">
-         <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
-      </a>
+         <a href="#updateCourseModal-{{forloop.counter}}" class="edit" data-bs-toggle="modal">
+            <span class="material-symbols-outlined" data-bs-toggle="tooltip" title="Edit">
+               edit
+            </span>
+         </a>
+         <a href="#deleteservicesModal-{{forloop.counter}}" class="delete" data-bs-toggle="modal">
+            <span class="material-symbols-outlined" data-bs-toggle="tooltip" title="Delete">
+               delete
+            </span>
+         </a>
    </div>
 
    <hr>
@@ -55,9 +52,10 @@
    <div class="modal-dialog">
       <div class="modal-content">
          <form method="post" action="/course_update_view/{{course.id}}" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="modal-header">
                <h4 class="modal-title">Update Course</h4>
-               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+               <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
                <div class="form-group">
@@ -85,11 +83,6 @@
                </div>
                <div class="form-group
                   ">
-                  <label for="active">Active</label>
-                  <input type="checkbox" class="form-control" name="active" value="{{course.active}}" required>
-               </div>
-               <div class="form-group
-                  ">
                   <label for="thumbnail">Thumbnail</label>
                   <input type="file" class="form-control" name="thumbnail" required>
                </div>
@@ -98,13 +91,9 @@
                   <label for="resource">Resource</label>
                   <input type="file" class="form-control" name="resource" required>
                </div>
-               <div class="form-group">
-                  <label for="length">Length</label>
-                  <input type="number" class="form-control" name="length" value="{{course.length}}" required>
-               </div>
             </div>
             <div class="modal-footer">
-               <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+               <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
                <input type="submit" class="btn btn-info" value="Save">
             </div>
          </form>
@@ -122,13 +111,13 @@
       ">
       <div class="modal-content
          ">
-         <form action="/course_update_view/{{course.id   }}" method="post" enctype="multipart/form-data">
+         <form action="/course_update_view/{{course.id}}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="modal-header
                ">
                <h4 class="modal-title
                   ">Edit Course</h4>
-               <button type="button" class="close" data-dismiss="modal" aria-hidden="true
+               <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true
                   ">&times;</button>
             </div>
             <div class="modal-body
@@ -165,12 +154,6 @@
                </div>
                <div class="form-group
                   ">
-                  <label for="active
-                     ">Active</label>
-                  <input type="checkbox" class="form-control" name="active" value="{{course.active}}" required>
-               </div>
-               <div class="form-group
-                  ">
                   <label for="thumbnail
                      ">Thumbnail</label>
                   <input type="file" class="form-control" name="thumbnail" required>
@@ -181,16 +164,10 @@
                      ">Resource</label>
                   <input type="file" class="form-control" name="resource" required>
                </div>
-               <div class="form-group
-                  ">
-                  <label for="length
-                     ">Length</label>
-                  <input type="number" class="form-control" name="length" value="{{course.length}}" required>
-               </div>
             </div>
             <div class="modal-footer
                ">
-               <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+               <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
                <input type="submit" class="btn btn-info" value="Save">
             </div>
          </form>
@@ -202,21 +179,21 @@
 
 <!-- Delete Modal HTML -->
 {% for course in courses %}
-<div id=" deleteCourseModal-{{forloop.counter}}" class="modal fade">
+<div id="deleteCourseModal-{{forloop.counter}}" class="modal fade">
    <div class="modal-dialog">
       <div class="modal-content">
          <form>
             <div class="modal-header">
                <h4 class="modal-title">Delete Course</h4>
-               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+               <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
                <p>Are you sure you want to delete these Records?</p>
                <p class="text-warning"><small>This will delete the course "{{course.name}}".</small></p>
             </div>
             <div class="modal-footer">
-               <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-               <a href="/course_delete/{{course.id}}" type="submit" class="btn btn-danger">Delete</a>
+               <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
+               <a href="/course_delete_view/{{course.id}}" type="submit" class="btn btn-danger">Delete</a>
             </div>
          </form>
       </div>

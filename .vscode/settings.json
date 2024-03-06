@@ -3,5 +3,5 @@
    "editor.wordWrap": "on",
    "workbench.editor.wrapTabs": true,
    "python.analysis.autoImportCompletions": true,
-   "python.analysis.typeCheckingMode": "basic"
+   "python.analysis.typeCheckingMode": "off"
 }

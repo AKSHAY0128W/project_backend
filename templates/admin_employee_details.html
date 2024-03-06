@@ -28,13 +28,13 @@
                     <td>{{i.address}}</td>
                     <td>{{i.phone}}</td>
                     <td>
-                        <a href="#editEmployeeModal-{{forloop.counter}}" class="edit" data-toggle="modal"><span
-                                class="material-symbols-outlined" data-toggle="tooltip" title="Edit">
+                        <a href="#editEmployeeModal-{{forloop.counter}}" class="edit" data-bs-toggle="modal"><span
+                                class="material-symbols-outlined" data-bs-toggle="tooltip" title="Edit">
                                 edit
                             </span>
                         </a>
-                        <a href="#deleteEmployeeModal-{{forloop.counter}}" class="delete" data-toggle="modal"><span
-                                class="material-symbols-outlined" data-toggle="tooltip" title="Delete">
+                        <a href="#deleteEmployeeModal-{{forloop.counter}}" class="delete" data-bs-toggle="modal"><span
+                                class="material-symbols-outlined" data-bs-toggle="tooltip" title="Delete">
                                 delete
                             </span></a>
                     </td>
@@ -55,7 +55,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title">Edit Employee</h4>
                     <div class="close-modal">
-                        <a href="" data-dismiss="modal" aria-hidden="true"><span
+                        <a href="" data-bs-dismiss="modal" aria-hidden="true"><span
                                 class="material-symbols-outlined">close</span></a>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                    <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
                     <input type="submit" class="btn btn-info" value="Update">
                 </div>
             </form>
@@ -101,14 +101,14 @@
             <form>
                 <div class="modal-header">
                     <h4 class="modal-title">Delete Employee</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
                     <p>Are you sure you want to delete these Records?</p>
                     <p class="text-warning"><small>{{i.name}} information are delete ?</small></p>
                 </div>
                 <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                    <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
                     <a href="/delete/{{i.employee_id}}" type="submit" class="btn btn-danger">Delete</a>
                 </div>
             </form>

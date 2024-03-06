@@ -9,10 +9,8 @@ def course_create_view(request):
         description = request.POST.get('description')
         price = request.POST.get('price')
         discount = request.POST.get('discount')
-        active = request.POST.get('active') == 'true'
         thumbnail = request.FILES.get('thumbnail')
         resource = request.FILES.get('resource')
-        length = request.POST.get('length')
         learnings = request.POST.get('learnings')
         video_title = request.POST.get('video_title')
         video_serial = request.POST.get('video_serial')
@@ -27,10 +25,8 @@ def course_create_view(request):
             description = description,
             price = price,
             discount = discount,
-            active = active,
             thumbnail = thumbnail,
             resource = resource,
-            length = length
         )
         course.save()
 
@@ -86,9 +82,12 @@ def course_list_view(request):
     return render(request, 'admin_course_details.html', context)
 
 def course_delete_view(request, id):
-    course = Course.objects.get(id=id)
-    course.delete()
-    return redirect('admin_course_details')
+    courses = Course.objects.filter(id=id)
+    courses.delete()
+    context = {
+        'courses': courses
+    }
+    return redirect('admin_course_details.html',context)
 
 def course_update_view(request, id):
     course = Course.objects.get(id=id)
@@ -98,10 +97,8 @@ def course_update_view(request, id):
         course.description = request.POST.get('description')
         course.price = request.POST.get('price')
         course.discount = request.POST.get('discount')
-        course.active = request.POST.get('active') == 'true'
         course.thumbnail = request.FILES.get('thumbnail')
         course.resource = request.FILES.get('resource')
-        course.length = request.POST.get('length')
         course.save()
         return redirect('admin_course_details')
 

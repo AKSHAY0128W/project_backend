@@ -4,20 +4,20 @@
     <div class="card-body">
         <form action="{% url 'add_packages' %}" method="post" enctype="multipart/form-data" class="form-group">
             {% csrf_token %}
-            <div class="form-group">
+            <div class="mb-3">
                 <label for="name">Name:</label>
                 <input class="form-control" id="name" type="text" name="name" required>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label for="description">Description:</label>
                 <textarea id="description" class="form-control" name="description" required></textarea>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label for="price">Price:</label>
                 <input id="price" type="number" class="form-control" name="price" required>
             </div>
 
-            <input type="submit" value="Add Package" class="btn btn-primary">
+            <input type="submit" value="Add Package" class="mt-3 btn btn-primary">
         </form>
     </div>
 </div>
@@ -49,12 +49,12 @@
                     <td>{{i.price}}</td>
 
                     <td>
-                        <a href="#editpackagesModal-{{forloop.counter}}" class="edit" data-toggle="modal">
-                            <span class="material-symbols-outlined" data-toggle="tooltip" title="Edit">
+                        <a href="#editpackagesModal-{{forloop.counter}}" class="edit" data-bs-toggle="modal">
+                            <span class="material-symbols-outlined" data-bs-toggle="tooltip" title="Edit">
                                 edit
                             </span>
                         </a>
-                        <a href="#deletepackagesModal-{{forloop.counter}}" class="delete" data-toggle="modal">
+                        <a href="#deletepackagesModal-{{forloop.counter}}" class="delete" data-bs-toggle="modal">
                             <span class="material-symbols-outlined" data-toggle="tooltip" title="Delete">
                                 delete
                             </span>
@@ -79,7 +79,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title">Edit Packages</h4>
                     <div class="close-modal">
-                        <a href="" data-dismiss="modal" aria-hidden="true"><span
+                        <a href="" data-bs-dismiss="modal" aria-hidden="true"><span
                                 class="material-symbols-outlined">close</span>
                         </a>
                     </div>
@@ -99,7 +99,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                    <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
                     <input type="submit" class="btn btn-info" value="Update">
                 </div>
             </form>
@@ -115,14 +115,14 @@
             <form>
                 <div class="modal-header">
                     <h4 class="modal-title">Delete packages</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
                     <p>Are you sure you want to delete these Records?</p>
                     <p class="text-warning"><small>{{i.name}} information are delete ?</small></p>
                 </div>
                 <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                    <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
                     <a href="/packages_delete/{{i.id}}" type="submit" class="btn btn-danger">Delete</a>
                 </div>
             </form>

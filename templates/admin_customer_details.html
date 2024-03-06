@@ -26,13 +26,6 @@
                     <td>{{i.email}}</td>
                     <td>{{i.phone}}</td>
                     <td>{{i.address}}</td>
-                    <td>
-                        <a href="#deletecustomerModal-{{forloop.counter}}" class="delete" data-toggle="modal">
-                            <span class="material-symbols-outlined" data-toggle="tooltip" title="Delete">
-                                delete
-                            </span>
-                        </a>
-                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -40,27 +33,4 @@
     </div>
 </div>
 
-<!-- Delete Modal HTML -->
-{% for i in customer %}
-<div id="deletecustomerModal-{{forloop.counter}}" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form>
-                <div class="modal-header">
-                    <h4 class="modal-title">Delete customer</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to delete these Records?</p>
-                    <p class="text-warning"><small>{{i.name}} information are delete ?</small></p>
-                </div>
-                <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <a href="/customer_delete/{{i.id}}" type="submit" class="btn btn-danger">Delete</a>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-{% endfor %}
 {% endblock %}

@@ -33,11 +33,11 @@
                <td>{{ booking.customer.email }}</td>
                <td>{{ booking.customer.phone }}</td>
                <td>{{ booking.customer.address }}</td>
-               <td>
-                  <a href="#deleteBookingModal-{{forloop.counter}}" class="delete" data-toggle="modal">
-                     <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+               <!-- <td>
+                  <a href="#deleteBookingModal-{{forloop.counter}}" class="delete" data-bs-toggle="modal">
+                     <i class="material-icons" data-bs-toggle="tooltip" title="Delete">&#xE872;</i>
                   </a>
-               </td>
+               </td> -->
             </tr>
             {% endfor %}
          </tbody>
@@ -46,26 +46,27 @@
 </div>
 
 <!-- Delete Modal HTML -->
-{% for booking in bookings %}
+<!-- {% for booking in bookings %}
 <div id="deleteBookingModal-{{forloop.counter}}" class="modal fade">
    <div class="modal-dialog">
       <div class="modal-content">
          <form>
             <div class="modal-header">
                <h4 class="modal-title">Delete Booking</h4>
-               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+               <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
                <p>Are you sure you want to delete these Records?</p>
                <p class="text-warning"><small>This will delete booking of {{booking.customer.name}}.</small></p>
             </div>
             <div class="modal-footer">
-               <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+               <input type="button" class="btn btn-default" data-bs
+               -dismiss="modal" value="Cancel">
                <a href="/booking_delete/{{booking.id}}" type="submit" class="btn btn-danger">Delete</a>
             </div>
          </form>
       </div>
    </div>
 </div>
-{% endfor %}
+{% endfor %} -->
 {% endblock %}

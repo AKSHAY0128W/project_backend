@@ -9,11 +9,9 @@ class Course(models.Model):
    description = models.CharField(max_length=255,null=False,default='')
    price = models.IntegerField(null=False)
    discount = models.IntegerField(null=False,default=0)
-   active = models.BooleanField(default=False)
    thumbnail = models.ImageField(upload_to='thumbnail')
    date = models.DateTimeField(auto_now_add=True)
    resource = models.FileField(upload_to='resources')
-   length = models.IntegerField(null=False)
 
    
 
