@@ -1,0 +1,17 @@
+{% extends 'customer.html' %}
+{% block content %}
+<h1>My Packages</h1>
+<hr>
+<div class="booked_packages">
+   {% for package in booked_packages %}
+   <div class="p-card">
+      <h2>{{ package.package.name }}</h2>
+      <p>{{ package.package.description }}</p>
+      <p>Price: {{package.package.price}}</p>
+   </div>
+   <hr>
+   {% empty %}
+   <p>You have not booked any packages.</p>
+   {% endfor %}
+</div>
+{% endblock %}

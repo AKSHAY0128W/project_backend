@@ -7,9 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Dashboard</title>
+    <link rel="stylesheet" href="/static/CSS/admin_panel.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+<!-- 
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -58,14 +59,17 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-    </style>
+    </style> -->
 </head>
 
 <body>
 
     <div id="sidebar">
-        <div id="dashboard">Employee Dashboard</div>
-        <hr>
+        <div id="sidebar-logo">
+            <h3>
+                Employee Dashboard
+            </h3>
+        </div>
         <a href="#" class="sidebar-item">Home</a>
         <a href="{% url 'employee_customer_list' %}" class="sidebar-item">Customers</a>
         <a href="{% url 'employee_appointment_list' %}" class="sidebar-item">Appointments</a>

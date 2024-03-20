@@ -38,6 +38,10 @@ urlpatterns = [
     path('service_booking_admin/', display_views.service_booking_admin, name='service_booking_admin'),
     path('booking_delete/<int:id>', display_views.booking_delete, name='booking_delete'),
 
+
+    path('package_booking/<int:id>/', homepage_views.package_booking, name='package_booking'),
+
+
     #admin_panel_pages
     path('add_employee/',homepage_views.admin_create_employee, name="add_employee"),
     path('admin_homepage/', homepage_views.admin_homepage, name="admin_homepage"),
@@ -94,6 +98,21 @@ urlpatterns = [
     path('course_delete_view/<int:id>',course_views.course_delete_view, name="course_delete_view"),
     # path('make_payment/<int:id>', homepage_views.make_payment, name="make_payment"),
     path('payment_list/', display_views.payment_list, name='payment_list'),
+
+
+# calcutators  
+    path('income_tax_calculator/', calculators_views.income_tax_calculator, name="income_tax_calculator"),
+    path('sip_calculator/', calculators_views.sip_calculator, name="sip_calculator"),
+    path('gst_calculator/', calculators_views.gst_calculator, name="gst_calculator"),
+
+
+
+
+
+    #customers
+    path('customer_my_services/', homepage_views.customer_my_services, name="customer_my_services"),
+    path('customer_my_packages/', homepage_views.customer_my_packages, name="customer_my_packages"),
+
 ]
 
 

@@ -56,7 +56,10 @@
                             <li class="nav-item mx-2">
                                 <a class="nav-link" href="#my-calc">Calculators</a>
                             </li>
+                            
+                            
                             <a href="{% url 'login' %}" class="button btn-hover">Login</a>
+                            
                         </ul>
                     </div>
                 </div>
@@ -145,104 +148,66 @@
     </div>
     <!-- services -->
 
-    <section id="Packages">
-        <div class="container package-container">
-            <div class="package-heading">
+    <div class="container">
+
+        <section id="Packages">
+            <div class="package-heading text-center">
                 <h2>Our Packages</h2>
             </div>
             <div class="row">
                 {% for package in packages %}
-                <div class="col-4 pack_box border border-5 p-4 rounded-5">
-                    <div class="package">
-                        <div class="package-name">
-                            <h1>
-                                {{ package.name }}
-                            </h1>
-                        </div>
-                        <hr>
-                        <div class="package-details">
-                            <p> {{ package.description}}</p>
-                            <h4>
-                                &#8377; {{ package.price }}
-                            </h4>
-                        </div>
-                        <!-- <a href="/package/{{ package.id }}" class="btn btn-primary">Book Now</a> -->
+                <!-- Package -->
+                <div class="col-md-4">
+                    <div class="card h-100">
+                    <!-- <img src="{{package.image}}" class="img-fluid" alt="{{package.name}}"> -->
+                    <div class="card-body">
+                        <h5 class="card-title text-center">{{package.name}}</h5>
+                        <p class="card-text">{{package.description}}</p>
+                        <a href="{{package.url}}" class="btn btn-primary">Add to Cart</a>
                     </div>
                 </div>
-                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    </section>
+    <footer class="text-center text-lg-start pt-1  bg-body-tertiary text-muted">
+
+        <div class="container text-center text-md-start mt-5">
+            <!-- Grid row -->
+            <div class="row mt-2">
+                <!-- Grid column -->
+                <div class="col-md-6 col-lg-4 col-xl-3 mx-auto mb-4">
+                    <!-- Content -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        <i class="fas fa-gem me-3"></i>Accountant
+                    </h6>
+                    <p>
+                        Accountant is a website that provides you with all the financial services you need.
+                        We provide you with the best financial services and help you to grow your business.
+                    </p>
+                </div>
+    
+                <div class="col-md-6 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <h6 class="text-uppercase fw-bold mb-4">Contact Us</h6>
+                    <p><i class="fas fa-home me-3"></i>506,Iconic Isanpur Complex,
+                        Opp.Mony Hotel,Narol-Naroda
+                        Highway,Isanpur,
+                        Ahmedabad-382443</p>
+                    <p>
+                        <i class="fas fa-envelope me-3"></i>
+                        camanish.grow@gmail.com
+                    </p>
+                    <p><i class="fas fa-phone me-3"></i>7600000392</p>
+                </div>
             </div>
         </div>
-    </section>
-
-
-
-    <!-- calculator -->
-    <section id="my-calc">
-        <div class="my-calc">
-            <div class=" wrapper sip_calculator " data-aos-duration="1000" data-aos="fade-right">
-                <h3>SIP Calculator</h3>
-                <div class="field">
-                    <label for="">AMOUNT INVESTED ₹</label>
-                    <div>
-                        <input type="number" placeholder="5000₹" class="amount">
-                    </div>
-                </div>
-                <div class="field">
-                    <label for="">Rate Of Return %</label>
-                    <div>
-                        <input type="number" placeholder="15%" class="rate">
-                    </div>
-                </div>
-                <div class="field">
-                    <label for="">Duration Years</label>
-                    <div>
-                        <input type="number" placeholder="20 years" class="years">
-                    </div>
-                </div>
-                <button class=" mb-2 w-100 py-2" onclick="calculateSIP()">CALCULATE</button>
-                <h5>TOTAL AMOUNT: <p id="amount">0 ₹</p>
-                </h5>
-                <h5>FUTURE VALUE: <p id="futurevalue">0 ₹</p>
-                </h5>
-
-            </div>
-
-            <div class="gst-calculator wrapper " data-aos-duration="1000" data-aos="fade-right">
-
-                <h3>GST Calculator</h3>
-                <h5>Amount (excluding GST)</h5>
-                <input type="number" id="gstamount" placeholder="Enter amount">
-
-                <select class="gstdropdown" name="" id="">
-                    <option value="5">5% - Mass Consumption Items </option>
-                    <option value="12">12% - Processed Foods</option>
-                    <option value="18">18% -Hair Product,Stationary</option>
-                    <option value="28">28% -Cars,Tobacco,drinks</option>
-                </select>
-                <button onclick="calculateGST()">Calculate Total</button>
-
-                <h5>Total Amount (including GST)</h5>
-                <input type="text" id="gsttotal" readonly>
-            </div>
-
-            <div class="income-calculator wrapper" data-aos="fade-right" data-aos-duration="1000">
-                <h3>INCOME TAX <br> CALCULATOR</h3>
-                <label for="income">Enter your income:</label>
-                <input type="number" id="income" required>
-
-                <label for="taxPercentage">Select tax percentage:</label>
-                <select id="taxPercentage" class="income_dropdown">
-                    <option value="5">5%</option>
-                    <option value="20">20%</option>
-                    <option value="30">30%</option>
-                </select>
-
-                <button type="button" class="py-2" onclick="calculateTax()">Calculate Tax</button>
-
-                <div id="result"></div>
-            </div>
+    
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+            ©Copyright All rights Reserved:
         </div>
-    </section>
+    </footer>
+    
     <script>
         function closeOffcanvas() {
             var offcanvasElement = document.getElementById('offcanvasNavbar');

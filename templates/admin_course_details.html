@@ -1,51 +1,82 @@
 {% extends 'admin.html' %}
 {% block content %}
+<style>
+   .course-details {
+      border-radius: 0.25rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+   }
+
+   .course-details h2 {
+      color: #343a40;
+      margin-bottom: 1rem;
+   }
+
+   .course-details dt {
+      font-weight: bold;
+   }
+
+   .course-details dd {
+      margin-bottom: 0.5rem;
+   }
+
+   .course-details .btn {
+      margin-right: 0.5rem;
+   }
+</style>
+
+<!-- display -->
 <!-- display -->
 <div class="container">
    {% for course in courses %}
-   <div class="course-details">
-      <h2>Course: {{course.name}}</h2>
-      <dl class="row">
-         <dt class="col-sm-3">Name</dt>
-         <dd class="col-sm-9">{{course.name}}</dd>
+   <div class="course-details card mb-4">
+      <div class="card-header">
+         <h2>Course: {{course.name}}</h2>
+      </div>
+      <div class="card-body">
+         <dl class="row">
+            <dt class="col-sm-3">Name</dt>
+            <dd class="col-sm-9">{{course.name}}</dd>
 
-         <dt class="col-sm-3">Description</dt>
-         <dd class="col-sm-9">{{course.description}}</dd>
+            <dt class="col-sm-3">Description</dt>
+            <dd class="col-sm-9">{{course.description}}</dd>
 
-         <dt class="col-sm-3">Slug</dt>
-         <dd class="col-sm-9">{{course.slug}}</dd>
+            <dt class="col-sm-3">Slug</dt>
+            <dd class="col-sm-9">{{course.slug}}</dd>
 
-         <dt class="col-sm-3">Price</dt>
-         <dd class="col-sm-9">{{course.price}}</dd>
+            <dt class="col-sm-3">Price</dt>
+            <dd class="col-sm-9">{{course.price}}</dd>
 
-         <dt class="col-sm-3">Discount</dt>
-         <dd class="col-sm-9">{{course.discount}}</dd>
+            <dt class="col-sm-3">Discount</dt>
+            <dd class="col-sm-9">{{course.discount}}</dd>
 
-         <dt class="col-sm-3">Thumbnail</dt>
-         <dd class="col-sm-9">
-            <img src="{{course.thumbnail.url}}" height="100px" width="100px" class="img-fluid" alt="{{course.name}}">
-         </dd>
+            <dt class="col-sm-3">Thumbnail</dt>
+            <dd class="col-sm-9">
+               <img src="{{course.thumbnail.url}}" height="100px" width="100px" class="img-fluid rounded"
+                  alt="{{course.name}}">
+            </dd>
 
-         <dt class="col-sm-3">Resource</dt>
-         <dd class="col-sm-9">
-            <a href="{{course.resource.url}}" download>Download Resource</a>
-         </dd>
-         <a href="#updateCourseModal-{{forloop.counter}}" class="edit" data-bs-toggle="modal">
-            <span class="material-symbols-outlined" data-bs-toggle="tooltip" title="Edit">
-               edit
-            </span>
-         </a>
-         <a href="#deleteservicesModal-{{forloop.counter}}" class="delete" data-bs-toggle="modal">
-            <span class="material-symbols-outlined" data-bs-toggle="tooltip" title="Delete">
-               delete
-            </span>
-         </a>
+            <dt class="col-sm-3">Resource</dt>
+            <dd class="col-sm-9">
+               <a href="{{course.resource.url}}" class="btn btn-primary" download>Download Resource</a>
+            </dd>
+
+            <dt class="col-sm-3">Actions</dt>
+            <dd class="col-sm-9">
+               <a href="#updateCourseModal-{{forloop.counter}}" class="edit text-decoration-none"
+                  data-bs-toggle="modal">
+                  <button class="btn btn-primary px-5">Update</button>
+               </a>
+               <a href="#deleteCourseModal-{{forloop.counter}}" class="delete text-decoration-none"
+                  data-bs-toggle="modal">
+                  <button class="btn btn-danger px-5">Delete</button>
+               </a>
+            </dd>
+         </dl>
+      </div>
    </div>
-
-   <hr>
    {% endfor %}
 </div>
-
 <!-- Update Model HTML -->
 {% for course in courses %}
 <div id="updateCourseModal-{{forloop.counter}}" class="modal fade">

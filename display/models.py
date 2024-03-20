@@ -37,6 +37,18 @@ class Packages(models.Model):
     duration = models.CharField(max_length=100)
     price = models.IntegerField(default=None)      
 
+class PackageBooking(models.Model):
+    class Meta:
+        db_table = 'package_booking'
+    
+    id = models.AutoField(primary_key=True)
+    company_name = models.CharField(max_length=100)
+    company_address = models.TextField()
+    date = models.DateField()
+    customer = models.ForeignKey('login_registration.Customer', on_delete=models.CASCADE, default=None)
+    package = models.ForeignKey(Packages, on_delete=models.CASCADE, default=None)
+
+
 
     def __str__(self):
         return self.name

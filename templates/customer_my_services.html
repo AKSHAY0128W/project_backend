@@ -1,0 +1,17 @@
+{% extends 'customer.html' %}
+{% block content %}
+<h1>My Services</h1>
+<hr>
+<div class="booked_services">
+   {% for service in booked_services %}
+   <div class="s-card">
+      <h2>{{ service.service.name }}</h2>
+      <p>{{ service.service.description }}</p>
+      <p>Price: {{service.service.price}}</p>
+   </div>
+   <hr>
+   {% empty %}
+   <p>You have not booked any services.</p>
+   {% endfor %}
+</div>
+{% endblock %}

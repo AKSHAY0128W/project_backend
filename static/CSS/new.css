@@ -457,6 +457,68 @@ input {
     text-transform: uppercase;
 }
 
+/* packages */
+.package-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.package-heading h2 {
+    font-size: 3vw;
+    color: #333;
+}
+
+.package-heading h2::after {
+    content: "";
+    width: 160px;
+    height: 3px;
+    background-color: #06b9e1;
+    display: block;
+    margin: 8px auto;
+}
+
+.package {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px;
+    padding: 20px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    max-width: 450px;
+    min-height: 300px;
+    background-color: #f2f2f2;
+
+}
+
+.package-name h3 {
+    font-weight: bold;
+}
+
+h3::after {
+    content: "";
+    width: 160px;
+    height: 3px;
+    background-color: #06b9e1;
+    display: block;
+    margin: 8px auto;
+}
+
+.package-details {
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+.package-price {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
 /* services */
 
 #myservices {
@@ -470,43 +532,10 @@ input {
     flex-direction: column;
 }
 
-#Packages {
-    text-align: center;
-    padding: 50px 0;
-    height: 100vh;
-    display: flex;
-    margin-bottom: 20px;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.package-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 30px;
-}
 
 .serivce-heading h2 {
     font-size: 3vw;
     color: #333;
-}
-
-.package-heading h2 {
-    font-size: 3vw;
-    color: #333;
-
-}
-
-.package-heading h2::after {
-    content: "";
-    width: 160px;
-    height: 3px;
-    background-color: #06b9e1;
-    display: block;
-    margin: 8px auto;
 }
 
 .serivce-heading h2::after {

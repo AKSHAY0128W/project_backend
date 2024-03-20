@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 
@@ -16,46 +17,55 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 </head>
 
 <body>
     <div id="sidebar">
-        <!-- <div id="dashboard">Accountant</div> -->
         <div id="sidebar-logo">
             <h3>ACCOUNTANT</h3>
         </div>
-        <a href="{% url 'admin_homepage' %}" class="sidebar-item"><i class="fas fa-home"></i> <span>Home</span></a>
+        <a href="{% url 'admin_homepage' %}"
+            class="{% if request.resolver_match.url_name == 'admin_homepage' %} active-tab {% endif %}sidebar-item"><i
+                class="fas fa-home"></i> <span>Home</span></a>
 
-        <a href="{% url 'add_employee' %}" class="sidebar-item"><i class="fas fa-user-plus"></i> <span>Add
-                Employee</span></a>
+        <a href="{% url 'add_employee' %}"
+            class="{% if request.resolver_match.url_name == 'add_employee' %} active-tab {% endif %}sidebar-item"><i
+                class="fas fa-user-plus"></i> <span>Add Employee</span></a>
 
-        <a href="{% url 'emp_display' %}" class="sidebar-item"><i class="fas fa-users"></i> <span>Employees</span></a>
+        <a href="{% url 'emp_display' %}"
+            class="{% if request.resolver_match.url_name == 'emp_display' %} active-tab {% endif %}sidebar-item"><i
+                class="fas fa-users"></i> <span>Employees</span></a>
 
-        <a href="{% url 'services_list' %}" class="sidebar-item"><i class="fas fa-concierge-bell"></i>
-            <span>Services</span></a>
+        <a href="{% url 'services_list' %}"
+            class="{% if request.resolver_match.url_name == 'services_list' %} active-tab {% endif %}sidebar-item"><i
+                class="fas fa-concierge-bell"></i> <span>Services</span></a>
 
-        <a href="{% url 'service_booking_admin' %}" class="sidebar-item"><i class="fas fa-calendar-check"></i>
-            <span>Services Bookings</span></a>
+        <a href="{% url 'service_booking_admin' %}"
+            class="{% if request.resolver_match.url_name == 'service_booking_admin' %} active-tab {% endif %}sidebar-item"><i
+                class="fas fa-calendar-check"></i> <span>Services Bookings</span></a>
 
-        <a href="{% url 'packages_list' %}" class="sidebar-item"><i class="fas fa-box-open"></i>
-            <span>Packages</span></a>
+        <a href="{% url 'packages_list' %}"
+            class="{% if request.resolver_match.url_name == 'packages_list' %} active-tab {% endif %}sidebar-item"><i
+                class="fas fa-box-open"></i> <span>Packages</span></a>
 
-        <a href="{% url 'customer_list'%}" class="sidebar-item"><i class="fas fa-users"></i> <span>Customers</span></a>
+        <a href="{% url 'customer_list'%}"
+            class="{% if request.resolver_match.url_name == 'customer_list' %} active-tab {% endif %}sidebar-item"><i
+                class="fas fa-users"></i> <span>Customers</span></a>
 
-        <a href="{% url 'payment_list'%}" class="sidebar-item"><i class="fas fa-credit-card"></i>
-            <span>Payments</span></a>
+        <a href="{% url 'admin_course_create' %}"
+            class="{% if request.resolver_match.url_name == 'admin_course_create' %} active-tab {% endif %}sidebar-item"><i
+                class="fas fa-book"></i> <span>Course</span></a>
 
-        <a href="{% url 'admin_course_create' %}" class="sidebar-item"><i class="fas fa-book"></i>
-            <span>Course</span></a>
-
-        <a href="{% url 'admin_course_details' %}" class="sidebar-item"><i class="fas fa-book"></i>
-            <span>Course Details</span></a>
+        <a href="{% url 'admin_course_details' %}"
+            class="{% if request.resolver_match.url_name == 'admin_course_details' %} active-tab {% endif %}sidebar-item"><i
+                class="fas fa-book"></i> <span>Course Details</span></a>
 
         <a href="{% url 'default' %}" class="sidebar-item"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
 
     </div>
 
-        <div id="content">
+    <div id="content">
         <div class="dashboard-card">
             {% block content %}
 

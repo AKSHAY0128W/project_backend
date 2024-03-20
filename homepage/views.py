@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from display.models import Services, serviceBooking, Packages
+from display.models import Services, serviceBooking, Packages, PackageBooking
 from login_registration.models import Customer, Employee, Profile
 from django.contrib.sessions.models import Session
 from appointment.models import Appointment
@@ -63,6 +63,31 @@ def service_booking(request, id):
 
     return render(request, 'service_booking.html', {'selected_service': selected_service})
 
+def package_booking(request, id):
+    selected_package = get_object_or_404(Packages, id=id)
+
+    try:
+        profile = Profile.objects.get(user=request.user)
+    except Profile.DoesNotExist:
+        return HttpResponse('Profile does not exist', status=404)
+
+    customer = profile.customer  # replace 'customer' with the actual related name
+
+    if not Customer.objects.filter(id=customer.id).exists():
+        return HttpResponse('Customer does not exist', status=400)
+
+    if request.method == 'POST':
+        comapany_name = request.POST.get('cname')
+        company_address = request.POST.get('cadd')
+        date = request.POST.get('date')
+
+        # make_payment(request, id)
+        booking = PackageBooking(customer=customer, date=date, company_name=comapany_name, company_address=company_address, package=selected_package)
+        booking.save()
+        
+        return redirect('packages')
+
+    return render(request, 'package_booking.html', {'selected_package': selected_package})
 
 
 def default(request):
@@ -101,18 +126,20 @@ def appointment(request):
 def dashboard(request):
     return render(request, 'customer.html')
 
+@login_required
 def myservices(request):
-    services = Services.objects.all()
-    context = {'services':services}
-    print(services)
-    return render(request, 'services.html', context)
+    profile = get_object_or_404(Profile, user=request.user)
+    customer = profile.customer
+    booked_services_ids = serviceBooking.objects.filter(customer=customer).values_list('service__id', flat=True)
+    services = Services.objects.exclude(id__in=booked_services_ids)
+    return render(request, 'services.html', {'services': services})
 
 def mypackages(request):
-
-    packages = Packages.objects.all()
-    context = {'packages':packages}
-    print(packages)
-    return render(request, 'packages.html', context)
+    profile = get_object_or_404(Profile, user=request.user)
+    customer = profile.customer
+    booked_packages_ids = PackageBooking.objects.filter(customer=customer).values_list('package__id', flat=True)
+    packages = Packages.objects.exclude(id__in=booked_packages_ids)
+    return render(request, 'packages.html', {'packages': packages})
 
 
 
@@ -154,3 +181,19 @@ def admin_service_details(request):
     return render(request, 'admin_service_details.html')
 
 
+
+
+@login_required
+def customer_my_services(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    customer = profile.customer
+    booked_services = serviceBooking.objects.filter(customer=customer)
+    return render(request, 'customer_my_services.html', {'booked_services': booked_services})
+
+
+@login_required
+def customer_my_packages(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    customer = profile.customer
+    booked_packages = PackageBooking.objects.filter(customer=customer)
+    return render(request, 'customer_my_packages.html', {'booked_packages': booked_packages})

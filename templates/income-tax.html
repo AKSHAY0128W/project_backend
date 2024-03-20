@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+   <title>Title</title>
+   <!-- Required meta tags -->
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+   <!-- Bootstrap CSS v5.2.1 -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+
+   <style>
+      #outer {
+         width: 100%;
+         max-width: 600px;
+         background: #fff;
+         margin: 0 auto
+      }
+
+      #cover {
+         border: 2px solid #111;
+         padding: 15px 0
+      }
+
+      .main {
+         table-layout: fixed;
+         width: 94%;
+         border: 0;
+         border-collapse: collapse;
+         margin: 0 auto
+      }
+
+      .main td {
+         padding: 0 8px;
+         vertical-align: middle;
+         border: 0
+      }
+
+      .main input {
+         width: 100%;
+         border: 1px solid #ccc;
+         margin: 2px 0;
+         padding: 0 2%;
+         height: 22px;
+         text-align: right
+      }
+
+      .ac {
+         text-align: center
+      }
+
+      .b {
+         font-weight: bold
+      }
+
+      .main select {
+         width: 100%;
+         border: 1px solid #ccc;
+         margin: 2px 0;
+         background: #fff;
+         height: 22px
+      }
+
+      .w50 {
+         width: 50%
+      }
+
+      .form-label {
+         font-weight: bold;
+      }
+
+      .main button {
+         width: 100%;
+         font-weight: bold;
+         margin: 3px 0
+      }
+
+      .logo {
+         font-size: 2em;
+         font-weight: bold;
+         color: #000;
+      }
+   </style>
+   <div class="container mx-auto bg-white">
+      <div class="border border-dark p-3">
+         <div class="text-center logo">Income Tax Calculator</div>
+         <form name="it">
+            <table class="table">
+               <tr>
+                  <td class="form-label">Opted for Sec. 115BAC</td>
+                  <td><select id="opt" onchange="itax2122();" class="form-select">
+                        <option value='no' selected>No
+                        <option value='yes'>Yes
+                     </select>
+                  </td>
+               </tr>
+               <tr class=stat>
+                  <td class="form-label">Select Status</td>
+                  <td><select id="age" class="form-select">
+                        <option value='b60' selected>Resident &lt; 60 years
+                        <option value='a60'>&gt;= 60 &lt; 80 years
+                        <option value='a80'>&gt;= 80 years
+                        <option value=huf>HUF / NRE
+                     </select>
+                  </td>
+               </tr>
+               <tr>
+                  <td class="form-label">Income</td>
+                  <td><input type=number id=tinc class="form-control"></td>
+               </tr>
+               <tr>
+                  <td class="form-label">Eligible Deductions</td>
+                  <td><input type="number" class="form-control" id=ed></td>
+               </tr>
+               <tr>
+                  <td><button type="reset" class="btn btn-primary">Reset</button></td>
+                  <td><button type=button onclick=itax2122(); class="btn btn-primary">Submit</button></td>
+               </tr>
+               <tr>
+                  <td class="form-label">Taxable Income</td>
+                  <td><input class="op form-control" id=ninc></td>
+               </tr>
+               <tr>
+                  <td class="form-label">Income Tax</td>
+                  <td><input class="op form-control" id="itax"></td>
+               </tr>
+               <tr>
+                  <td class="form-label">Surcharge</td>
+                  <td><input class="op form-control" id="surch"></td>
+               </tr>
+               <tr>
+                  <td class="form-label">Education Cess</td>
+                  <td><input class="op form-control" id="ecess"></td>
+               </tr>
+               <tr>
+                  <td class="form-label">Total Tax Liability</td>
+                  <td><input class="op form-control" id="liab"></td>
+               </tr>
+
+            </table>
+         </form>
+      </div>
+   </div>
+
+   <script>
+      function show(elmnt) { document.getElementById(elmnt).style.display = 'block' } function hide(elmnt) { document.getElementById(elmnt).style.display = 'none' }
+      function sc(elm) { var x = document.getElementsByClassName(elm); var i; for (i = 0; i < x.length; i++) { x[i].style.display = '' } } function hc(elm) { var x = document.getElementsByClassName(elm); var i; for (i = 0; i < x.length; i++) { x[i].style.display = 'none' } }
+      // -- Itax
+      function itax2122() {
+         var age = document.getElementById('age').value; var tax; var liab; var tcredit = 0; var surch = 0; var ttax; var mtr = 0; var ecess;
+         var inc = document.getElementById('tinc').value * 1 - document.getElementById('ed').value * 1; var opt = document.getElementById('opt').value;
+         if (opt == 'no') {
+            if ((age == 'b60' || age == 'huf') && inc > 1000000) { tax = 112500 * 1 + Math.round((inc * 1 - 1000000 * 1) * 30 / 100) }
+            else if ((age == 'b60' || age == 'huf') && inc > 500000 && inc <= 1000000) { tax = 12500 * 1 + Math.round((inc * 1 - 500000 * 1) * 20 / 100) }
+            else if ((age == 'b60' || age == 'huf') && inc > 200000 && inc <= 500000) { tax = Math.round((inc * 1 - 250000 * 1) * 5 / 100) }
+            else if ((age == 'b60' || age == 'huf') && inc <= 250000) { tax = 0 }
+            else if (age == 'a60' && inc > 1000000) { tax = 110000 * 1 + Math.round((inc * 1 - 1000000 * 1) * 30 / 100) }
+            else if (age == 'a60' && inc > 500000 && inc <= 1000000) { tax = 10000 * 1 + Math.round((inc * 1 - 500000 * 1) * 20 / 100) }
+            else if (age == 'a60' && inc > 250000 && inc <= 500000) { tax = Math.round((inc * 1 - 300000 * 1) * 5 / 100) }
+            else if (age == 'a60' && inc < 300000) { tax = 0 }
+            else if (age == 'a80' && inc > 1000000) { tax = 100000 * 1 + Math.round((inc * 1 - 1000000 * 1) * 30 / 100) }
+            else if (age == 'a80' && inc > 500000 && inc <= 1000000) { tax = Math.round((inc * 1 - 500000 * 1) * 20 / 100) }
+            else if (age == 'a80' && inc <= 500000) { tax = 0 }
+            if (age == 'b60' && inc <= 500000 && tax > 0) { tcredit = Math.round(tax) }
+            if (age == 'a60' && inc <= 500000 && tax > 0) { tcredit = Math.round(tax) }
+         }
+
+         if (opt == 'yes') {
+            if (inc > 1500000) { tax = 187500 + (inc - 1500000) * 30 / 100 }
+            else if (inc <= 1500000 && inc > 1250000) { tax = 125000 + ((inc - 1250000) * 25 / 100) }
+            else if (inc <= 1250000 && inc > 1000000) { tax = 75000 + ((inc - 1000000) * 20 / 100) }
+            else if (inc <= 1000000 && inc > 750000) { tax = 37500 + ((inc - 750000) * 15 / 100) }
+            else if (inc <= 750000 && inc > 500000) { tax = 12500 + ((inc - 500000) * 10 / 100) }
+            else if (inc <= 500000 && inc > 25000) { tax = ((inc - 250000) * 5 / 100) }
+            else if (inc <= 250000 && inc > 0) { tax = 0 }
+         }
+
+         if (inc <= 500000 && inc > 250000) tcredit = tax;
+         if (inc > 500000) { tcredit = 0 };
+         tax = tax * 1 - tcredit * 1;
+
+         if (inc > 5000000 && inc <= 10000000) { surch = tax * 10 / 100 }
+         else if (inc > 10000000 && inc <= 20000000) { surch = tax * 15 / 100 }
+         else if (inc > 20000000 && inc <= 50000000) { surch = tax * 25 / 100 }
+         else if (inc > 50000000) { surch = itax * 37 / 100 }
+
+         ttax = tax * 1 + surch * 1;
+         ecess = Math.round(ttax * .04); liab = ttax * 1 + ecess * 1;
+         document.getElementById('ninc').value = Math.round(inc);
+         document.getElementById('itax').value = Math.round(tax);
+         document.getElementById('surch').value = Math.round(surch);
+         document.getElementById('ecess').value = Math.round(ecess);
+         document.getElementById('liab').value = Math.round(liab)
+      }</script>
+
+   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"></script>
+
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"></script>
+   </body>
+
+</html>

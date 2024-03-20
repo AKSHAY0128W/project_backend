@@ -82,12 +82,9 @@ def course_list_view(request):
     return render(request, 'admin_course_details.html', context)
 
 def course_delete_view(request, id):
-    courses = Course.objects.filter(id=id)
-    courses.delete()
-    context = {
-        'courses': courses
-    }
-    return redirect('admin_course_details.html',context)
+    Course.objects.filter(id=id).delete()
+    return redirect('admin_course_details')
+
 
 def course_update_view(request, id):
     course = Course.objects.get(id=id)

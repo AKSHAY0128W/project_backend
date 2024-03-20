@@ -1,102 +1,39 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <style>
-   .package-container {
-      margin-top: 5%;
+   .package-heading {
+      margin-bottom: 30px;
    }
 
-   .pack_box {
-      padding: 10px;
-      margin: 10px;
-      border-radius: 15px;
-      background: #f2f2f2;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
+   .card {
+      margin-bottom: 30px;
    }
 
-   .package_name h1 {
-      font-size: 20px;
-      text-align: center;
-      font-weight: bold;
-   }
-
-   .package-details p {
-      font-size: 16px;
-      font-family: 'Poppins', 'sans-serif';
-   }
-
-   .package-details h4 {
-      font-size: 20px;
-      font-family: 'Poppins', 'sans-serif';
+   .card img {
+      height: 200px;
+      object-fit: cover;
    }
 </style>
-
-</head>
-
-<body>
-   <section id="Packages">
-      <div class="container-fluid package-container">
-         {% for package in packages %}
-         <div class="package">
-            <div class="package-name">
-               <h1>
-                  {{ package.name }}
-               </h1>
+<div class="spacer" style="margin-top:120px ;"></div>
+<div class="container mt-5">
+   <div class="package-heading">
+      <h1 class="text-center mb-2">Packages</h1>
+   </div>
+   <div class="row">
+      {% for package in packages %}
+      <!-- Package -->
+      <div class="col-md-4">
+         <div class="card h-100" >
+            <!-- <img src="{{package.image}}" class="img-fluid" alt="{{package.name}}"> -->
+            <div class="card-body">
+               <h5 class="card-title text-center">{{package.name}}</h5>
+               <p class="card-text">{{package.description}}</p>
+               <a href="{% url 'package_booking' package.id%}" class="btn btn-primary">Add to Cart</a>
             </div>
-            <div class="package-details">
-               <p> {{ package.description}}</p>
-               <h4>
-                  &#8377; {{ package.price }}
-               </h4>
-            </div>
-            <a href="/package/{{ package.id }}" class="btn btn-primary">Book Package</a>
          </div>
-         <hr>
-         {% endfor %}
       </div>
-   </section>
-
-   <!-- <div class="package">
-      <div class="package-name">
-         Monthly Accounting Package
-      </div>
-      <div class="package-details">
-         This package includes the following services:
-         <ul>
-            <li>Monthly Financial Statements</li>
-            <li>Monthly Tax Returns</li>
-            <li>Monthly Tax Planning</li>
-         </ul>
-      </div>
+      {% endfor %}
    </div>
-   <div class="package">
-      <div class="package-name">
-         Payroll Package
-      </div>
-      <div class="package-details">
-         This package includes the following services:
-         <ul>
-            <li>Payroll Processing</li>
-            <li>Payroll Tax Returns</li>
-            <li>Payroll Tax Planning</li>
-         </ul>
-      </div>
-   </div>
-
-   <div class="package">
-      <div class="package-name">
-
-         Tax Preparation Package
-      </div>
-      <div class="package-details">
-         This package includes the following services:
-         <ul>
-            <li>Income Tax Preparation</li>
-            <li>Tax Planning</li>
-            <li>Tax Consultation</li>
-         </ul>
-      </div>
-   </div> -->
-
-
-   {% endblock %}
+</div>
+{% endblock %}
