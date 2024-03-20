@@ -1,0 +1,17 @@
+{% existing 'customer.html' %}
+{% block content %}
+<h1>My Courses</h1>
+<hr>
+<div class="booked_courses">
+   {% for course in booked_courses %}
+   <div class="c-card">
+      <h2>{{ course.course.name }}</h2>
+      <p>{{ course.course.description }}</p>
+      <p>Price: {{course.course.price}}</p>
+   </div>
+   <hr>
+   {% empty %}
+   <p>You have not booked any courses.</p>
+   {% endfor %}   
+</div>
+{% endblock %}

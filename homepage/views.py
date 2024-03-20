@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from display.models import Services, serviceBooking, Packages, PackageBooking
+from display.models import Services, serviceBooking, Packages, PackageBooking, employee_service_schedule
 from login_registration.models import Customer, Employee, Profile
 from django.contrib.sessions.models import Session
 from appointment.models import Appointment
@@ -62,6 +62,9 @@ def service_booking(request, id):
         return redirect('myservices')
 
     return render(request, 'service_booking.html', {'selected_service': selected_service})
+
+    
+    
 
 def package_booking(request, id):
     selected_package = get_object_or_404(Packages, id=id)
@@ -180,9 +183,25 @@ def admin_view_employee(request):
 def admin_service_details(request):
     return render(request, 'admin_service_details.html')
 
+def admin_employee_schedule(request):
+    
+    if request.method == 'POST':
+        employee_id = request.POST.get('employee')
+        servbooking_id = request.POST.get('booking')  # Changed booking_id to servbooking_id
+        datetime_str = request.POST.get('datetime')
+        datetime = timezone.datetime.strptime(datetime_str, '%Y-%m-%dT%H:%M')
+        employee = Employee.objects.get(employee_id=employee_id)
+        servbooking = serviceBooking.objects.get(id=servbooking_id)  # Changed booking to servbooking
+        employee_service_schedule.objects.create(employee=employee, servbooking=servbooking, datetime=datetime)  # Changed booking to servbooking
+        return redirect('admin_employee_schedule')
+    else:
+        employees = Employee.objects.all()
+        servbookings = serviceBooking.objects.all()  # Changed bookings to servbookings
+        context = {'employees': employees, 'servbookings': servbookings}  # Changed bookings to servbookings
 
 
-
+        return render(request, 'admin_employee_schedule.html', context)
+        
 @login_required
 def customer_my_services(request):
     profile = get_object_or_404(Profile, user=request.user)
@@ -197,3 +216,7 @@ def customer_my_packages(request):
     customer = profile.customer
     booked_packages = PackageBooking.objects.filter(customer=customer)
     return render(request, 'customer_my_packages.html', {'booked_packages': booked_packages})
+
+
+def customer_my_coures(request):
+    return render(request, 'customer_my_courses.html')

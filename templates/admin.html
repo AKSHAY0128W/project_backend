@@ -37,6 +37,10 @@
             class="{% if request.resolver_match.url_name == 'emp_display' %} active-tab {% endif %}sidebar-item"><i
                 class="fas fa-users"></i> <span>Employees</span></a>
 
+        <a href="{% url 'admin_employee_schedule' %}"
+            class="{% if request.resolver_match.url_name == 'admin_employee_schedule' %} active-tab {% endif %}sidebar-item"><i
+                class="fas fa-users"></i> <span>Employee Schedule</span></a>
+
         <a href="{% url 'services_list' %}"
             class="{% if request.resolver_match.url_name == 'services_list' %} active-tab {% endif %}sidebar-item"><i
                 class="fas fa-concierge-bell"></i> <span>Services</span></a>

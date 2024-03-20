@@ -46,6 +46,7 @@ urlpatterns = [
     path('add_employee/',homepage_views.admin_create_employee, name="add_employee"),
     path('admin_homepage/', homepage_views.admin_homepage, name="admin_homepage"),
     path('admin_service_details', homepage_views.admin_service_details, name="admin_employee_details"),
+    path('admin_employee_schedule', homepage_views.admin_employee_schedule, name="admin_employee_schedule"),
 
     #packages
 

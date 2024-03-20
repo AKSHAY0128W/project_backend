@@ -230,6 +230,7 @@ def employee_service_booking_list(request):
     return render(request, 'employee_service_booking_details.html', {'bookings': bookings})
 
 
+
 def employee_payment_list(request):
     payments = payment.objects.all()
     print(payments)

@@ -121,6 +121,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="/services_delete/{{i.id}}" method="post">
+                {% csrf_token %}
                 <div class="modal-header">
                     <h4 class="modal-title">Delete Services</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

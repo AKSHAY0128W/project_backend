@@ -1,5 +1,7 @@
 from django.db import models
 
+import login_registration
+
 # Create your models here.
 
 class Services(models.Model):
@@ -65,3 +67,13 @@ class payment(models.Model):
     
     def __str__(self):
         return str(self.id)
+    
+
+class employee_service_schedule(models.Model):
+    class Meta:
+        db_table = 'employee_service_schedule'
+
+    service_schedule_id = models.AutoField(primary_key=True)
+    employee = models.ForeignKey('login_registration.Employee', on_delete=models.CASCADE)
+    servbooking = models.ForeignKey(serviceBooking, on_delete=models.CASCADE)  # Changed booking to servbooking
+    datetime = models.DateTimeField()
