@@ -1,0 +1,35 @@
+{% extends 'admin.html' %}
+
+{% block content %}
+
+<div class="container">
+   <div class="table-wrapper">
+      <div class="table-title">
+         <div class="row">
+            <div class="col-sm-6">
+               <h2><b>Course Bookings</b></h2>
+            </div>
+         </div>
+      </div>
+      <table class="table table-striped table-hover">
+         <thead>
+            <tr>
+               <th>Course Title</th>
+               <th>UserName</th>
+               <th>Name</th>
+            </tr>
+         </thead>
+         <tbody>
+            {% for booking in courseBooking %}
+            <tr>
+               <td>{{booking.course.name}}</td>
+               <td>{{booking.customer.name}}</td>
+               <td>{{booking.name}}</td>
+            </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+   </div>
+</div>
+
+{% endblock %}

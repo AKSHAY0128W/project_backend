@@ -479,6 +479,7 @@ input {
     margin: 8px auto;
 }
 
+
 .package {
     display: flex;
     flex-direction: column;
@@ -524,12 +525,12 @@ h3::after {
 #myservices {
     text-align: center;
     padding: 50px 0;
-    height: 100vh;
     display: flex;
     margin-bottom: 20px;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
 }
 
 
@@ -565,14 +566,11 @@ h3::after {
 
 .s-card {
     background: #fff;
+    height: 600px;
+    width: 400px;
     padding: 20px;
     text-align: center;
     margin: 20px;
-    min-width: 300px;
-    max-width: 400px;
-    min-height: 400px;
-    max-height: 600px;
-    border-radius: 25px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -590,6 +588,19 @@ h3::after {
     transform: scale(1.05);
 }
 
+.cal-heading h2 {
+    font-size: 3vw;
+    color: #333;
+}
+
+.cal-heading h2::after {
+    content: "";
+    width: 160px;
+    height: 3px;
+    background-color: #06b9e1;
+    display: block;
+    margin: 8px auto;
+}
 
 .s-card h2 {
     margin: 0 0 10px 0;
@@ -610,14 +621,25 @@ h3::after {
     margin: 10px auto 5px auto;
 }
 
-
-
 .s-card p {
-    color: #777;
     margin: 0 0 10px 0;
     padding: 0;
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
+}
+
+.s-card .pricing {
+    font-size: 20px;
+    font-weight: 600;
+    color: #06b9e1;
+    margin-top: 20px;
+}
+
+.pricing {
+    font-size: 20px;
+    font-weight: 600;
+    color: #06b9e1;
+    margin-top: 20px;
 }
 
 .s-card a {

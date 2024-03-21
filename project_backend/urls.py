@@ -23,13 +23,12 @@ urlpatterns = [
     path('appointment/', homepage_views.appointment, name="appointment"),    
 
     path('dashboard/', homepage_views.dashboard, name="dashboard"),
-
     path('admin_dashboard/', homepage_views.admin_dashboard, name="admin_dashboard"),
 
     path('create_employee/', login_registration_views.create_employee, name='create_employee'),
 
     path('employee_panel/', homepage_views.employee_panel, name="employee_panel"),
-
+    path('employee_my_schedule/', homepage_views.employee_my_schedule, name="employee_my_schedule"),
     path('admin_login/', homepage_views.admin_login, name="admin_login"),
     
     path('services/', homepage_views.services, name="services"),
@@ -40,14 +39,16 @@ urlpatterns = [
 
 
     path('package_booking/<int:id>/', homepage_views.package_booking, name='package_booking'),
+    path('package_booking_admin/', display_views.package_booking_admin, name='package_booking_admin'),
 
 
     #admin_panel_pages
     path('add_employee/',homepage_views.admin_create_employee, name="add_employee"),
     path('admin_homepage/', homepage_views.admin_homepage, name="admin_homepage"),
     path('admin_service_details', homepage_views.admin_service_details, name="admin_employee_details"),
-    path('admin_employee_schedule', homepage_views.admin_employee_schedule, name="admin_employee_schedule"),
-
+    path('admin_employee_service_schedule', homepage_views.admin_employee_service_schedule, name="admin_employee_service_schedule"),
+    path('admin_package_schedule', homepage_views.admin_package_schedule, name="admin_package_schedule"),
+    path('admin_appointment_list', display_views.admin_appointment_list, name="admin_appointment_list"),
     #packages
 
     path('packages/', homepage_views.mypackages, name="packages"),
@@ -90,10 +91,13 @@ urlpatterns = [
     path('employee_appointment_list/', display_views.employee_appointment_list, name='employee_appointment_list'),
     path('employee_service_booking_list/', display_views.employee_service_booking_list, name='employe_service_booking_list'),
     path('employee_payment_list/', display_views.employee_payment_list, name='employee_payment_list'),
+    path('employee_package_booking_list/', display_views.employee_package_booking_list, name='employee_package_booking_list'),
 
     #course
     path('course/', include('course.urls')),
     path('admin_course_create/',course_views.course_create_view, name="admin_course_create"),
+    path('course_booking/<int:id>', course_views.course_booking_view, name='course_booking'),
+    path('admin_course_booking_details', homepage_views.admin_course_booking_details, name='admin_course_booking_details'),
     path('admin_course_details/',course_views.course_list_view, name="admin_course_details"),
     path('course_update_view/<int:id>',course_views.course_update_view, name="course_update_view"),
     path('course_delete_view/<int:id>',course_views.course_delete_view, name="course_delete_view"),

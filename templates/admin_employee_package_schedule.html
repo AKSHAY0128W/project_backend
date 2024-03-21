@@ -1,0 +1,89 @@
+{% extends 'admin.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+   <form method="post" class="container mt-5">
+      {% csrf_token %}
+      <h1 class="text-center">Assign Employees to Package Bookings</h1>
+      <div class="form-group">
+         <label for="employeeSelect">Select Employee</label>
+         <select name="employee" class="form-control" id="employeeSelect">
+            {% if employees %}
+            {% for employee in employees %}
+            <option value="{{ employee.employee_id }}">{{ employee.name }}</option>
+            {% endfor %}
+            {% else %}
+            <option>No More Employee For Assign</option>
+            {% endif %}
+         </select>
+      </div>
+      <div class="form-group">
+         <label for="bookingSelect">Select Package Booking</label>
+         <select name="booking" class="form-control" id="bookingSelect">
+            {% if packbookings %}
+            {% for booking in packbookings %}
+            <option value="{{ booking.id }}">{{ booking.customer.name }} - {{ booking.package.name }}</option>
+            {% endfor %}
+            {% else %}
+            <option>No more package bookings</option>
+            {% endif %}
+         </select>
+      </div>
+      <div class="form-group">
+         <label for="datetimeInput">Select Date and Time</label>
+         <input type="datetime-local" name="datetime" class="form-control" id="datetimeInput">
+      </div>
+      <button type="submit" class="btn btn-primary">Assign Employee</button>
+   </form>
+   <div class="container">
+      <div class="table-wrapper">
+         <div class="table-title">
+            <div class="row">
+               <div class="col-sm-6">
+                  <h2>Manage <b>Package Schedules</b></h2>
+               </div>
+            </div>
+         </div>
+         <table class="table table-striped table-hover">
+            <thead>
+               <tr>
+                  <th>Schedule ID</th>
+                  <th>Employee Name</th>
+                  <th>Package Booking Name</th>
+                  <th>Customer</th>
+                  <th>Address</th>
+                  <th>Contact</th>
+                  <th>Datetime</th>
+               </tr>
+            </thead>
+            <tbody>
+               {% for i in schedule %}
+               <tr>
+                  <td>{{i.package_schedule_id}}</td>
+                  <td>{{i.employee.name}}</td>
+                  <td>{{i.packbooking.package.name}}</td>
+                  <td>{{i.packbooking.customer.name}}</td>
+                  <td>{{i.packbooking.customer.address}}</td>
+                  <td>{{i.packbooking.customer.phone}}</td>
+                  <td>{{i.datetime}}</td>
+               </tr>
+               {% endfor %}
+            </tbody>
+         </table>
+      </div>
+   </div>
+   <!-- Bootstrap JS and jQuery -->
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+
+{% endblock %}

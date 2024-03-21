@@ -89,7 +89,7 @@ def create_employee(request):
                 edetails = edetails.save(commit=False)
                 edetails.profile = profile
                 edetails.save()
-                return redirect('admin_dashboard')
+                return redirect('emp_display')
             else:
                 print(form.errors, edetails.errors)
         else:

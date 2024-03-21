@@ -2,7 +2,9 @@ from appointment.models import *
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
-from .models import Services, Packages
+
+from homepage.views import package_booking
+from .models import PackageBooking, Services, Packages
 from .models import serviceBooking
 from login_registration.models import *
 from django.http import HttpResponse
@@ -117,17 +119,31 @@ def services_delete(request, id):
     }
     return redirect('/services_list', context)
 
+
+#appointment
+def admin_appointment_list(request):
+    admin_appointment_list = Appointment.objects.all()
+    context = {
+        'admin_appointment_list':admin_appointment_list,
+    }
+    return render(request, 'admin_appointment_details.html', context)
+
 #serviceBooking
 
 def service_booking_admin(request):
     bookings = serviceBooking.objects.select_related('customer').all()
     return render(request, 'admin_service_booking_details.html', {'bookings': bookings})
 
+
 def booking_delete(request, id):
     booking = serviceBooking.objects.filter(id=id)
     booking.delete()
     return redirect('/service_booking_admin')
 
+
+def package_booking_admin(request):
+    bookings = PackageBooking.objects.select_related('customer').all()
+    return render(request, 'admin_package_booking_details.html', {'bookings': bookings})
 
 #payments
 
@@ -238,3 +254,8 @@ def employee_payment_list(request):
         'payments':payments,
     }
     return render(request, 'employee_payments_details.html', context)
+
+
+def employee_package_booking_list(request):
+    bookings = PackageBooking.objects.select_related('customer').all()
+    return render(request, 'employee_package_booking_list.html', {'bookings': bookings})

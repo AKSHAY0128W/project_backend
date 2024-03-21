@@ -1,5 +1,6 @@
+from importlib.resources import contents
 from django.shortcuts import render,redirect
-from display.models import Services, serviceBooking, Packages, PackageBooking, employee_service_schedule
+from display.models import Services, serviceBooking, Packages, PackageBooking, employee_service_schedule,employee_package_schedule
 from login_registration.models import Customer, Employee, Profile
 from django.contrib.sessions.models import Session
 from appointment.models import Appointment
@@ -11,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.urls import reverse
 from display.models import payment
-
+from course.models import course_booking
 # def make_payment(request, id): 
 #     selected_service = get_object_or_404(Services, id=id)
 
@@ -54,9 +55,10 @@ def service_booking(request, id):
     if request.method == 'POST':
         date = request.POST.get('date')
         time = request.POST.get('time')
-
-        # make_payment(request, id)
-        booking = serviceBooking(customer=customer, date=date, time=time, service=selected_service)
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        booking = serviceBooking(customer=customer, date=date, time=time, service=selected_service, name=name, email=email, phone=phone)
         booking.save()
         
         return redirect('myservices')
@@ -145,7 +147,6 @@ def mypackages(request):
     return render(request, 'packages.html', {'packages': packages})
 
 
-
 def admin_dashboard(request):
     return render(request, 'admin_dashboard.html')
 
@@ -183,25 +184,54 @@ def admin_view_employee(request):
 def admin_service_details(request):
     return render(request, 'admin_service_details.html')
 
-def admin_employee_schedule(request):
-    
+from django.db.models import Q
+
+def admin_employee_service_schedule(request):
     if request.method == 'POST':
         employee_id = request.POST.get('employee')
-        servbooking_id = request.POST.get('booking')  # Changed booking_id to servbooking_id
+        servbooking_id = request.POST.get('booking')
         datetime_str = request.POST.get('datetime')
         datetime = timezone.datetime.strptime(datetime_str, '%Y-%m-%dT%H:%M')
         employee = Employee.objects.get(employee_id=employee_id)
-        servbooking = serviceBooking.objects.get(id=servbooking_id)  # Changed booking to servbooking
-        employee_service_schedule.objects.create(employee=employee, servbooking=servbooking, datetime=datetime)  # Changed booking to servbooking
-        return redirect('admin_employee_schedule')
+        servbooking = serviceBooking.objects.get(id=servbooking_id)
+        employee_service_schedule.objects.create(employee=employee, servbooking=servbooking, datetime=datetime)
+        return redirect('admin_employee_service_schedule')
     else:
-        employees = Employee.objects.all()
-        servbookings = serviceBooking.objects.all()  # Changed bookings to servbookings
-        context = {'employees': employees, 'servbookings': servbookings}  # Changed bookings to servbookings
+        scheduled_servbookings = employee_service_schedule.objects.values_list('servbooking', flat=True)
+        servbookings = serviceBooking.objects.filter(~Q(id__in=scheduled_servbookings))
+        scheduled_employees_service = employee_service_schedule.objects.values_list('employee', flat=True)
+        scheduled_employees_package = employee_package_schedule.objects.values_list('employee', flat=True)
+        employees = Employee.objects.filter(~Q(employee_id__in=scheduled_employees_service) & ~Q(employee_id__in=scheduled_employees_package))
+        schedule = employee_service_schedule.objects.all()
+        context = {'employees': employees, 'servbookings': servbookings, 'schedule': schedule}
 
+    return render(request, 'admin_employee_service_schedule.html', context)
 
-        return render(request, 'admin_employee_schedule.html', context)
-        
+def admin_package_schedule(request):
+    if request.method == 'POST':
+        employee_id = request.POST.get('employee')
+        packbooking_id = request.POST.get('booking')
+        datetime_str = request.POST.get('datetime')
+        datetime = timezone.datetime.strptime(datetime_str, '%Y-%m-%dT%H:%M')
+        employee = Employee.objects.get(employee_id=employee_id)
+        packbooking = PackageBooking.objects.get(id=packbooking_id)
+        employee_package_schedule.objects.create(employee=employee, packbooking=packbooking, datetime=datetime)
+        return redirect('admin_package_schedule')
+    else:
+        scheduled_packbookings = employee_package_schedule.objects.values_list('packbooking', flat=True)
+        packbookings = PackageBooking.objects.filter(~Q(id__in=scheduled_packbookings))
+        scheduled_employees_package = employee_package_schedule.objects.values_list('employee', flat=True)
+        scheduled_employees_service = employee_service_schedule.objects.values_list('employee', flat=True)
+        employees = Employee.objects.filter(~Q(employee_id__in=scheduled_employees_package) & ~Q(employee_id__in=scheduled_employees_service))
+        schedule = employee_package_schedule.objects.all()
+        context = {'employees': employees, 'packbookings': packbookings, 'schedule': schedule}
+
+    return render(request, 'admin_employee_package_schedule.html', context)
+
+def admin_course_booking_details(request):
+    courseBooking = course_booking.objects.all()
+    return render(request, 'admin_course_booking_details.html', {'courseBooking': courseBooking})
+
 @login_required
 def customer_my_services(request):
     profile = get_object_or_404(Profile, user=request.user)
@@ -218,5 +248,16 @@ def customer_my_packages(request):
     return render(request, 'customer_my_packages.html', {'booked_packages': booked_packages})
 
 
-def customer_my_coures(request):
-    return render(request, 'customer_my_courses.html')
+
+@login_required
+def employee_my_schedule(request):
+    # Get the Profile object for the logged-in user
+    profile = Profile.objects.get(user=request.user)
+
+    # Get the Employee object for the profile
+    employee = Employee.objects.get(profile=profile)
+
+    # Get the schedule for the employee
+    my_schedule = employee_service_schedule.objects.filter(employee=employee)
+
+    return render(request, 'employee_my_schedule.html', {'my_schedule': my_schedule})

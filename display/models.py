@@ -22,6 +22,9 @@ class serviceBooking(models.Model):
         db_table = 'service_booking'
     
     id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100, default=None)
+    email = models.EmailField(null = True, default=None)
+    phone = models.CharField(max_length=10, default=None)    
     date = models.DateField()
     time = models.TimeField()
     customer = models.ForeignKey('login_registration.Customer', on_delete=models.CASCADE, default=None)
@@ -29,6 +32,16 @@ class serviceBooking(models.Model):
     
     def __str__(self):
         return self.name
+    
+class employee_service_schedule(models.Model):
+    class Meta:
+        db_table = 'employee_service_schedule'
+
+    service_schedule_id = models.AutoField(primary_key=True)
+    employee = models.ForeignKey('login_registration.Employee', on_delete=models.CASCADE)
+    servbooking = models.ForeignKey(serviceBooking, on_delete=models.CASCADE)  # Changed booking to servbooking
+    datetime = models.DateTimeField()
+
 
 class Packages(models.Model):
     class Meta:
@@ -50,10 +63,17 @@ class PackageBooking(models.Model):
     customer = models.ForeignKey('login_registration.Customer', on_delete=models.CASCADE, default=None)
     package = models.ForeignKey(Packages, on_delete=models.CASCADE, default=None)
 
-
-
     def __str__(self):
         return self.name
+    
+class employee_package_schedule(models.Model):
+    class Meta:
+        db_table = 'employee_package_schedule'
+
+    package_schedule_id = models.AutoField(primary_key=True)
+    employee = models.ForeignKey('login_registration.Employee', on_delete=models.CASCADE)
+    packbooking = models.ForeignKey(PackageBooking, on_delete=models.CASCADE)  # Changed booking to packbooking
+    datetime = models.DateTimeField()
     
 class payment(models.Model):
     class Meta:
@@ -68,12 +88,3 @@ class payment(models.Model):
     def __str__(self):
         return str(self.id)
     
-
-class employee_service_schedule(models.Model):
-    class Meta:
-        db_table = 'employee_service_schedule'
-
-    service_schedule_id = models.AutoField(primary_key=True)
-    employee = models.ForeignKey('login_registration.Employee', on_delete=models.CASCADE)
-    servbooking = models.ForeignKey(serviceBooking, on_delete=models.CASCADE)  # Changed booking to servbooking
-    datetime = models.DateTimeField()

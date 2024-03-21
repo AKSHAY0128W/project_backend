@@ -37,9 +37,16 @@
             class="{% if request.resolver_match.url_name == 'emp_display' %} active-tab {% endif %}sidebar-item"><i
                 class="fas fa-users"></i> <span>Employees</span></a>
 
-        <a href="{% url 'admin_employee_schedule' %}"
-            class="{% if request.resolver_match.url_name == 'admin_employee_schedule' %} active-tab {% endif %}sidebar-item"><i
-                class="fas fa-users"></i> <span>Employee Schedule</span></a>
+        <a href="{% url 'admin_employee_service_schedule' %}"
+            class="{% if request.resolver_match.url_name == 'admin_employee_service_schedule' %} active-tab {% endif %}sidebar-item"><i
+                class="fas fa-users"></i> <span>Employee Service Schedule</span>
+        </a>
+        
+        <a href="{% url 'admin_package_schedule' %}"
+            class="{% if request.resolver_match.url_name == 'admin_package_schedule' %} active-tab {% endif %}sidebar-item"><i
+                class="fas fa-users"></i> <span>Employee Package Schedule</span>
+        </a>
+        
 
         <a href="{% url 'services_list' %}"
             class="{% if request.resolver_match.url_name == 'services_list' %} active-tab {% endif %}sidebar-item"><i
@@ -53,6 +60,10 @@
             class="{% if request.resolver_match.url_name == 'packages_list' %} active-tab {% endif %}sidebar-item"><i
                 class="fas fa-box-open"></i> <span>Packages</span></a>
 
+        <a href="{% url 'package_booking_admin' %}"
+            class="{% if request.resolver_match.url_name == 'package_booking_admin ' %} active-tab {% endif %}sidebar-item"><i
+                class="fas fa-box-open"></i> <span>Packages Booking</span></a>
+
         <a href="{% url 'customer_list'%}"
             class="{% if request.resolver_match.url_name == 'customer_list' %} active-tab {% endif %}sidebar-item"><i
                 class="fas fa-users"></i> <span>Customers</span></a>
@@ -64,6 +75,10 @@
         <a href="{% url 'admin_course_details' %}"
             class="{% if request.resolver_match.url_name == 'admin_course_details' %} active-tab {% endif %}sidebar-item"><i
                 class="fas fa-book"></i> <span>Course Details</span></a>
+
+        <a href="{% url 'admin_course_booking_details' %}"
+            class="{% if request.resolver_match.url_name == 'admin_course_booking_details' %} active-tab {% endif %}sidebar-item"><i
+                class="fas fa-book"></i> <span>Course Bookings</span></a>
 
         <a href="{% url 'default' %}" class="sidebar-item"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
 
