@@ -166,9 +166,6 @@ def admin_login(request):
         return render(request, 'admin_login')
     return render(request, 'login.html')
 
-def admin_create_employee(request):
-    return render(request, 'admin_create_employee.html')
-
 def admin_homepage(request):
     user_count = Customer.objects.count()
     logged_in_user_count = Session.objects.filter(expire_date__gte=timezone.now()).count()

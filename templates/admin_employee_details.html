@@ -17,6 +17,7 @@
                     <th>Email</th>
                     <th>Address</th>
                     <th>Phone</th>
+                    <th>Designation</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -27,6 +28,7 @@
                     <td>{{i.email}}</td>
                     <td>{{i.address}}</td>
                     <td>{{i.phone}}</td>
+                    <td>{{i.designation}}</td>
                     <td>
                         <a href="#editEmployeeModal-{{forloop.counter}}" class="edit" data-bs-toggle="modal"><span
                                 class="material-symbols-outlined" data-bs-toggle="tooltip" title="Edit">
@@ -64,13 +66,7 @@
                         <label>Name</label>
                         <input value="{{i.name}}" name="name" type="text" class="form-control" required>
                     </div>
-
-
-                    <!-- <div class="form-group">
-                        <label>Name</label>
-                        <input value="{{i.username}}" name="name" type="text" class="form-control" required>
-                    </div> -->
-
+                        
                     <div class="form-group">
                         <label>Email</label>
                         <input value="{{i.email}}" type="email" name="email" class="form-control" required>

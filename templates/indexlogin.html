@@ -6,10 +6,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <!-- Your custom CSS -->
     <link rel="stylesheet" href="path/to/your/custom.css">
@@ -32,6 +37,7 @@
 
         form label {
             color: white;
+            margin-bottom: 5px;
             font-weight: 600;
         }
 
@@ -39,7 +45,7 @@
             border-radius: 5px;
             outline: none !important;
             color: white !important;
-            padding: 23px 15px !important;
+            padding: 15px 15px !important;
             background-color: transparent !important;
         }
 
@@ -80,29 +86,54 @@
         .form-group .show-password input:checked {
             border: 1px solid white;
         }
+        .reg-btn {
+            color: white;
+            margin-top: 20px;
+            display: block;
+        }
     </style>
 </head>
 
 <body>
-    <form method="post" class="form-signin">
+
+    <form method="post" class="form-signin" id="loginForm">
         {% csrf_token %}
         <h1 class=" text-center ">Login</h1>
         <div class="form-group">
             <label for="inputUsername">Username</label>
-            <input type="text" id="inputUsername" name="username" class="form-control" required autofocus>
+            <input type="text" id="inputUsername" name="username" class="form-control" autofocus>
         </div>
         <div class="form-group">
             <label for="inputPassword">Password</label>
-            <input type="password" id="inputPassword" name="password" class="form-control" required>
+            <input type="password" id="inputPassword" name="password" class="form-control">
             <div class="show-password">
                 <input type="checkbox" id="show-password">
                 <label for="show-password">Show Password</label>
             </div>
         </div>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-        <a href="{% url 'register' %}" class="mt-2">Create Account</a>
+        
+        <button class="btn btn-lg btn-primary btn-block w-100" type="submit">Login</button>
+        
+        <a href="{% url 'register' %}" class="reg-btn text-decoration-none">Create Account</a>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive"
+            aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    {{ message }}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
     </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
     <script>
         document.getElementById('show-password').addEventListener('change', function () {
             var passwordInput = document.getElementById('inputPassword');
@@ -110,6 +141,24 @@
                 passwordInput.type = 'text';
             } else {
                 passwordInput.type = 'password';
+            }
+        });
+        $(document).ready(function () {
+            $('.toast').toast({ autohide: false });
+            $('.toast').toast('show');
+        });
+
+
+
+        // Add event listener to the form
+        document.getElementById('loginForm').addEventListener('submit', function (event) {
+            var username = document.getElementById('inputUsername').value;
+            var password = document.getElementById('inputPassword').value;
+
+            // Check if username or password is empty
+            if (!username || !password) {
+                alert('Username and password are required!');
+                event.preventDefault(); // Prevent form submission
             }
         });
     </script>

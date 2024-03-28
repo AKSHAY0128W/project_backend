@@ -1,15 +1,13 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
-from .forms import CreateUserForm, LoginForm, CustomerForm, EmployeeForm, EmployeeDetailsForm
-from django.contrib.auth.models import auth
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.contrib.auth.password_validation import validate_password
-from .models import Customer, Employee, Profile
-
+from django.http import HttpResponse
+from django.contrib.auth.hashers import make_password
+from .models import Customer, Employee, Profile, Designation
 
 def register(request):
     if request.method == 'POST':
@@ -20,6 +18,14 @@ def register(request):
         name = request.POST.get('name')
         address = request.POST.get('address')
         phone = request.POST.get('phone')
+
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Username already exists')
+            return render(request, 'indexregister.html')
+
+        if User.objects.filter(email=email).exists():
+            messages.error(request, 'Email already exists')
+            return render(request, 'indexregister.html')
 
         if password1 != password2:
             pass
@@ -41,11 +47,7 @@ def register(request):
         return redirect ('login')
 
     return render(request, 'indexregister.html')
-
-
-# Login View both customer and employee and admin
-
-from django.http import HttpResponse
+from django.contrib import messages
 
 def login_view(request):
     if request.method == 'POST':
@@ -62,40 +64,46 @@ def login_view(request):
             else:
                 return redirect('homepage')
         else:
-            return HttpResponse("Invalid username or password.")
-    context = {'form': LoginForm()}
-    return render(request, 'indexlogin.html', context=context)
+            messages.error(request, "Invalid username or password.")
+            return render(request, 'indexlogin.html')
+    return render(request, 'indexlogin.html')
 
 
-
-# Logout View for customer and employee and admin
 def logout_view(request):
-    auth.logout(request)
+    logout(request)
     return redirect('default')
 
-
-# Employee creation view for admin
 def create_employee(request):
     if request.user.is_superuser:
+        pos = Designation.objects.all()
         if request.method == 'POST':
-            form = EmployeeForm(request.POST)
-            edetails = EmployeeDetailsForm(request.POST)
-            if form.is_valid() and edetails.is_valid():
-                form.save()
+            username = request.POST.get('name')
+            password = request.POST.get('password')
+            email = request.POST.get('email')
+            fullname = request.POST.get('fullname')
+            phone = request.POST.get('phone')
+            address = request.POST.get('address')
+            designation = request.POST.get('designation')
 
-                profile = Profile(user=form.instance, user_type='employee')
-                profile.save()
+            if User.objects.filter(username=username).exists():
+                messages.error(request, 'Username already exists.')
+                return render(request, 'admin_create_employee.html', {'pos': pos})
 
-                edetails = edetails.save(commit=False)
-                edetails.profile = profile
-                edetails.save()
-                return redirect('emp_display')
-            else:
-                print(form.errors, edetails.errors)
+            if Employee.objects.filter(email=email).exists():
+                messages.error(request, 'Email already in use.')
+                return render(request, 'admin_create_employee.html', {'pos': pos})
+
+            user = User(username=username, password=make_password(password), is_staff=True)
+            user.save()
+
+            profile = Profile(user=user, user_type='employee')
+            profile.save()
+
+            employee = Employee(profile=profile, name=fullname,email=email ,phone=phone, address=address, designation_id=designation)
+            employee.save()
+
+            return redirect('emp_display')
         else:
-            form = EmployeeForm()
-            edetails = EmployeeDetailsForm()
-        context = {'eform': form, 'edetails': edetails}
-        return render(request, 'admin_create_employee.html', context=context)
+            return render(request, 'admin_create_employee.html', {'pos': pos})
     else:
         return redirect('homepage')

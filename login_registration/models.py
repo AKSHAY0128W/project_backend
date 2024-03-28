@@ -42,9 +42,21 @@ class Employee(models.Model):
 
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE, default='')
     name = models.CharField(max_length=100, default='')
-    email = models.EmailField(default='', unique=True)
+    email = models.EmailField(default='')
     address = models.CharField(max_length=255, null=True, default='Default address')
     phone = models.CharField(max_length=15, default='')
+    designation = models.ForeignKey('Designation', on_delete=models.CASCADE, default='')
 
     def __str__(self):
         return self.name
+
+
+
+class Designation(models.Model):
+    class Meta:
+        db_table = 'Designation'
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100, default='')
+
+    def __str__(self):
+        return self.name    

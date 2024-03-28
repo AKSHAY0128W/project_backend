@@ -43,7 +43,6 @@ urlpatterns = [
 
 
     #admin_panel_pages
-    path('add_employee/',homepage_views.admin_create_employee, name="add_employee"),
     path('admin_homepage/', homepage_views.admin_homepage, name="admin_homepage"),
     path('admin_service_details', homepage_views.admin_service_details, name="admin_employee_details"),
     path('admin_employee_service_schedule', homepage_views.admin_employee_service_schedule, name="admin_employee_service_schedule"),
@@ -72,7 +71,6 @@ urlpatterns = [
     path('packages_edit/', display_views.packages_edit, name='packages_edit'),
     path('packages_update/<int:id>', display_views.packages_update, name='packages_update'),
     path('packages_delete/<int:id>', display_views.packages_delete, name='packages_delete'),
-
     path('customer_list/', display_views.customer_list, name='customer_list'),
     path('customer_delete/<int:id>', display_views.customer_delete, name='customer_delete'),
     
@@ -112,11 +110,11 @@ urlpatterns = [
 
 
 
-
-
     #customers
     path('customer_my_services/', homepage_views.customer_my_services, name="customer_my_services"),
     path('customer_my_packages/', homepage_views.customer_my_packages, name="customer_my_packages"),
+
+    # path('temp', login_registration_views.temp, name="temp"),
 
 ]
 

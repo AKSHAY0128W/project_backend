@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 class Course(models.Model):
    class Meta:
@@ -10,7 +11,7 @@ class Course(models.Model):
    price = models.IntegerField(null=False)
    discount = models.IntegerField(null=False,default=0)
    thumbnail = models.ImageField(upload_to='thumbnail')
-   date = models.DateTimeField(auto_now_add=True)
+   date = models.DateTimeField(default=timezone.now)
    resource = models.FileField(upload_to='resources')
 
    

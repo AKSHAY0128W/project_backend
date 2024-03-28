@@ -1,12 +1,118 @@
 {% extends 'admin.html' %}
+
 {% block content %}
 <div class="container">
-    <h2>Create Employee Account</h2>
+    <div class="d-flex justify-content-between">
+        <h2>Create Employee Account</h2>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive"
+            aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    {{ message }}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
     <form method="post" action="{% url 'create_employee' %}">
         {% csrf_token %}
-        {{ eform.as_p }}
-        {{ edetails.as_p }}
+        <div class="row">
+
+            <div class="mb-3 col-md-6">
+                <label for="username" class="form-label">Username:</label>
+                <input type="text" class="form-control" id="name" name="name">
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="email" name="email">
+            </div>
+        </div>
+        <div class="row">
+            <div class="mb-3 col-md-6">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" class="form-control" id="password" name="password">
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="cpassword" class="form-label">Confirm Password:</label>
+                <input type="password" class="form-control" id="cpassword" name="cpassword">
+            </div>
+        </div>
+        <div class="row">
+            <div class="mb-3 col-md-6">
+                <label for="fullname" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="fullname" name="fullname">
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="phone" class="form-label">Contact No</label>
+                <input type="tel" class="form-control" id="phone" name="phone">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <textarea class="form-control" id="address" name="address"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="designation" class="form-label">Designation:</label>
+            <select class="form-control" id="designation" name="designation">
+                {% for p in pos %}
+                <option value="{{p.id}}">{{p.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <!-- Add more fields as needed -->
         <button type="submit" class="btn btn-primary px-4">Create</button>
     </form>
+
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.toast').toast({ autohide: false });
+        $('.toast').toast('show');
+    });
+
+
+    document.querySelector('form').addEventListener('submit', function (event) {
+        var username = document.getElementById('name').value;
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        var cpassword = document.getElementById('cpassword').value;
+        var fullname = document.getElementById('fullname').value;
+        var phone = document.getElementById('phone').value;
+        var address = document.getElementById('address').value;
+
+        if (username === '') {
+            alert('Username is required');
+            event.preventDefault();
+        } else if (email === '') {
+            alert('Email is required');
+            event.preventDefault();
+        } else if (password === '') {
+            alert('Password is required');
+            event.preventDefault();
+        } else if (cpassword === '') {
+            alert('Confirm Password is required');
+            event.preventDefault();
+        } else if (password !== cpassword) {
+            alert('Passwords do not match');
+            event.preventDefault();
+        } else if (fullname === '') {
+            alert('Full Name is required');
+            event.preventDefault();
+        } else if (phone === '') {
+            alert('Contact No is required');
+            event.preventDefault();
+        } else if (address === '') {
+            alert('Address is required');
+            event.preventDefault();
+        }
+    });
+</script>
 {% endblock %}
