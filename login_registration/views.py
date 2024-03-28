@@ -9,21 +9,20 @@ from django.http import HttpResponse
 from django.contrib.auth.hashers import make_password
 from .models import Customer, Employee, Profile, Designation
 
+from django.contrib import messages
+
 def register(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         email = request.POST.get('email')
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
-        name = request.POST.get('name')
-        address = request.POST.get('address')
-        phone = request.POST.get('phone')
 
         if User.objects.filter(username=username).exists():
             messages.error(request, 'Username already exists')
             return render(request, 'indexregister.html')
 
-        if User.objects.filter(email=email).exists():
+        if Customer.objects.filter(email=email).exists():
             messages.error(request, 'Email already exists')
             return render(request, 'indexregister.html')
 
@@ -35,20 +34,22 @@ def register(request):
         except ValidationError as e:
             pass
 
-        user = User.objects.create_user(username=username, email=email, password=password1)
+        user = User.objects.create_user(username=username, password=password1)
         user.save()
 
         profile = Profile(user=user, user_type='customer')
         profile.save()
 
-        customer = Customer(profile=profile, name=name, address=address, phone=phone, email=email)
+        customer = Customer(profile=profile,email=email)
         customer.save()
+
+        messages.success(request, 'User created successfully')  
 
         return redirect ('login')
 
     return render(request, 'indexregister.html')
-from django.contrib import messages
 
+    
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -107,3 +108,25 @@ def create_employee(request):
             return render(request, 'admin_create_employee.html', {'pos': pos})
     else:
         return redirect('homepage')
+    
+def customer_my_profile(request):
+    if request.user.is_authenticated:
+        if request.user.profile.user_type == 'customer':
+            customer = Customer.objects.get(profile=request.user.profile)
+            if request.method == 'POST':
+                customer.name = request.POST.get('name')
+                customer.email = request.POST.get('email')
+                customer.address = request.POST.get('address')
+                customer.phone = request.POST.get('phone')
+                customer.company_name = request.POST.get('company_name')
+                customer.company_address = request.POST.get('company_address')
+                customer.company_phone = request.POST.get('company_phone')
+                customer.company_email = request.POST.get('company_email')
+                customer.save()
+                messages.success(request, 'Profile updated successfully.')
+                return redirect('customer_my_profile')
+            return render(request, 'customer_my_profile.html', {'customer': customer})
+        else:
+            return redirect('homepage')
+    else:
+        return redirect('login')

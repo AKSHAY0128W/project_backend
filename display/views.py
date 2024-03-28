@@ -162,11 +162,12 @@ def add_packages(request):
         name = request.POST.get('name')
         description = request.POST.get('description')
         price = request.POST.get('price')
+        duration = request.POST.get('duration')
 
         if not price:
             price = 0  
 
-        Packages.objects.create(name=name, description=description,price=price)
+        Packages.objects.create(name=name, description=description,price=price, duration=duration)
 
         return redirect('/packages_list')
 
@@ -193,6 +194,7 @@ def packages_update(request, id):
         packages.name = request.POST.get('name')
         packages.description = request.POST.get('description')
         packages.price = request.POST.get('price')
+        packages.duration = request.POST.get('duration')
 
         packages.save()
         return redirect('/packages_list')

@@ -82,12 +82,11 @@ def package_booking(request, id):
         return HttpResponse('Customer does not exist', status=400)
 
     if request.method == 'POST':
-        comapany_name = request.POST.get('cname')
-        company_address = request.POST.get('cadd')
-        date = request.POST.get('date')
+        date = datetime.now().date()
+        duration = request.POST.get('duration')
 
         # make_payment(request, id)
-        booking = PackageBooking(customer=customer, date=date, company_name=comapany_name, company_address=company_address, package=selected_package)
+        booking = PackageBooking(customer=customer, date=date,duration=duration, package=selected_package)
         booking.save()
         
         return redirect('packages')

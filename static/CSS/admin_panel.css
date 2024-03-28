@@ -27,14 +27,14 @@ html{
     background-color: #f2edf3;
 }
 
-#sidebar-logo {
+#logo {
     text-align: center;
     padding-top: 10px;
     padding-bottom: 10px;
     border-bottom: 2px solid #ac12ff;
 }
 
-#sidebar-logo h3 {
+#logo h3 {
     margin: 0;
     color: #ac12ff;
     font-weight: 600;
@@ -67,11 +67,6 @@ html{
     color: #000;
 }
 
-@media (max-width: 768px) {
-    .sidebar-item span {
-        display: none;
-    }
-}
 
 .dashboard-card {
     background: #fff;
@@ -309,4 +304,36 @@ table.table .avatar {
 
 .modal form label {
     font-weight: normal;
+}
+
+
+@media screen and (max-width: 768px) {
+    #sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    #content {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .dashboard-card {
+        width: 100%;
+    }
+
+    /* Add more styles for smaller screens */
+    .table-wrapper {
+        padding: 10px;
+    }
+
+    .table-title {
+        padding: 10px;
+    }
+
+    table.table tr th,
+    table.table tr td {
+        padding: 6px 10px;
+    }
 }

@@ -1,0 +1,112 @@
+{% extends 'customer.html' %}
+
+{% block content %}
+<form action="{% url 'customer_my_profile' %}" id="profileForm" method="post">
+   {% csrf_token %}
+   <div class="form-group">
+      <div class="mb-1">
+         <label for="address" class="form-label">Address:</label>
+         <input class="form-control" id="address" type="text" name="address" value="{{ customer.address|default:'' }}">
+      </div>
+      <div class="mb-1">
+         <label for="phone" class="form-label">Phone:</label>
+         <input class="form-control" id="phone" type="text" name="phone" value="{{ customer.phone|default:'' }}">
+      </div>
+      <div class="mb-1">
+         <label for="company_name" class="form-label">Company Name:</label>
+         <input type="text" class="form-control" id="company_name" name="company_name"
+            value="{{ customer.company_name|default:'' }}">
+      </div>
+      <div class="mb-1">
+         <label for="company_address" class="form-label">Company Address:</label>
+         <input type="text" class="form-control" id="company_address" name="company_address"
+            value="{{ customer.company_address|default:'' }}">
+      </div>
+      <div class="mb-1">
+         <label for="company_phone" class="form-label">Company Phone:</label>
+         <input type="text" class="form-control" id="company_phone" name="company_phone"
+            value="{{ customer.company_phone|default:'' }}">
+      </div>
+      <div class="mb-1">
+         <label for="company_email" class="form-label">Company Email:</label>
+         <input type="email" class="form-control" id="company_email" name="company_email"
+            value="{{ customer.company_email|default:'' }}">
+      </div>
+   </div>
+   <!-- Add more fields as needed -->
+   <div class="d-flex justify-content-between align-items-center">
+
+      <button type="submit" class="mt-3 btn btn-primary" id="updateButton" disabled>Update Profile</button>
+      {% if messages %}
+      {% for message in messages %}
+      <div class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive"
+         aria-atomic="true">
+         <div class="d-flex">
+            <div class="toast-body">
+               {{ message }}
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+               aria-label="Close"></button>
+         </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+   </div>
+</form>
+<script>
+   document.addEventListener('DOMContentLoaded', function () {
+      var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+      var toastList = toastElList.map(function (toastEl) {
+         return new bootstrap.Toast(toastEl)
+      })
+      toastList.forEach(toast => toast.show());
+
+      var form = document.getElementById('profileForm');
+      var button = document.getElementById('updateButton');
+      var formChanged = false;
+
+      form.addEventListener('change', function () {
+         formChanged = true;
+         button.disabled = false;
+      });
+
+      form.addEventListener('submit', function (event) {
+         // Get form fields
+         var address = document.getElementById('address');
+         var phone = document.getElementById('phone');
+         var companyName = document.getElementById('company_name');
+         var companyAddress = document.getElementById('company_address');
+         var companyPhone = document.getElementById('company_phone');
+         var companyEmail = document.getElementById('company_email');
+
+         // Validate form fields
+         if (!address.value.trim()) {
+            alert('Address is required.');
+            event.preventDefault();
+         } else if (!phone.value.trim()) {
+            alert('Phone is required.');
+            event.preventDefault();
+         } else if (!companyName.value.trim()) {
+            alert('Company name is required.');
+            event.preventDefault();
+         } else if (!companyAddress.value.trim()) {
+            alert('Company address is required.');
+            event.preventDefault();
+         } else if (!companyPhone.value.trim()) {
+            alert('Company phone is required.');
+            event.preventDefault();
+         } else if (!companyEmail.value.trim()) {
+            alert('Company email is required.');
+            event.preventDefault();
+         } else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(companyEmail.value)) {
+            alert('Company email is not valid.');
+            event.preventDefault();
+         }
+
+         if (!formChanged) {
+            event.preventDefault();
+         }
+      });
+   });
+</script>
+{% endblock %}

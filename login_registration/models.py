@@ -29,6 +29,10 @@ class Customer(models.Model):
     email = models.EmailField(default='', unique=True)
     address = models.CharField(max_length=255, null=True, default='Default address')
     phone = models.CharField(max_length=15, default='')
+    company_name = models.CharField(max_length=100, null = True, default='')
+    company_address = models.CharField(max_length=255, null = True, default='')
+    company_phone = models.CharField(max_length=15, null = True, default='')
+    company_email = models.EmailField(null = True, default='')
 
     def __str__(self):
         return self.name

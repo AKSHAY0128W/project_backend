@@ -113,6 +113,7 @@ urlpatterns = [
     #customers
     path('customer_my_services/', homepage_views.customer_my_services, name="customer_my_services"),
     path('customer_my_packages/', homepage_views.customer_my_packages, name="customer_my_packages"),
+    path('customer_my_profile/', login_registration_views.customer_my_profile, name="customer_my_profile"),
 
     # path('temp', login_registration_views.temp, name="temp"),
 

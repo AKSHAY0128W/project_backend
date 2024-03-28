@@ -1,7 +1,8 @@
+from email.policy import default
 from django.db import models
-
+from django.utils import timezone
 import login_registration
-
+from datetime import timedelta
 # Create your models here.
 
 class Services(models.Model):
@@ -40,7 +41,7 @@ class employee_service_schedule(models.Model):
     service_schedule_id = models.AutoField(primary_key=True)
     employee = models.ForeignKey('login_registration.Employee', on_delete=models.CASCADE)
     servbooking = models.ForeignKey(serviceBooking, on_delete=models.CASCADE)  # Changed booking to servbooking
-    datetime = models.DateTimeField()
+    datetime = models.DateTimeField(default=timezone.now)
 
 
 class Packages(models.Model):
@@ -50,19 +51,23 @@ class Packages(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     duration = models.CharField(max_length=100)
-    price = models.IntegerField(default=None)      
+    price = models.IntegerField(default=None)
+    created_at = models.DateTimeField(default=timezone.now)
+    def __str__(self):
+        return self.name
+    
 
 class PackageBooking(models.Model):
     class Meta:
         db_table = 'package_booking'
     
     id = models.AutoField(primary_key=True)
-    company_name = models.CharField(max_length=100)
-    company_address = models.TextField()
-    date = models.DateField()
+    date = models.DateTimeField(default=timezone.now);
+    duration = models.CharField(max_length=100,default=None)
     customer = models.ForeignKey('login_registration.Customer', on_delete=models.CASCADE, default=None)
     package = models.ForeignKey(Packages, on_delete=models.CASCADE, default=None)
-
+    def end_date(self):
+        return self.date + timedelta(days=int(self.duration))
     def __str__(self):
         return self.name
     
@@ -73,7 +78,7 @@ class employee_package_schedule(models.Model):
     package_schedule_id = models.AutoField(primary_key=True)
     employee = models.ForeignKey('login_registration.Employee', on_delete=models.CASCADE)
     packbooking = models.ForeignKey(PackageBooking, on_delete=models.CASCADE)  # Changed booking to packbooking
-    datetime = models.DateTimeField()
+    datetime = models.DateTimeField(default=timezone.now)
     
 class payment(models.Model):
     class Meta:

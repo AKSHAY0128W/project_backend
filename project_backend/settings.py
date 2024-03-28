@@ -62,6 +62,7 @@ MIDDLEWARE = [
 
 ]
 # settings.py
+ALLOWED_HOSTS = ['192.168.1.4', '127.0.0.1', 'localhost']
 
 
 ROOT_URLCONF = 'project_backend.urls'
