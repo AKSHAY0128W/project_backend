@@ -1,7 +1,7 @@
 from email.policy import default
 from django.db import models
 from django.utils import timezone
-import login_registration
+import login_registration 
 from datetime import timedelta
 # Create your models here.
 
@@ -23,25 +23,23 @@ class serviceBooking(models.Model):
         db_table = 'service_booking'
     
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100, default=None)
-    email = models.EmailField(null = True, default=None)
-    phone = models.CharField(max_length=10, default=None)    
     date = models.DateField()
-    time = models.TimeField()
     customer = models.ForeignKey('login_registration.Customer', on_delete=models.CASCADE, default=None)
     service = models.ForeignKey(Services, on_delete=models.CASCADE, default=None)
     
     def __str__(self):
         return self.name
     
+
 class employee_service_schedule(models.Model):
     class Meta:
         db_table = 'employee_service_schedule'
 
     service_schedule_id = models.AutoField(primary_key=True)
     employee = models.ForeignKey('login_registration.Employee', on_delete=models.CASCADE)
-    servbooking = models.ForeignKey(serviceBooking, on_delete=models.CASCADE)  # Changed booking to servbooking
+    servbooking = models.ForeignKey(serviceBooking, on_delete=models.CASCADE)
     datetime = models.DateTimeField(default=timezone.now)
+
 
 
 class Packages(models.Model):
@@ -77,7 +75,7 @@ class employee_package_schedule(models.Model):
 
     package_schedule_id = models.AutoField(primary_key=True)
     employee = models.ForeignKey('login_registration.Employee', on_delete=models.CASCADE)
-    packbooking = models.ForeignKey(PackageBooking, on_delete=models.CASCADE)  # Changed booking to packbooking
+    packbooking = models.ForeignKey(PackageBooking, on_delete=models.CASCADE)
     datetime = models.DateTimeField(default=timezone.now)
     
 class payment(models.Model):

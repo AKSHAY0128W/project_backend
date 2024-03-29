@@ -13,6 +13,10 @@ from django.http import HttpResponse
 from django.urls import reverse
 from display.models import payment
 from course.models import course_booking
+from django.db.models import Q
+from django.db.models import Prefetch
+from django.utils import timezone
+from django.contrib import messages
 # def make_payment(request, id): 
 #     selected_service = get_object_or_404(Services, id=id)
 
@@ -54,11 +58,7 @@ def service_booking(request, id):
 
     if request.method == 'POST':
         date = request.POST.get('date')
-        time = request.POST.get('time')
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        phone = request.POST.get('phone')
-        booking = serviceBooking(customer=customer, date=date, time=time, service=selected_service, name=name, email=email, phone=phone)
+        booking = serviceBooking(customer=customer, date=date, service=selected_service)
         booking.save()
         
         return redirect('myservices')
@@ -180,47 +180,76 @@ def admin_view_employee(request):
 def admin_service_details(request):
     return render(request, 'admin_service_details.html')
 
-from django.db.models import Q
 
 def admin_employee_service_schedule(request):
     if request.method == 'POST':
-        employee_id = request.POST.get('employee')
+        employee_ids = request.POST.getlist('employee')
         servbooking_id = request.POST.get('booking')
         datetime_str = request.POST.get('datetime')
         datetime = timezone.datetime.strptime(datetime_str, '%Y-%m-%dT%H:%M')
-        employee = Employee.objects.get(employee_id=employee_id)
         servbooking = serviceBooking.objects.get(id=servbooking_id)
-        employee_service_schedule.objects.create(employee=employee, servbooking=servbooking, datetime=datetime)
+        for employee_id in employee_ids:
+            employee = Employee.objects.get(employee_id=employee_id)
+            # Check if the employee is already assigned to a booking on the selected date
+            if not employee_service_schedule.objects.filter(employee=employee, datetime__date=datetime.date()).exists():
+                employee_service_schedule.objects.create(employee=employee, servbooking=servbooking, datetime=datetime)
+            else:
+                messages.error(request, f'Employee {employee.name} is already assigned on this date.')
         return redirect('admin_employee_service_schedule')
     else:
+        current_date = timezone.now().date()
         scheduled_servbookings = employee_service_schedule.objects.values_list('servbooking', flat=True)
         servbookings = serviceBooking.objects.filter(~Q(id__in=scheduled_servbookings))
-        scheduled_employees_service = employee_service_schedule.objects.values_list('employee', flat=True)
-        scheduled_employees_package = employee_package_schedule.objects.values_list('employee', flat=True)
+        scheduled_employees_service = employee_service_schedule.objects.filter(datetime__date=current_date).values_list('employee', flat=True)
+        scheduled_employees_package = employee_package_schedule.objects.filter(datetime__date=current_date).values_list('employee', flat=True)
         employees = Employee.objects.filter(~Q(employee_id__in=scheduled_employees_service) & ~Q(employee_id__in=scheduled_employees_package))
-        schedule = employee_service_schedule.objects.all()
-        context = {'employees': employees, 'servbookings': servbookings, 'schedule': schedule}
+
+        schedule_list = []
+        for booking in serviceBooking.objects.all():
+            for schedule in booking.employee_service_schedule_set.all():
+                schedule_list.append({
+                    'booking': booking,
+                    'datetime': schedule.datetime,
+                    'employees': [schedule.employee],
+                })
+
+        context = {'employees': employees, 'servbookings': servbookings, 'schedule_list': schedule_list}
 
     return render(request, 'admin_employee_service_schedule.html', context)
 
 def admin_package_schedule(request):
     if request.method == 'POST':
-        employee_id = request.POST.get('employee')
+        employee_ids = request.POST.getlist('employee')
         packbooking_id = request.POST.get('booking')
         datetime_str = request.POST.get('datetime')
         datetime = timezone.datetime.strptime(datetime_str, '%Y-%m-%dT%H:%M')
-        employee = Employee.objects.get(employee_id=employee_id)
         packbooking = PackageBooking.objects.get(id=packbooking_id)
-        employee_package_schedule.objects.create(employee=employee, packbooking=packbooking, datetime=datetime)
+        for employee_id in employee_ids:
+            employee = Employee.objects.get(employee_id=employee_id)
+            # Check if the employee is already assigned to a booking on the selected date
+            if not employee_package_schedule.objects.filter(employee=employee, datetime__date=datetime.date()).exists():
+                employee_package_schedule.objects.create(employee=employee, packbooking=packbooking, datetime=datetime)
+            else:
+                messages.error(request, f'Employee {employee.name} is already assigned on this date.')
         return redirect('admin_package_schedule')
     else:
+        current_date = timezone.now().date()
         scheduled_packbookings = employee_package_schedule.objects.values_list('packbooking', flat=True)
         packbookings = PackageBooking.objects.filter(~Q(id__in=scheduled_packbookings))
-        scheduled_employees_package = employee_package_schedule.objects.values_list('employee', flat=True)
-        scheduled_employees_service = employee_service_schedule.objects.values_list('employee', flat=True)
+        scheduled_employees_package = employee_package_schedule.objects.filter(datetime__date=current_date).values_list('employee', flat=True)
+        scheduled_employees_service = employee_service_schedule.objects.filter(datetime__date=current_date).values_list('employee', flat=True)
         employees = Employee.objects.filter(~Q(employee_id__in=scheduled_employees_package) & ~Q(employee_id__in=scheduled_employees_service))
-        schedule = employee_package_schedule.objects.all()
-        context = {'employees': employees, 'packbookings': packbookings, 'schedule': schedule}
+
+        schedule_list = []
+        for booking in PackageBooking.objects.all():
+            for schedule in booking.employee_package_schedule_set.all():
+                schedule_list.append({
+                    'booking': booking,
+                    'datetime': schedule.datetime,
+                    'employees': [schedule.employee],
+                })
+
+        context = {'employees': employees, 'packbookings': packbookings, 'schedule_list': schedule_list}
 
     return render(request, 'admin_employee_package_schedule.html', context)
 

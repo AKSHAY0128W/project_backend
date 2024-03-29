@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
+from display.models import serviceBooking,PackageBooking
 # Multiuser Profile Model
 class Profile(models.Model):
     class Meta:
@@ -50,6 +50,8 @@ class Employee(models.Model):
     address = models.CharField(max_length=255, null=True, default='Default address')
     phone = models.CharField(max_length=15, default='')
     designation = models.ForeignKey('Designation', on_delete=models.CASCADE, default='')
+    services = models.ManyToManyField(serviceBooking, through='display.employee_service_schedule')
+    package = models.ManyToManyField(PackageBooking, through='display.employee_package_schedule')
 
     def __str__(self):
         return self.name

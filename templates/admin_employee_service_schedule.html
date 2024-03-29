@@ -14,7 +14,7 @@
       <h1 class="text-center">Assign Employees to Service Bookings</h1>
       <div class="form-group">
          <label for="employeeSelect">Select Employee</label>
-         <select name="employee" class="form-control" id="employeeSelect">
+         <select name="employee" class="form-control" id="employeeSelect" multiple>
             {% if employees %}
             {% for employee in employees %}
             <option value="{{ employee.employee_id }}">{{ employee.name }}</option>
@@ -41,6 +41,15 @@
          <input type="datetime-local" name="datetime" class="form-control" id="datetimeInput">
       </div>
       <button type="submit" class="btn btn-primary">Assign Employee</button>
+
+      {% if messages %}
+      <div class="messages">
+         {% for message in messages %}
+         <div{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}
+      </div>
+      {% endfor %}
+      </div>
+      {% endif %}
    </form>
 
 
@@ -64,19 +73,24 @@
                   <th>Address</th>
                   <th>Contact</th>
                   <th>Datetime</th>
-   
+
                </tr>
             </thead>
             <tbody>
-               {% for i in schedule %}
+               {% for i in schedule_list %}
                <tr>
-                  <td>{{i.service_schedule_id}}</td>
-                  <td>{{i.employee.name}}</td>
-                  <td>{{i.servbooking.service.name}}</td>
-                  <td>{{i.servbooking.customer.name}}</td>
-                  <td>{{i.servbooking.customer.address}}</td>
-                  <td>{{i.servbooking.customer.phone}}</td>
-                  <td>{{i.datetime}}</td>
+                  <td>{{i.booking.id}}</td>
+                  <td>
+                     {% for employee in i.employees %}
+                     {{ employee.name }}
+                     {% if not forloop.last %}, {% endif %}
+                     {% endfor %}
+                  </td>
+                  <td>{{i.booking.service.name}}</td>
+                  <td>{{i.booking.customer.name}}</td>
+                  <td>{{i.booking.customer.address}}</td>
+                  <td>{{i.booking.customer.phone}}</td>
+                  <td>{{i.datetime|date:"Y-m-d H:i"}}</td>
                </tr>
                {% endfor %}
             </tbody>
