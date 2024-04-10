@@ -15,15 +15,15 @@
         .cal-heading {
             margin-bottom: 30px;
         }
-    
+
         .card {
             margin-bottom: 30px;
         }
-    
+
         .card img {
             height: 200px;
             object-fit: cover;
-    
+
         }
     </style>
     <!-- <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" /> -->
@@ -71,10 +71,10 @@
                             <!-- <li class="nav-item mx-2">
                                 <a class="nav-link" href="#my-calc">Calculators</a>
                             </li> -->
-                            
-                            
+
+
                             <a href="{% url 'login' %}" class="button btn-hover">Login</a>
-                            
+
                         </ul>
                     </div>
                 </div>
@@ -147,7 +147,8 @@
             <div class="s-card">
                 <h2>{{ service.name }}</h2>
                 {% if service.image %}
-                <img src="/media/{{service.image}}" height="100px" width="100px" class="img-fluid" alt="{{service.name}}" />
+                <img src="/media/{{service.image}}" height="100px" width="100px" class="img-fluid"
+                    alt="{{service.name}}" />
                 {% else %}
                 <p>No image available for this service.</p>
                 {% endif %}
@@ -163,7 +164,7 @@
     <!-- services -->
 
     <section id="Packages">
-    <div class="container">
+        <div class="container">
             <div class="package-heading text-center mb-5">
                 <h2>Our Packages</h2>
             </div>
@@ -172,115 +173,42 @@
                 <!-- Package -->
                 <div class="col-md-4">
                     <div class="card h-100">
-                    <!-- <img src="{{package.image}}" class="img-fluid" alt="{{package.name}}"> -->
-                    <div class="card-body">
-                        <h5 class="card-title text-center">{{package.name}}</h5>
-                        <p class="card-text">{{package.description}}</p>
-                        <p class="pricing">Price:{{package.price}}</p>
+                        <!-- <img src="{{package.image}}" class="img-fluid" alt="{{package.name}}"> -->
+                        <div class="card-body">
+                            <h5 class="card-title text-center">{{package.name}}</h5>
+                            <p class="card-text">{{package.description}}</p>
+                            <p class="pricing">Price:{{package.price}}</p>
+                        </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
-    </div>
     </section>
-    <!-- <section id="my-calc">
-    <div class="container mt-5">
-        <div class="cal-heading">
-            <h2 class="text-center mb-2">Calculators</h2>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="https://img.freepik.com/free-photo/income-tax-return-deduction-refund-concept_53876-133887.jpg?t=st=1710907872~exp=1710911472~hmac=de30437725d4017f77315e31a36371558f31d6b8c0be0e9856f4f6dec7a7e79a&w=900"
-                        class="img-fluid" alt="Calculator 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Income Tax Calculator</h5>
-                        <p class="card-text">
-                            Income tax is a tax imposed by the government on the financial income of companies and
-                            individuals. The income tax calculator is a tool that helps you estimate your tax liability in a
-                            given financial year.
-                        </p>
-                        <a href="{% url 'income_tax_calculator' %}" class="btn btn-primary">View Calculator</a>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="https://www.motilaloswalmf.com/investor-education/wp-content/uploads/2023/08/What-Is-SIP-Calculator-and-How-Does-It-Work-1140x570.jpg"
-                        class="img-fluid" alt="Calculator 2">
-                    <div class="card-body">
-                        <h5 class="card-title">SIP Calculator</h5>
-                        <p class="card-text">
-                            SIP stands for Systematic Investment Plan. It is a method of investing a fixed sum, regularly,
-                            in a mutual fund scheme. SIP allows an investor to buy units on a given date each month, so that
-                            one can implement a saving plan for themselves.
-                        </p>
-                        <a href="{% url 'sip_calculator' %}" class="btn btn-primary">View Calculator</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="https://media.thekashmirmonitor.net/wp-content/uploads/2023/03/gst-Calculator.jpg"
-                        class="img-fluid" alt="Calculator 3">
-                    <div class="card-body">
-                        <h5 class="card-title">GST Calculator</h5>
-                        <p class="card-text">
-                            GST Calculator is a tool that helps you to calculate the amount of tax that is to be paid on a
-                            particular product or service. It is a simple and easy-to-use tool that helps you to calculate
-                            the amount of tax that is to be paid on a particular product or service.
-                        </p>
-                        <a href="{% url 'gst_calculator' %}" class="btn btn-primary">View Calculator</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    </section>
-     -->
-
-    <footer class="text-center text-lg-start pt-1  bg-body-tertiary text-muted">
-
-        <div class="container text-center text-md-start mt-5">
-            <!-- Grid row -->
-            <div class="row mt-2">
-                <!-- Grid column -->
-                <div class="col-md-6 col-lg-4 col-xl-3 mx-auto mb-4">
-                    <!-- Content -->
-                    <h6 class="text-uppercase fw-bold mb-4">
-                        <i class="fas fa-gem me-3"></i>Accountant
-                    </h6>
+    <!-- Footer -->
+    <footer class="footer bg-light mt-3 text-center m-0 text-lg-start">
+        <div class="container p-4">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Accountant</h5>
                     <p>
                         Accountant is a website that provides you with all the financial services you need.
                         We provide you with the best financial services and help you to grow your business.
                     </p>
                 </div>
-    
-                <div class="col-md-6 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                    <h6 class="text-uppercase fw-bold mb-4">Contact Us</h6>
-                    <p><i class="fas fa-home me-3"></i>506,Iconic Isanpur Complex,
-                        Opp.Mony Hotel,Narol-Naroda
-                        Highway,Isanpur,
-                        Ahmedabad-382443</p>
-                    <p>
-                        <i class="fas fa-envelope me-3"></i>
-                        camanish.grow@gmail.com
-                    </p>
-                    <p><i class="fas fa-phone me-3"></i>7600000392</p>
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Contact Us</h5>
+                    <p>506, Iconic Isanpur Complex, Opp.Mony Hotel, Narol-Naroda Highway, Isanpur, Ahmedabad-382443</p>
+                    <p>camanish.grow@gmail.com</p>
+                    <p>7600000392</p>
                 </div>
             </div>
         </div>
-    
-        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-            ©Copyright All rights Reserved:
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © Copyright All rights Reserved
         </div>
     </footer>
-    </footer>
-    
+
     <script>
         function closeOffcanvas() {
             var offcanvasElement = document.getElementById('offcanvasNavbar');

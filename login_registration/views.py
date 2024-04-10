@@ -115,16 +115,20 @@ def customer_my_profile(request):
             customer = Customer.objects.get(profile=request.user.profile)
             if request.method == 'POST':
                 customer.name = request.POST.get('name')
-                customer.email = request.POST.get('email')
                 customer.address = request.POST.get('address')
                 customer.phone = request.POST.get('phone')
                 customer.company_name = request.POST.get('company_name')
                 customer.company_address = request.POST.get('company_address')
                 customer.company_phone = request.POST.get('company_phone')
                 customer.company_email = request.POST.get('company_email')
-                customer.save()
-                messages.success(request, 'Profile updated successfully.')
-                return redirect('customer_my_profile')
+                
+                if customer.email:  # Check if email is not empty
+                    customer.save()
+                    messages.success(request, 'Profile updated successfully.')
+                    return redirect('customer_my_profile')
+                else:
+                    messages.error(request, 'Email cannot be empty.')
+                    
             return render(request, 'customer_my_profile.html', {'customer': customer})
         else:
             return redirect('homepage')
