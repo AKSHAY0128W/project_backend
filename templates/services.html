@@ -56,7 +56,7 @@
       {% else %}
       <p>No image available for this service.</p>
       {% endif %}
-      <p>{{ service.description }}</p>
+      <p>{{ service.description }}</p> 
       <p class="pricing">Price :₹{{service.price}}</p>
       <a href="{% url 'service_booking' service.id %}" type="submit" class="btn btn-primary">Book Now</a>
       <!-- <div class="button mt-2">

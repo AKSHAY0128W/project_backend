@@ -48,7 +48,6 @@ class Packages(models.Model):
 
     name = models.CharField(max_length=100)
     description = models.TextField()
-    duration = models.CharField(max_length=100)
     price = models.IntegerField(default=None)
     created_at = models.DateTimeField(default=timezone.now)
     def __str__(self):
@@ -62,6 +61,7 @@ class PackageBooking(models.Model):
     id = models.AutoField(primary_key=True)
     date = models.DateTimeField(default=timezone.now);
     duration = models.CharField(max_length=100,default=None)
+    no_of_accounts = models.IntegerField(default=None)
     customer = models.ForeignKey('login_registration.Customer', on_delete=models.CASCADE, default=None)
     package = models.ForeignKey(Packages, on_delete=models.CASCADE, default=None)
     def end_date(self):

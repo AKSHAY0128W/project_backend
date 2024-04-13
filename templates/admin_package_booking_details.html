@@ -25,12 +25,12 @@
             {% for booking in bookings %}
             <tr>
                <td>{{ booking.id }}</td>
-               <td>{{ booking.date }}</td>
+               <td>{{ booking.date|date:"F j, Y" }}</td>
                <td>{{ booking.package.name }}</td>
                <td>{{ booking.customer.name }}</td>
                <td>{{ booking.customer.email }}</td>
-               <td>{{ booking.company_name }}</td>
-               <td>{{ booking.company_address }}</td>
+               <td>{{ booking.customer.company_name }}</td>
+               <td>{{ booking.customer.company_address }}</td>
                <!-- <td>
                   <a href="#deleteBookingModal-{{forloop.counter}}" class="delete" data-bs-toggle="modal">
                      <i class="material-icons" data-bs-toggle="tooltip" title="Delete">&#xE872;</i>

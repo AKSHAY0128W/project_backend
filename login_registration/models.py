@@ -25,14 +25,14 @@ class Customer(models.Model):
         db_table = 'customer'
 
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE, default='')
-    name = models.CharField(max_length=100, default='')
+    name = models.CharField(max_length=100, default='Not Specified')
     email = models.EmailField(default='', unique=True)
-    address = models.CharField(max_length=255, null=True, default='Default address')
-    phone = models.CharField(max_length=15, default='')
-    company_name = models.CharField(max_length=100, null = True, default='')
-    company_address = models.CharField(max_length=255, null = True, default='')
-    company_phone = models.CharField(max_length=15, null = True, default='')
-    company_email = models.EmailField(null = True, default='')
+    address = models.CharField(max_length=255, null=True, default='Not Specified')
+    phone = models.CharField(max_length=15, default='Not Specified')
+    company_name = models.CharField(max_length=100, null = True, default='Not Specified')
+    company_address = models.CharField(max_length=255, null = True, default='Not Specified')
+    company_phone = models.CharField(max_length=15, null = True, default='Not Specified')
+    company_email = models.EmailField(null = True, default='Not Specified')
 
     def __str__(self):
         return self.name

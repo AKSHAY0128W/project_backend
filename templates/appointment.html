@@ -41,4 +41,21 @@
     </form>
 
 </div>
+<script>
+    window.onload = function () {
+        var today = new Date().toISOString().split('T')[0];
+        document.getElementsByName("date")[0].setAttribute('min', today);
+
+        document.getElementsByName("time")[0].onchange = function () {
+            var inputTime = this.value;
+            var minTime = "12:00";
+            var maxTime = "17:00";
+
+            if (inputTime < minTime || inputTime > maxTime) {
+                alert("Please select a time between 12:00 PM and 5:00 PM.");
+                this.value = minTime;
+            }
+        }
+    }
+</script>
 {% endblock %}

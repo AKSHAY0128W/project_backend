@@ -6,7 +6,6 @@
    {% for package in booked_packages %}
    <div class="p-card">
       <h2>{{ package.package.name }}</h2>
-      <p>{{ package.package.description }}</p>
       <p>Price: {{package.package.price}}</p>
       <p>Booking Date: {{ package.date|date:"F j, Y" }}</p>
 

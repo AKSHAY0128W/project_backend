@@ -3,29 +3,27 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from course.models import Course, course_booking
 from login_registration.models import Profile
-def course_booking_view(request, id):
-    selected_course = get_object_or_404(Course, id=id)
+from django.shortcuts import render, redirect, get_object_or_404
+from course.models import Course
+from login_registration.models import Customer
+from course.models import course_booking as CourseBooking
 
-    try:
-        profile = Profile.objects.get(user=request.user)
-    except Profile.DoesNotExist:
-        return HttpResponse('Profile does not exist', status=404)
+def course_booking(request, id):
+    if not request.user.is_authenticated:
+        return redirect('login')  # Redirect to login page if user is not authenticated
 
-    customer = profile.customer  
+    course = get_object_or_404(Course, id=id)  # Get the course or return a 404 error if it doesn't exist
 
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        booking = course_booking(customer=customer,name=name, email=email, course=selected_course)
-        booking.save()
-        return redirect('homepage')
+    profile = get_object_or_404(Profile, user=request.user)  # Get the profile associated with the current user
+    customer = get_object_or_404(Customer, profile=profile)  # Get the customer associated with the profile
 
-    return render(request, 'course/course_book.html', {'selected_course': selected_course})
+    CourseBooking.objects.create(customer=customer, course=course)  # Create a new CourseBooking instance
 
+    return redirect('course_home')  # Redirect to the course home page
 
 def customer_my_courses(request):
     profile = get_object_or_404(Profile, user=request.user)
     customer = profile.customer
-    booked_courses_ids = course_booking.objects.filter(customer=customer).values_list('course__id', flat=True)
+    booked_courses_ids = CourseBooking.objects.filter(customer=customer).values_list('course__id', flat=True)
     courses = Course.objects.filter(id__in=booked_courses_ids)
     return render(request, 'customer_my_courses.html', {'courses': courses})

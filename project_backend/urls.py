@@ -93,8 +93,9 @@ urlpatterns = [
 
     #course
     path('course/', include('course.urls')),
+    path('customer_my_courses',course_views.customer_my_courses, name="customer_my_courses"),
     path('admin_course_create/',course_views.course_create_view, name="admin_course_create"),
-    path('course_booking/<int:id>', course_views.course_booking_view, name='course_booking'),
+    path('course_booking/<int:id>', course_views.course_booking, name='course_booking'),
     path('admin_course_booking_details', homepage_views.admin_course_booking_details, name='admin_course_booking_details'),
     path('admin_course_details/',course_views.course_list_view, name="admin_course_details"),
     path('course_update_view/<int:id>',course_views.course_update_view, name="course_update_view"),
@@ -114,6 +115,8 @@ urlpatterns = [
     path('customer_my_services/', homepage_views.customer_my_services, name="customer_my_services"),
     path('customer_my_packages/', homepage_views.customer_my_packages, name="customer_my_packages"),
     path('customer_my_profile/', login_registration_views.customer_my_profile, name="customer_my_profile"),
+    path('customer_my_appointments/', homepage_views.customer_my_appointments, name="customer_my_appointments"),
+    
 
     # path('temp', login_registration_views.temp, name="temp"),
 

@@ -84,9 +84,10 @@ def package_booking(request, id):
     if request.method == 'POST':
         date = datetime.now().date()
         duration = request.POST.get('duration')
+        accountants = request.POST.get('accountants')
 
         # make_payment(request, id)
-        booking = PackageBooking(customer=customer, date=date,duration=duration, package=selected_package)
+        booking = PackageBooking(customer=customer, date=date,duration=duration, no_of_accounts=accountants,package=selected_package)
         booking.save()
         
         return redirect('packages')
@@ -271,6 +272,14 @@ def customer_my_packages(request):
     customer = profile.customer
     booked_packages = PackageBooking.objects.filter(customer=customer)
     return render(request, 'customer_my_packages.html', {'booked_packages': booked_packages})
+
+@login_required
+def customer_my_appointments(request):
+    profile = Profile.objects.get(user=request.user)
+    customer = Customer.objects.get(profile=profile)
+    appointments = Appointment.objects.filter(name=customer.name, email=customer.email)
+
+    return render(request, 'customer_my_appointments.html', {'appointments': appointments})
 
 
 
