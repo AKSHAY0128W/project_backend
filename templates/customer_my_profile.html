@@ -9,6 +9,10 @@
          <input class="form-control" id="name" type="text" name="name" value="{{ customer.name|default:'' }}">
       </div>
       <div class="mb-1">
+         <label for="email" class="form-label">Email:</label>
+         <input class="form-control" id="name" type="email" name="email" value="{{ customer.email|default:'' }}">
+      </div>
+      <div class="mb-1">
          <label for="address" class="form-label">Address:</label>
          <input class="form-control" id="address" type="text" name="address" value="{{ customer.address|default:'' }}">
       </div>

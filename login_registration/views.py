@@ -115,6 +115,7 @@ def customer_my_profile(request):
             customer = Customer.objects.get(profile=request.user.profile)
             if request.method == 'POST':
                 customer.name = request.POST.get('name')
+                customer.email = request.POST.get('email')
                 customer.address = request.POST.get('address')
                 customer.phone = request.POST.get('phone')
                 customer.company_name = request.POST.get('company_name')

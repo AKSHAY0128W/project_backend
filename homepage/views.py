@@ -61,6 +61,9 @@ def service_booking(request, id):
         booking = serviceBooking(customer=customer, date=date, service=selected_service)
         booking.save()
         
+        messages.success(request, 'Package booked successfully!')  # Add a success message
+
+        
         return redirect('myservices')
 
     return render(request, 'service_booking.html', {'selected_service': selected_service})
@@ -89,7 +92,9 @@ def package_booking(request, id):
         # make_payment(request, id)
         booking = PackageBooking(customer=customer, date=date,duration=duration, no_of_accounts=accountants,package=selected_package)
         booking.save()
-        
+
+        messages.success(request, 'Package booked successfully!')  # Add a success message
+
         return redirect('packages')
 
     return render(request, 'package_booking.html', {'selected_package': selected_package})

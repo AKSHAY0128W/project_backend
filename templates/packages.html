@@ -46,6 +46,15 @@
 </style>
 <div class="spacer" style="margin-top:120px ;"></div>
 <div class="container mb-5">
+   {% if messages %}
+   <div class="messages">
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}" id="toastMessage">
+         {{ message }}
+      </div>
+      {% endfor %}
+   </div>
+   {% endif %}
    <div class="package-heading text-center mb-5">
       <h2>Our Packages</h2>
    </div>
@@ -66,4 +75,15 @@
       {% endfor %}
    </div>
 </div>
+
+<script>
+     window.onload = function () {
+         var toastElement = document.getElementById("toastMessage");
+         if (toastElement) {
+            setTimeout(function () {
+               toastElement.style.display = 'none';
+            }, 2000);
+         }
+      }
+</script>
 {% endblock %}
