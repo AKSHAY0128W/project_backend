@@ -1,5 +1,28 @@
 {% extends 'customer.html' %}
+
 {% block content %}
+<style>
+   .s-card {
+      width: 18rem;
+      margin-bottom: 2rem;
+      padding: 1.25rem;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      transition: 0.3s;
+      border-radius: 5px;
+   }
+
+   .s-card:hover {
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+   }
+
+   .booked_services {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 1rem;
+   }
+</style>
+
 <h1>My Services</h1>
 <hr>
 <div class="booked_services">
@@ -9,7 +32,6 @@
       <p>{{ service.service.description }}</p>
       <p>Price: {{service.service.price}}</p>
    </div>
-   <hr>
    {% empty %}
    <p>You have not booked any services.</p>
    {% endfor %}

@@ -1,11 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="a_form">
-
-    <div class="appointment-heading">
-        <h1>BOOK <br> APPOINTMENT</h1>
-        <hr>
-        <p>Book an appointment with us today and get the best services.</p>
+    <div class="d-flex flex-column">
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" id="toastMessage">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <div class="appointment-heading">
+            <h1>BOOK <br> APPOINTMENT</h1>
+            <hr>
+            <p>Book an appointment with us today and get the best services.</p>
+        </div>
     </div>
 
     <form method="post" class="appointment-form p-4 " action="{% url 'appointment' %}" data-aos-duration="1000"
@@ -43,6 +53,13 @@
 </div>
 <script>
     window.onload = function () {
+        var toastElement = document.getElementById("toastMessage");
+        if (toastElement) {
+            setTimeout(function () {
+                toastElement.style.display = 'none';
+            }, 2000);
+        }
+
         var today = new Date().toISOString().split('T')[0];
         document.getElementsByName("date")[0].setAttribute('min', today);
 

@@ -109,6 +109,7 @@ def aboutus(request):
 
 
 @login_required
+
 def appointment(request):
     if request.method == 'POST':
         # Get name and email from the Customer table
@@ -125,6 +126,7 @@ def appointment(request):
         appointment = Appointment(name=name, email=email, date=date, time=time, message=message)
         appointment.save()
 
+        messages.success(request, 'Your appointment has been booked.')
         return render(request, 'appointment.html')
     return render(request, 'appointment.html')
 
