@@ -1,0 +1,25 @@
+<h1>Service Schedules</h1>
+{% for schedule in ss %}
+<p>
+   ID: {{ schedule.id }}<br>
+   Employee: {{ schedule.employee }}<br>
+   Service: {{ schedule.service.name }}<br>
+   Start Time: {{ schedule.start_time }}<br>
+   End Time: {{ schedule.end_time }}<br>
+</p>
+{% empty %}
+<p>No service schedules found.</p>
+{% endfor %}
+
+<h1>Package Schedules</h1>
+{% for schedule in ps %}
+<p>
+   ID: {{ schedule.id }}<br>
+   Employee: {{ schedule.employee }}<br>
+   Package: {{ schedule.package.name }}<br>
+   Start Time: {{ schedule.start_time }}<br>
+   End Time: {{ schedule.end_time }}<br>
+</p>
+{% empty %}
+<p>No package schedules found.</p>
+{% endfor %}

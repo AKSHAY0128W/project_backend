@@ -27,8 +27,12 @@ urlpatterns = [
 
     path('create_employee/', login_registration_views.create_employee, name='create_employee'),
 
+
+    path('test/', homepage_views.test, name="test"),
+
+
+    path('employee_schedule/', homepage_views.employee_schedule, name="employee_schedule"),
     path('employee_panel/', homepage_views.employee_panel, name="employee_panel"),
-    path('employee_my_schedule/', homepage_views.employee_my_schedule, name="employee_my_schedule"),
     path('admin_login/', homepage_views.admin_login, name="admin_login"),
     
     path('services/', homepage_views.services, name="services"),

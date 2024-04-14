@@ -1,0 +1,60 @@
+{% extends 'employee.html' %}
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Service Schedules</h1>
+    {% for schedule in ss %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Service</th>
+                <th>Customer Name</th>
+                <th>Customer Address</th>
+                <th>Customer Phone</th>
+                <th>Date and Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ schedule.service_schedule_id }}</td>
+                <td>{{ schedule.servbooking.service.name }}</td>
+                <td>{{ schedule.servbooking.customer.name }}</td>
+                <td>{{ schedule.servbooking.customer.address }}</td>
+                <td>{{ schedule.servbooking.customer.phone }}</td>
+                <td>{{ schedule.datetime }}</td>
+            </tr>
+        </tbody>
+    </table>
+    {% empty %}
+    <p>No service schedules found.</p>
+    {% endfor %}
+
+    <h1 class="my-4">Package Schedules</h1>
+    {% for schedule in ps %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Package</th>
+                <th>Customer Name</th>
+                <th>Customer Address</th>
+                <th>Customer Phone</th>
+                <th>Date and Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ schedule.package_schedule_id }}</td>
+                <td>{{ schedule.packbooking.customer.name }}</td>
+                <td>{{ schedule.packbooking.customer.name }}</td>
+                <td>{{ schedule.packbooking.customer.address }}</td>
+                <td>{{ schedule.packbooking.customer.phone }}</td>
+                <td>{{ schedule.datetime }}</td>
+            </tr>
+        </tbody>
+    </table>
+    {% empty %}
+    <p>No package schedules found.</p>
+    {% endfor %}
+</div>
+{% endblock %}

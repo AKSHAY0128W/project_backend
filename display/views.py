@@ -162,12 +162,11 @@ def add_packages(request):
         name = request.POST.get('name')
         description = request.POST.get('description')
         price = request.POST.get('price')
-        duration = request.POST.get('duration')
 
         if not price:
             price = 0  
 
-        Packages.objects.create(name=name, description=description,price=price, duration=duration)
+        Packages.objects.create(name=name, description=description,price=price)
 
         return redirect('/packages_list')
 

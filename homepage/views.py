@@ -1,4 +1,5 @@
 from importlib.resources import contents
+from multiprocessing import context
 from django.shortcuts import render,redirect
 from display.models import Services, serviceBooking, Packages, PackageBooking, employee_service_schedule,employee_package_schedule
 from login_registration.models import Customer, Employee, Profile
@@ -178,8 +179,8 @@ def admin_homepage(request):
     logged_in_user_count = Session.objects.filter(expire_date__gte=timezone.now()).count()
     totalemployee = Employee.objects.count()
     totalservice_booking = serviceBooking.objects.count()
-    totalpayments = payment.objects.count()
-    context = {'user_count': user_count, 'logged_in_user_count': logged_in_user_count, 'totalemployee': totalemployee, 'totalservice_booking': totalservice_booking, 'totalpayments': totalpayments}
+    totalcoursebooking = course_booking.objects.count()
+    context = {'user_count': user_count, 'logged_in_user_count': logged_in_user_count, 'totalemployee': totalemployee, 'totalservice_booking': totalservice_booking, 'totalcoursebooking': totalcoursebooking}
     return render(request, 'admin_homepage.html', context)
 
 def admin_view_employee(request):
@@ -188,6 +189,17 @@ def admin_view_employee(request):
 def admin_service_details(request):
     return render(request, 'admin_service_details.html')
 
+
+def employee_schedule(request):
+    current_employee = Employee.objects.get(profile__user=request.user)
+    ss = employee_service_schedule.objects.filter(employee=current_employee)
+    ps = employee_package_schedule.objects.filter(employee=current_employee)
+    
+    context = {'ss': ss, 'ps': ps}
+    return render(request, 'employee_schedule.html', context)
+
+def test(request):
+    return render(request, 'test.html', context)
 
 def admin_employee_service_schedule(request):
     if request.method == 'POST':

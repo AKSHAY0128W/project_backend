@@ -29,7 +29,7 @@
    {% for service in booked_services %}
    <div class="s-card">
       <h2>{{ service.service.name }}</h2>
-      <p>{{ service.service.description }}</p>
+      <p>{{ service.date }}</p>
       <p>Price: {{service.service.price}}</p>
    </div>
    {% empty %}

@@ -14,9 +14,10 @@
       <table class="table table-striped table-hover">
          <thead>
             <tr>
-               <th>Course Title</th>
-               <th>UserName</th>
+               <th>Course Name</th>
                <th>Name</th>
+               <th>Email</th>
+               <th>Purchased Date</th>
             </tr>
          </thead>
          <tbody>
@@ -24,7 +25,8 @@
             <tr>
                <td>{{booking.course.name}}</td>
                <td>{{booking.customer.name}}</td>
-               <td>{{booking.name}}</td>
+               <td>{{booking.customer.email}}</td>
+               <td>{{booking.purchased_date}}</td>
             </tr>
             {% endfor %}
          </tbody>

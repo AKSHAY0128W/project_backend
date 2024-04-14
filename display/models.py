@@ -26,10 +26,7 @@ class serviceBooking(models.Model):
     date = models.DateField()
     customer = models.ForeignKey('login_registration.Customer', on_delete=models.CASCADE, default=None)
     service = models.ForeignKey(Services, on_delete=models.CASCADE, default=None)
-    
-    def __str__(self):
-        return self.name
-    
+  
 
 class employee_service_schedule(models.Model):
     class Meta:
@@ -66,9 +63,7 @@ class PackageBooking(models.Model):
     package = models.ForeignKey(Packages, on_delete=models.CASCADE, default=None)
     def end_date(self):
         return self.date + timedelta(days=int(self.duration))
-    def __str__(self):
-        return self.name
-    
+   
 class employee_package_schedule(models.Model):
     class Meta:
         db_table = 'employee_package_schedule'

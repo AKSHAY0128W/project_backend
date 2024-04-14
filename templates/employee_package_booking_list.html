@@ -19,6 +19,7 @@
                <th>Customer Email</th>
                <th>Company Name</th>
                <th>Company Address</th>
+               <th>Company Phone</th>
             </tr>
          </thead>
          <tbody>
@@ -29,8 +30,9 @@
                <td>{{ booking.package.name }}</td>
                <td>{{ booking.customer.name }}</td>
                <td>{{ booking.customer.email }}</td>
-               <td>{{ booking.company_name }}</td>
-               <td>{{ booking.company_address }}</td>
+               <td>{{ booking.customer.company_name }}</td>
+               <td>{{ booking.customer.company_address }}</td>
+               <td>{{ booking.customer.company_phone }}</td>
                <!-- <td>
                   <a href="#deleteBookingModal-{{forloop.counter}}" class="delete" data-bs-toggle="modal">
                      <i class="material-icons" data-bs-toggle="tooltip" title="Delete">&#xE872;</i>
