@@ -4,6 +4,7 @@ from .models import *
 # Register your models here.
 
 admin.site.register(Employee)
+admin.site.register(Designation)
 admin.site.register(Customer)
 admin.site.register(serviceBooking)
 admin.site.register(PackageBooking)

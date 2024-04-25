@@ -1,6 +1,7 @@
 from importlib.resources import contents
 from multiprocessing import context
 from django.shortcuts import render,redirect
+from course.models.course import Course
 from display.models import Services, serviceBooking, Packages, PackageBooking, employee_service_schedule,employee_package_schedule
 from login_registration.models import Customer, Employee, Profile
 from django.contrib.sessions.models import Session
@@ -199,6 +200,15 @@ def employee_schedule(request):
     return render(request, 'employee_schedule.html', context)
 
 def test(request):
+    # services = Services.objects.all()
+    # packages = Packages.objects.all()
+    # employee = Employee.objects.all()
+    # bookings = PackageBooking.objects.select_related('customer').all()
+    # courses = Course.objects.all()
+    courseBooking = course_booking.objects.all()
+    # context = {'services':services, 'packages':packages}
+    # context = {'employee': employee}
+    context = {'courseBooking': courseBooking}
     return render(request, 'test.html', context)
 
 def admin_employee_service_schedule(request):

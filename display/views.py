@@ -18,8 +18,10 @@ from display.models import payment
 # employee
 def emp_display(request):
     emp = Employee.objects.all()
+    des = Designation.objects.all()
     print(emp)
     context = {
+        'des':des,
         'emp':emp,
     }
     return render(request, 'admin_employee_details.html', context)
@@ -33,18 +35,25 @@ def emp_edit(request,employee_id):
     return render(request, 'admin_employee_details.html', context)
 
 
+from django.http import HttpResponseForbidden
+
 def emp_update(request, employee_id):
-    emp = get_object_or_404(Employee, employee_id=employee_id)  
-
+    emp = Employee.objects.get(employee_id=employee_id)  
+        
     if request.method == "POST":
-        emp.name = request.POST.get('name')
-        emp.email = request.POST.get('email')
-        emp.phone = request.POST.get('phone')
-        emp.address = request.POST.get('address')
-        emp.save() 
-        return redirect('/emp_display')
-
-    return render(request, 'admin_employee_details', {'emp': emp})
+            emp.name = request.POST.get('name')
+            emp.email = request.POST.get('email')
+            emp.phone = request.POST.get('phone')
+            emp.address = request.POST.get('address')
+            designation_id = request.POST.get('designation')
+            emp.designation = Designation.objects.get(id=designation_id)
+            emp.save() 
+            return redirect('/emp_display')
+        
+    context = {
+        'emp': emp,
+    }
+    return render(request, 'admin_employee_details.html', context)
 
 def emp_delete(request, employee_id):
     emp = Employee.objects.filter(employee_id=employee_id)
