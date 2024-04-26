@@ -30,7 +30,7 @@ urlpatterns = [
 
     path('test/', homepage_views.test, name="test"),
 
-
+    path('customer_homepage/', homepage_views.customer_homepage, name="customer_homepage"),
     path('employee_schedule/', homepage_views.employee_schedule, name="employee_schedule"),
     path('employee_panel/', homepage_views.employee_panel, name="employee_panel"),
     path('admin_login/', homepage_views.admin_login, name="admin_login"),

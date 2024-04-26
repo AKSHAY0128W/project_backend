@@ -60,7 +60,7 @@
                                 <a class="nav-link" href="{% url 'calculators' %}">Calculators</a>
                             </li>
                             <li class="nav-item mx-2 username">
-                                <a class="nav-link" href="{% url 'dashboard' %}">
+                                <a class="nav-link" href="{% url 'customer_homepage' %}">
                                     {% if user.is_authenticated %}
                                     @{{ user.username }}
                                     {% endif %}

@@ -68,7 +68,7 @@ def course_create_view(request):
         #         course = course
         # )
         # video.save()
-        print(video)
+        # print(video)
         
         return redirect('admin_course_create')
 

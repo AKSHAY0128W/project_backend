@@ -8,7 +8,7 @@ def coursePage(request, slug):
     course = get_object_or_404(Course, slug=slug)
     serial_number = request.GET.get('lecture')
     videos = course.video_set.all().order_by("serial_number")
-
+    learning_descriptions = course.learning_set.all()
     if serial_number is None:
         serial_number = 1 
 
@@ -20,7 +20,8 @@ def coursePage(request, slug):
     context = {
         "course": course,
         "video": video,
-        'videos': videos
+        'videos': videos,
+        'learning_descriptions': learning_descriptions,
     }
 
     return render(request, "course/coursePage.html", context)

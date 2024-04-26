@@ -19,32 +19,6 @@ from django.db.models import Q
 from django.db.models import Prefetch
 from django.utils import timezone
 from django.contrib import messages
-# def make_payment(request, id): 
-#     selected_service = get_object_or_404(Services, id=id)
-
-#     profile = get_object_or_404(Profile, user=request.user)
-#     customer = profile.customer  
-
-#     if not Customer.objects.filter(id=customer.id).exists():  
-#         return HttpResponse('Customer does not exist', status=400)
-    
-#     if request.method == 'POST':
-
-#         date = datetime.now().date()
-#         time = datetime.now().time()
-
-#         booking = serviceBooking(customer=customer, date=date, time=time, service=selected_service)
-#         booking.save()
-
-#         # Create a new payment instance with the customer and selected service
-#         payment_instance = payment(date=date, time=time, customer=customer, service=selected_service)
-#         payment_instance.save()
-
-#         return redirect('myservices')
-        
-#     return render(request, 'payment.html', {'service_name': selected_service.name, 'service_price': selected_service.price, 'customer': customer, 'service_id': id})
-
-@login_required
 def service_booking(request, id):
     selected_service = get_object_or_404(Services, id=id)
 
@@ -115,7 +89,6 @@ def aboutus(request):
     return render(request, 'aboutus.html')
 
 
-@login_required
 
 def appointment(request):
     if request.method == 'POST':
@@ -128,7 +101,7 @@ def appointment(request):
         date = request.POST.get('date')
         time = request.POST.get('time')
         message = request.POST.get('message')        
-        print(name, email, date, time, message)
+        # print(name, email, date, time, message)
 
         appointment = Appointment(name=name, email=email, date=date, time=time, message=message)
         appointment.save()
@@ -140,7 +113,6 @@ def appointment(request):
 def dashboard(request):
     return render(request, 'customer.html')
 
-@login_required
 def myservices(request):
     profile = get_object_or_404(Profile, user=request.user)
     customer = profile.customer
@@ -200,15 +172,24 @@ def employee_schedule(request):
     return render(request, 'employee_schedule.html', context)
 
 def test(request):
-    # services = Services.objects.all()
-    # packages = Packages.objects.all()
-    # employee = Employee.objects.all()
-    # bookings = PackageBooking.objects.select_related('customer').all()
-    # courses = Course.objects.all()
+    services = Services.objects.all()
+    packages = Packages.objects.all()
+    employee = Employee.objects.all()
+    customer = Customer.objects.all()
+    pbookings = PackageBooking.objects.select_related('customer').all()
+    sbookings = PackageBooking.objects.select_related('customer').all()
+    courses = Course.objects.all()
     courseBooking = course_booking.objects.all()
-    # context = {'services':services, 'packages':packages}
-    # context = {'employee': employee}
-    context = {'courseBooking': courseBooking}
+    context = {
+        'services':services,
+        'packages':packages,
+        'pbookings':pbookings,
+        'sbookings':sbookings,
+        'employee':employee,
+        'customer':customer,
+        'courses':courses,
+        'courseBooking':courseBooking,
+    }
     return render(request, 'test.html', context)
 
 def admin_employee_service_schedule(request):
@@ -286,6 +267,18 @@ def admin_package_schedule(request):
 def admin_course_booking_details(request):
     courseBooking = course_booking.objects.all()
     return render(request, 'admin_course_booking_details.html', {'courseBooking': courseBooking})
+
+
+
+def customer_homepage(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    customer = profile.customer
+    myservices = serviceBooking.objects.filter(customer=customer).count()
+    mypackages = PackageBooking.objects.filter(customer=customer).count()
+    mycourses = course_booking.objects.filter(customer=customer).count()
+    my_appointments = Appointment.objects.filter(name=customer.name).count()
+    context = {'myservices': myservices, 'mypackages': mypackages, 'mycourses': mycourses, 'my_appointments': my_appointments}
+    return render(request, 'customer_homepage.html', context)
 
 @login_required
 def customer_my_services(request):

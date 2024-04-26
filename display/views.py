@@ -1,25 +1,18 @@
 from appointment.models import *
 from django.shortcuts import render
-from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
-
-from homepage.views import package_booking
 from .models import PackageBooking, Services, Packages
 from .models import serviceBooking
 from login_registration.models import *
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login, logout
-from django.contrib import messages
-from django.core.files import File
 from display.models import payment
-
+from django.contrib.auth.decorators import login_required
 # employee
+
 def emp_display(request):
     emp = Employee.objects.all()
     des = Designation.objects.all()
-    print(emp)
+    # print(emp)
     context = {
         'des':des,
         'emp':emp,
@@ -33,9 +26,6 @@ def emp_edit(request,employee_id):
         
     }
     return render(request, 'admin_employee_details.html', context)
-
-
-from django.http import HttpResponseForbidden
 
 def emp_update(request, employee_id):
     emp = Employee.objects.get(employee_id=employee_id)  
@@ -55,6 +45,7 @@ def emp_update(request, employee_id):
     }
     return render(request, 'admin_employee_details.html', context)
 
+
 def emp_delete(request, employee_id):
     emp = Employee.objects.filter(employee_id=employee_id)
     emp.delete()
@@ -65,19 +56,14 @@ def emp_delete(request, employee_id):
 
 
 # services
-
-
 def services_list(request):
     services = Services.objects.all()
-    print(services)
+    # print(services)
     context = {
         'services':services,
     }
 
     return render(request, 'admin_service_details.html', context)
-
-
-
 
 def add_service(request):
     if request.method == "POST":
@@ -158,7 +144,7 @@ def package_booking_admin(request):
 
 def payment_list(request):
     payments = payment.objects.all()
-    print(payments)
+    # print(payments)
     context = {
         'payments':payments,
     }
@@ -183,7 +169,7 @@ def add_packages(request):
 
 def packages_list(request):
     packages = Packages.objects.all()
-    print(packages)
+    # print(packages)
     context = {
         'packages':packages,
     }
@@ -221,7 +207,7 @@ def packages_delete(request, id):
 #customers
 def customer_list(request):
     customer = Customer.objects.all()
-    print(customer)
+    # print(customer)
     context = {
         'customer':customer,
     }
@@ -259,7 +245,7 @@ def employee_service_booking_list(request):
 
 def employee_payment_list(request):
     payments = payment.objects.all()
-    print(payments)
+    # print(payments)
     context = {
         'payments':payments,
     }

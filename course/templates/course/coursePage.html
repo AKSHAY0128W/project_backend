@@ -73,16 +73,30 @@
             <div class="card-body">
                <h5 class="card-title">Learning</h5>
                <p class="card-text">
-                  <ol>
-                     {% for l in course.learning_set.all%}
-                     <li class="">{{l.learnings_description}}</li>
-                     {% endfor %}
-                  </ol>
+               <ol>
+                  {% for l in course.learning_set.all %}
+                  <li class="">{{l.learning_description}}</li>
+                  {% empty %}
+                  <li>No learning descriptions available.</li>
+                  {% endfor %}
+               </ol>
                </p>
             </div>
          </div>
       </div>
       <!-- End Learning -->
+      <!-- Resources -->
+      <div class="mt-3">
+         <div class="card">
+            <div class="card-body">
+               <h5 class="card-title">Resources</h5>
+               <p class="card-text">
+               <a href="{{course.resource.url}}" class="btn btn-primary" download>Download Resource</a>
+               </p>
+            </div>
+         </div>
+      </div>
+      <!-- End Resources -->
    </div>
 </div>
 <script>
