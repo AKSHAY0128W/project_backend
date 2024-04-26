@@ -9,10 +9,9 @@
 
    <!-- Bootstrap CSS v5.2.1 -->
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
-      crossorigin="anonymous" />
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
    <style>
-      body{
+      body {
          display: flex;
          justify-content: center;
          align-items: center;
@@ -37,17 +36,17 @@
          <tbody>
             {% for service in services %}
             <tr>
-            <td>{{service.id}}</td>
-            <td>{{service.name}}</td>
-            <td><img src="/media/{{service.image}}" height="100px" width="100px" class="img-fluid" alt="{{service.name}}" /></td>
-            <td>{{service.description}}</td>
-            <td>{{service.price}}</td>
+               <td>{{service.id}}</td>
+               <td>{{service.name}}</td>
+               <td><img src="/media/{{service.image}}" height="100px" width="100px" class="img-fluid"
+                     alt="{{service.name}}" /></td>
+               <td>{{service.description}}</td>
+               <td>{{service.price}}</td>
             </tr>
             {% endfor %}
          </tbody>
       </table>
    </div>
-
    <div class="container">
       <h2 class="text-center mb-5 display-1">Packages</h2>
       <table class="table table-bordered">
@@ -62,10 +61,10 @@
          <tbody>
             {% for package in packages %}
             <tr>
-            <td>{{package.id}}</td>
-            <td>{{package.name}}</td>
-            <td>{{package.description}}</td>
-            <td>{{package.price}}</td> 
+               <td>{{package.id}}</td>
+               <td>{{package.name}}</td>
+               <td>{{package.description}}</td>
+               <td>{{package.price}}</td>
             </tr>
             {% endfor %}
          </tbody>
@@ -81,23 +80,105 @@
                <th>Description</th>
                <th>Price</th>
                <th>Discount</th>
-               <!-- <th>Date</th> -->
             </tr>
          </thead>
          <tbody>
             {% for course in courses %}
             <tr>
-            <td>{{course.id}}</td>
-            <td>{{course.name}}</td>
-            <td>{{course.description}}</td>
-            <td>{{course.price}}</td> 
-            <td>{{course.discount}}</td> 
-            <!-- <td>{{course.date}}</td>  -->
+               <td>{{course.id}}</td>
+               <td>{{course.name}}</td>
+               <td>{{course.description}}</td>
+               <td>{{course.price}}</td>
+               <td>{{course.discount}}</td>
             </tr>
             {% endfor %}
          </tbody>
       </table>
    </div>
+   <div class="container">
+      <h2 class="text-center mb-5 display-1">Package Bookings</h2>
+      <table class="table table-bordered">
+         <thead>
+            <tr>
+               <th>ID</th>
+               <th>Date</th>
+               <th>Package Name</th>
+               <th>Customer Name</th>
+               <th>Customer Phone</th>
+               <th>Company Name</th>
+               <th>Company Address</th>
+            </tr>
+         </thead>
+         <tbody>
+            {% for pbooking in pbookings %}
+            <tr>
+               <td>{{pbooking.id}}</td>
+               <td>{{pbooking.date|date:"F j, Y" }}</td>
+               <td>{{pbooking.package.name}}</td>
+               <td>{{pbooking.customer.name}}</td>
+               <td>{{pbooking.customer.phone}}</td>
+               <td>{{pbooking.customer.company_name}}</td>
+               <td>{{pbooking.customer.company_address}}</td>
+            </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+   </div>
+   <div class="container">
+      <h2 class="text-center mb-5 display-1">Service Bookings</h2>
+      <table class="table table-bordered">
+         <thead>
+            <tr>
+               <th>ID</th>
+               <th>Service Name</th>
+               <th>Date</th>
+               <th>Customer Name</th>
+               <th>Customer Email</th>
+               <th>Customer Phone</th>
+               <th>Customer Address</th>
+            </tr>
+         </thead>
+         <tbody>
+            {% for sbooking in sbookings %}
+            <tr>
+               <td>{{sbooking.id}}</td>
+               <td>{{sbooking.service.name}}</td>
+               <td>{{sbooking.date|date:"F j, Y" }}</td>
+               <td>{{sbooking.customer.name}}</td>
+               <td>{{sbooking.customer.email}}</td>
+               <td>{{sbooking.customer.phone}}</td>
+               <td>{{sbooking.customer.address}}</td>
+            </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+   </div>
+   <div class="container">
+      <h2 class="text-center mb-5 display-1">Course Bookings</h2>
+      <table class="table table-bordered">
+         <thead>
+            <tr>
+               <th>ID</th>
+               <th>Course Name</th>
+               <th>Customer Name</th>
+               <th>Customer Email</th>
+               <th>Purchased Date</th>
+            </tr>
+         </thead>
+         <tbody>
+            {% for booking in courseBooking %}
+            <tr>
+               <td>{{booking.id}}</td>
+               <td>{{booking.course.name}}</td>
+               <td>{{booking.customer.name}}</td>
+               <td>{{booking.customer.email}}</td>
+               <td>{{booking.purchased_date}}</td>
+            </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+   </div>
+   
    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
       integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
       crossorigin="anonymous"></script>

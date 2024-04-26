@@ -174,11 +174,11 @@ def employee_schedule(request):
 def test(request):
     services = Services.objects.all()
     packages = Packages.objects.all()
+    courses = Course.objects.all()
     employee = Employee.objects.all()
     customer = Customer.objects.all()
     pbookings = PackageBooking.objects.select_related('customer').all()
-    sbookings = PackageBooking.objects.select_related('customer').all()
-    courses = Course.objects.all()
+    sbookings = serviceBooking.objects.select_related('customer').all()
     courseBooking = course_booking.objects.all()
     context = {
         'services':services,
